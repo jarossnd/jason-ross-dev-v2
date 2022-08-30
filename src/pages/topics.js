@@ -11,7 +11,6 @@ import SEO from '../components/SEO';
 const TopicStyles = styled.div`
   ul {
     list-style-type: none;
-
     -moz-column-count: 3;
     -moz-column-gap: 20px;
     -webkit-column-count: 3;
@@ -22,6 +21,7 @@ const TopicStyles = styled.div`
   ul li {
     padding-left: 30px;
   }
+
   ul li:before {
     margin: 0 0 0 -34px;
     text-align: right;
@@ -30,6 +30,7 @@ const TopicStyles = styled.div`
     position: absolute;
     height: 100%;
   }
+
   h2 {
     margin: 0px;
   }
@@ -55,10 +56,9 @@ const TopicStyles = styled.div`
       background-color: var(--blue);
     }
     ul {
-      column-count: 1;
-      text-align: center;
+      column-count: 2;
+      padding-left: 2rem;
     }
-
     ul li {
       padding-left: 0px;
       position: unset;
@@ -84,23 +84,12 @@ const TagsPage = ({
   },
 }) => (
   <>
-    <SEO title="Technology Enthusiast" />
+    <SEO title="Topics" />
     <div className="item1">
-      <h1>Welcome</h1>
-      <h2>Hello, my name is Jason 👋</h2>
-      <p>
-        Welcome to my corner on the internet! I talk about technology and other
-        topics on my blog, and you will find other useful pages on this site.
-        Sometimes I post videos on my YouTube channel found{' '}
-        <a href="https://www.youtube.com/channel/UCP6Y5xvu8VSyXjFHwGMgc6g">
-          here
-        </a>
-        . I typically write about Linux, utilities, servers, web dev, and
-        occasionally some off topics.{' '}
-      </p>
+      <h1>Topics</h1>
+      <p>This page contains all the topics I have created blog posts on.</p>
       <TopicStyles>
         <div className="container">
-          <h2>Topics</h2>
           <ul>
             {group.map((tag) => (
               <li key={tag.fieldValue}>

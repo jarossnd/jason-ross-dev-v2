@@ -1,0 +1,27 @@
+---
+title: Strider Cup, Rapid City, SD 2022
+date: "2022-08-30"
+description: "My son participated in the Strider Cup in Rapid City, SD in August, 2022. This post contains information about our trip."
+tags: ['strider bikes', 'competition', 'vacation']
+---
+
+## Overview
+
+If you don't know what a Strider Bike is, head to their [website](https://striderbikes.com) for more information. Basically, it is a balance bike that allows children to learn how to ride a bike without training wheels and they use their feet to move instead of pedals. Once they have the balance down, they can graduate to pedals, all without having to use training wheels. My son first participated in the Strider Cup when he was 2 years old using the 12" bike. This time around he is five and rides a 14x which is a larger bike. The 14x comes with a pedal kit that allows you to easily take the pedals on and off.
+
+## The Course
+
+The Strider Cup that we participated in incorporated both running, balance bike mode, and pedal bike mode:
+
+- Lap 1: Running
+- Lap 2 - 3: Balance Mode
+- Lap 4 - 6: Pedal Mode
+
+The total distance is about 3,500 feet (1065 meters) and the trace took place at Main Street Square, Downtown Rapid City, SD.
+
+Once lap 1 is done, they will switch to their Strider Bike in balance mode and do two laps. After the two laps are done, there is a pit stop where one of the parents installs the bike chain and pedals which is for the last 3 laps of the race. There are opsticals along the way such as having to stop and carry the bike over and object and get back on the bike again and go.
+
+## Video
+
+`vimeo: https://vimeo.com/744648826`
+
