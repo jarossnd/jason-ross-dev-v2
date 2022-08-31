@@ -12,8 +12,6 @@ const PostStyles = styled.nav`
   }
 `;
 
-const editURL = `https://github.com/jarossnd/jason-ross-dev/tree/master/src/`;
-
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
@@ -49,7 +47,7 @@ const BlogPostTemplate = ({ data, location }) => {
             <Bio />
             🐛 Found a typo or something that needs to be corrected?{' '}
             <a
-              href={`https://github.com/jarossnd/jason-ross-dev/tree/main/blog/posts/${post.fields.slug}index.md`}
+              href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}
             >
               Edit on GitHub
             </a>
