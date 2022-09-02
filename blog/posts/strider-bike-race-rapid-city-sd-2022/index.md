@@ -17,9 +17,9 @@ The Strider Cup that we participated in incorporated both running, balance bike 
 - Lap 2 - 3: Balance Mode
 - Lap 4 - 6: Pedal Mode
 
-The total distance is about 3,500 feet (1065 meters) and the trace took place at Main Street Square, Downtown Rapid City, SD.
+The total distance is about 3,500 feet (1065 meters) and the race took place at Main Street Square, Downtown Rapid City, SD.
 
-Once lap 1 is done, they will switch to their Strider Bike in balance mode and do two laps. After the two laps are done, there is a pit stop where one of the parents installs the bike chain and pedals which is for the last 3 laps of the race. There are obstacles along the way such as having to stop and carry the bike over and object and get back on the bike again and go.
+Once lap 1 is done, they will switch to their Strider Bike in balance mode and do two laps. After the two laps are done, there is a pit stop where one of the parents installs the bike chain and pedals which will be used for the last 3 laps of the race. There are obstacles along the way such as having to stop and carry the bike over and object and get back on the bike again and go.
 
 ## The Race
 
