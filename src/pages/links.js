@@ -148,6 +148,38 @@ export default function ProjectsPage() {
               </li>
             </ul>
           </div>
+          <div className="container">
+            <h2>Vim</h2>
+            <ul>
+              <li>
+                <a
+                  href="https://vim-adventures.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Vim Adventures
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.openvim.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open Vim
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://neovim.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Neovim
+                </a>
+              </li>
+            </ul>
+          </div>
         </LinksStyles>
       </div>
     </>

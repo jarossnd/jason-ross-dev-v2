@@ -280,7 +280,7 @@ Quit Neovim and open again. It will open with an error message which is expected
 
 ## Installing NerdFont
 
-The file manager you see on the left side is a plugin called NerdTree. We are also using vim-devicons which should put the appropriate icon next to our files and folders in NerdTree. As you can see from the screenshot above, there are no icons, just boxes. This is because we need a special font do display the icons. We will fix that by installing a compatible font on our machine and set that font in our PowerShell Terminal profile:
+The file manager you see on the left side is a plugin called NerdTree. We are also using vim-devicons which should put the appropriate icon next to our files and folders in NerdTree. As you can see from the screenshot above, there are no icons, just boxes. This is because we need a special font to display the icons. We will fix that by installing a compatible font on our machine and set that font in our PowerShell Terminal profile:
 
 I am going to use [SpaceMono](https://www.nerdfonts.com/font-downloads). Open the zip file and install `Space Mono Nerd Font Complete Windows Compatible.ttf`.
 
