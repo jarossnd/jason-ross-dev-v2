@@ -1,5 +1,5 @@
 ---
-title: Symbolic link your Vim config file on windows to your Git repo
+title: Symbolic link your Vim config file on Windows to your Git repo
 date: "2022-10-07"
 description: "If you store your Windows Vim config file in your Git repro, symbolic link it so you don't have to manually copy!"
 tags: ['vim']
@@ -13,7 +13,7 @@ However, I keep my Vim init file in a Git repro so I have access to it on multip
 
 Whenever I do a Git `pull` to update my repo, I would have to manually copy my init.vim file from my Git repo to my home directory. One way around this would be to use a PowerShell or Batch file to copy the file for me. However, this is still to much work.
 
-There is a Command Prompt (cmd) command called `mklink` to create a symbolic link. The symbolic link will be created created here `~\AppData\Local\nvim\init.vim` and point to `~\repos\windows-config\nvim\init.vim`. This way I never have to manually copy the file again!
+There is a Command Prompt (cmd) command called `mklink` to create a symbolic link. The symbolic link will be created created here `~\AppData\Local\nvim\init.vim` and point to `~\repos\windows-config\nvim\init.vim`. This way I never have to manually copy the file again! All I have to do is a Git `pull`.
 
 The `mklink` only works in Command Prompt. Windows PowerShell will not be able to find this command without some configuration. Here is how I created a symbolic link:
 

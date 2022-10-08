@@ -83,6 +83,16 @@ export default function UsesPage() {
             </ul>
           </div>
           <div className="container">
+            <h2>Streaming Equipment</h2>
+            <ul>
+              <li>🎙️ Microphone: Shure SM7B</li>
+    <li>🎧 Headphones: Sony MDR7506 Pro</li>
+              <li>🎛️ Preamp: dbx 286s</li>
+              <li>🎚️ Audio Interface: Focusrite Scarlett 2i2 (3rd Gen)</li>
+            </ul>
+          </div>
+ 
+          <div className="container">
             <h2>Software</h2>
             <ul>
               <li>
