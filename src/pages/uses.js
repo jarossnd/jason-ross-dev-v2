@@ -62,12 +62,12 @@ export default function UsesPage() {
                 🖥️ Desktop: Custom built AMD Ryzen 9 5950X 4th Gen, 64GB RAM,
                 and 6TB of storage
               </li>
-              <li>💻 Laptop: Lenovo Thinkpad x220</li>
+              <li>💻 Laptop: Macbook Pro M2 16"</li>
               <li>🖥️ Monitor: LG 34" and HP 25"</li>
               <li>🖱️ Mouse: Logitech - MX Master 3</li>
               <li>⌨️ Keyboard: Logitech - G915</li>
-              <li>📱 Phone: iPhone 12 Pro Max</li>
-              <li>⌚ Watch: Apple Watch with GPS and Cellular</li>
+              <li>📱 Phone: iPhone 14 Pro Max</li>
+              <li>⌚ Watch: Apple Watch Ultra</li>
             </ul>
           </div>
           <div className="container">
