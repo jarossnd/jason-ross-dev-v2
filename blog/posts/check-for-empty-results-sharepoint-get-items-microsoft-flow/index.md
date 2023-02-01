@@ -2,7 +2,7 @@
 title: Check for Empty Results SharePoint Get Items in Microsoft Flow
 date: "2022-09-05"
 description: "Create a condition to check for empty SharePoint list items in Microsoft Flow"
-tags: ["sharepoint", "microsoft flow"]
+tags: ["sharepoint-online", "microsoft-flow"]
 ---
 
 ## Overview

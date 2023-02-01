@@ -2,7 +2,7 @@
 title: Compile C Program in Visual Studio Code (VS Code) in Windows
 date: "2022-12-02"
 description: "How to setup VS Code and compile a simple C program in Windows with MinGW"
-tags: ['c programming']
+tags: ['c-programming']
 ---
 
 ## Overview

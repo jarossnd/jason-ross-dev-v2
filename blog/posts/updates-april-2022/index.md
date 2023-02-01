@@ -2,7 +2,7 @@
 title: Website Updates April 2022
 date: "2022-04-22"
 description: "Looking forward to the summer time and I launched a new website!"
-tags: ['website updates', 'personal']
+tags: ['website-updates', 'personal']
 ---
 ## Personal Updates
 

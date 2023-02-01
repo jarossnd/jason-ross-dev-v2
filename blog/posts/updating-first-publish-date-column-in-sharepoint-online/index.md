@@ -2,7 +2,7 @@
 title: Updating the "First Publish Date" column in SharePoint Online
 date: "2022-07-27"
 description: "How to use SharePoint PowerShell PnP to update read-only column First Publish Date"
-tags: ['sharepoint', 'powershell']
+tags: ['sharepoint-online', 'powershell']
 ---
 
 ## Overview

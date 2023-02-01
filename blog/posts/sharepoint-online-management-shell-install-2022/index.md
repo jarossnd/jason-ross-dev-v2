@@ -2,7 +2,7 @@
 title: Installing the SharePoint Online Management Shell in 2022
 date: "2022-01-12"
 description: "I walk you through installing the SharePoint Online Management Shell and connecting to your SharePoint Online Tenant"
-tags: ['sharepoint', 'powershell']
+tags: ['sharepoint-online', 'powershell']
 ---
 
 ## Overview

@@ -2,7 +2,7 @@
 title: My Neovim Setup on Windows
 date: "2022-05-10"
 description: "Yes, you can use Vim on Windows and here is my setup and configuration for your consumption."
-tags: ['windows terminal', 'vim']
+tags: ['windows-terminal', 'vim']
 ---
 
 ## Overview
