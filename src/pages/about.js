@@ -10,8 +10,8 @@ export default function AboutPage() {
         <h1>About</h1>
         <h2>Howdy, my name is Jason 😊</h2>
         <p>
-          I live in the United States in an area where summers are hot, winter
-          are cold, and is windy all the time.
+          I live in the United States in an area where summers are hot, winters
+          are cold, and windy all the time.
         </p>
         <p>
           I enjoy anything that has to do with Linux based operating systems,
