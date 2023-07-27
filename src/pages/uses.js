@@ -63,7 +63,7 @@ export default function UsesPage() {
                 and 6TB of storage
               </li>
               <li>💻 Laptop: Macbook Pro M2 16"</li>
-              <li>🖥️ Monitor: LG 34" and HP 25"</li>
+              <li>🖥️ Monitor: Two Samsung - Odyssey G51C 32" monitors</li>
               <li>🖱️ Mouse: Logitech - MX Master 3</li>
               <li>⌨️ Keyboard: Logitech - G915</li>
               <li>📱 Phone: iPhone 14 Pro Max</li>
@@ -73,7 +73,7 @@ export default function UsesPage() {
           <div className="container">
             <h2>Hardware (Work)</h2>
             <ul>
-              <li>💻 Laptop: Surface Book Pro 2</li>
+              <li>💻 Laptop: Surface Laptop Studio</li>
               <li>🖥️ 2 HP - 27" IPS LED Monitors</li>
               <li>🖱️ Mouse: Logitech - MX Master 3</li>
               <li>
@@ -86,12 +86,11 @@ export default function UsesPage() {
             <h2>Streaming Equipment</h2>
             <ul>
               <li>🎙️ Microphone: Shure SM7B</li>
-    <li>🎧 Headphones: Sony MDR7506 Pro</li>
+              <li>🎧 Headphones: Sony MDR7506 Pro</li>
               <li>🎛️ Preamp: dbx 286s</li>
               <li>🎚️ Audio Interface: Focusrite Scarlett 2i2 (3rd Gen)</li>
             </ul>
           </div>
- 
           <div className="container">
             <h2>Software</h2>
             <ul>
