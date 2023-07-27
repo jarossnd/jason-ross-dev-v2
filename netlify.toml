@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "https://www.jasonross.xyz/*"
-  to = "https://www.jasonross.dev/:splat"
+  from = "https://www.jasonross.xyz"
+  to = "https://www.jasonross.dev"
   status = 301
   force = true
