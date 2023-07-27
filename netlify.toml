@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://www.jasonross.xyz/*"
+  to = "https://www.jasonross.dev/:splat"
+  status = 301
+  force = true
