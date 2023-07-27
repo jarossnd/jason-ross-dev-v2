@@ -5,7 +5,7 @@ description: "A quick update about going back to work at the office."
 tags: ["work"]
 ---
 
-After 2 years of working from home, my place of work has finally fully opened again and I can now physically go back into the office. Below are some quick abservations when I went back.
+After 2 years of working from home, my place of work has finally fully opened again and I can now physically go back into the office. Below are some quick observations when I went back.
 
 1. I had a 2020 calendar hanging on my locker
 2. Pictures and drawings hanging on the walls I had forgotten about
