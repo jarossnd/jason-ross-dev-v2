@@ -1,6 +1,4 @@
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+require('dotenv').config();
 
 const siteUrl = process.env.URL || `https://www.jasonross.dev`;
 
@@ -80,6 +78,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
@@ -87,6 +92,16 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
+            },
+          },
+          {
+            resolve: `gatsby-source-cloudinary`,
+            options: {
+              cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+              apiKey: process.env.CLOUDINARY_API_KEY,
+              apiSecret: process.env.CLOUDINARY_API_SECRET,
+              resourceType: `image`,
+              prefix: `samples/`
             },
           },
           {
@@ -119,6 +134,14 @@ module.exports = {
           `gatsby-plugin-sitemap`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
+          `gatsby-plugin-image`,
+          {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+              name: `images`,
+              path: `${__dirname}/src/images`
+            }
+          },
         ],
       },
     },
