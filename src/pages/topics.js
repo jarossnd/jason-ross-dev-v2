@@ -87,7 +87,7 @@ const TagsPage = ({
     <SEO title="Topics" />
     <div className="item1">
       <h1>Topics</h1>
-      <p>This page contains all the topics I have created blog posts on.</p>
+      <p>Select a category below to read more about the posts I've written on that subject.</p>
       <TopicStyles>
         <div className="container">
           <ul>
