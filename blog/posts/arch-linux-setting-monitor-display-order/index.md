@@ -7,7 +7,7 @@ tags: ["linux", "linux-config"]
 
 ## Overview
 
-I recently reimaged my machine with a fresh install of Arch Linux. I found myself having to look up the proper command to set my monitor order since I didn't remember all the parameters that needed to be used. I decided to create a quick blog post so I can reference my own content in the future when setting monitor display order. This should work for many different Linux distros and not just Arch Linux.
+I recently reimaged my machine with a fresh installation of Arch Linux. I found myself having to look up the proper command to set my monitor order since I did not remember all the parameters that needed to be used. I decided to create a quick blog post so I can reference my own content in the future when setting monitor display order. This should work for many different Linux distros and not just Arch Linux.
 
 ## Setting Display Order
 
