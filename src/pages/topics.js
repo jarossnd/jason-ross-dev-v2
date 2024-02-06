@@ -94,8 +94,9 @@ const TagsPage = ({
             {group.map((tag) => (
               <li key={tag.fieldValue}>
                 <Link to={`/topics/${kebabCase(tag.fieldValue)}/`}>
-                  {tag.fieldValue}{' '}
+                  {tag.fieldValue}
                 </Link>
+                {' '}
                 ({tag.totalCount})
               </li>
             ))}
