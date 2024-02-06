@@ -96,7 +96,7 @@ const TagsPage = ({
           here
         </a>
         . I typically write about Linux, utilities, servers, web dev, and
-        occasionally some off topics.{' '}
+        occasionally some off topics. 
       </p>
       <TopicStyles>
         <div className="container">
