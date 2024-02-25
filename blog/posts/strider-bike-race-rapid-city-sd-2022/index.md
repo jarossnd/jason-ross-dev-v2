@@ -23,7 +23,7 @@ Once lap 1 is done, they will switch to their Strider Bike in balance mode and d
 
 ## The Race
 
-My kid is wearing the helmet with the green spikes with a green and black tank top. He goes by the nickname of Big E. The announcer in the video was calling him Big E and Big Easy. He is in 3rd place until he gets to the pit stop. My wife was able to beat all the dads and was able to install the pedals and chain before the others and Big E came out of the pit stop in first place. Big E is the fastest when it comes to pedalling so we knew if he was able to get into 1st place that he would have a good shot at winning the event. We ended up taking first place and Big E was able to get his trophy that he wanted.
+My kid is wearing the helmet with the green spikes with a green and black tank top. He goes by the nickname of Big E. The announcer in the video was calling him Big E and Big Easy. He is in 3rd place until he gets to the pit stop. My wife was able to beat all the dads and was able to install the pedals and chain before the others and Big E came out of the pit stop in first place. Big E is the fastest when it comes to pedaling so we knew if he was able to get into 1st place that he would have a good shot at winning the event. We ended up taking first place and Big E was able to get his trophy that he wanted.
 
 ## Video
 
