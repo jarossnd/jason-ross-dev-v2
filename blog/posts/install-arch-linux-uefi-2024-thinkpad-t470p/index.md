@@ -1,5 +1,5 @@
 ---
-title: Installing Arch Linux with UEFI 2024
+title: Installing Arch Linux with UEFI 2024 on a ThinkPad T470p
 date: "2024-02-25"
 description: "I am going to walk you through installing Arch Linux with UEFI from beginning to end on a Lenovo Thinkpad T470p laptop."
 tags: ['linux']
@@ -147,7 +147,7 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     - `umount -R /mnt`
     - `reboot`
 
-27. Installed `throttled` which is a workaround for Intel throttling issues
+27. Install `throttled` which is a workaround for Intel throttling issues. Read more about it [here](https://github.com/erpalma/throttled).
     - `pacman -S throttled`
     - `sudo systemctl enable --now throttled.service`
 
