@@ -195,6 +195,16 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
+                  to="/topics"
+                  onClick={() => {
+                    this.setState({ checked: false });
+                  }}
+                >
+                  Topics
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/uses"
                   onClick={() => {
                     this.setState({ checked: false });
@@ -211,16 +221,6 @@ class Nav extends Component {
                   }}
                 >
                   Donate
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/links"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Links
                 </Link>
               </li>
               <li>
