@@ -7,6 +7,7 @@ const BlogStyles = styled.div`
   ol {
     padding: 0px;
     margin: 0px;
+    text-align:center;
   }
 
   div:hover {
@@ -76,7 +77,7 @@ const BlogIndex = ({ data, location }) => {
                   itemType="http://schema.org/Article"
                 >
                   <PostStyles>
-                    <h2>
+                    <h3>
                       <Link
                         to={post.fields.slug}
                         itemProp="url"
@@ -84,8 +85,8 @@ const BlogIndex = ({ data, location }) => {
                       >
                         <span itemProp="headline">{title}</span>
                       </Link>
-                    </h2>
-                    <p>Date: {post.frontmatter.date}</p>
+                    </h3>
+                    <p style={{ fontSize: `16px` }}>Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p>
 
                     <section>
                       <p
@@ -127,6 +128,7 @@ export const pageQuery = graphql`
           description
           tags
         }
+        timeToRead
       }
     }
   }

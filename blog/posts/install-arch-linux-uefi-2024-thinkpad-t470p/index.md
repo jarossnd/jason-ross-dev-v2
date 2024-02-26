@@ -34,6 +34,8 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
 
 7. Select `gpt`
 
+![Select label type menu in the cfdisk utility](/assets/select-label-type.png)
+
 8. Create EFI partition:
     - New
     - 1G
@@ -61,10 +63,14 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     - `lvcreate --size 8G vol_grp --name swap`
     - `lvcreate -l +100%FREE vol_grp --name root`
 
+![Commands when creating logical partitions](/assets/create-logical-partitions.png)
+
 12. Format the root and swap partitions
 
     - `mkfs.ext4 -L root /dev/mapper/vol_grp-root`
     - `mkswap /dev/mapper/vol_grp-swap`
+
+![Format the root and swap partitions using mkfs and mkswap](assets/format-root-swap-partitions.png)
 
 13. Mount the filesystems.
     - `mount /dev/mapper/vol_grp-root /mnt`
@@ -140,7 +146,6 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     initrd /initramfs-linux.img
     options cryptdevice=UUID="YOUR-UUID-HERE":vol_grp root=/dev/mapper/vol_grp-root resume=/dev/mapper/vol_grp-swap rw intel_pstate=no_hwp
     ```
-
 
 26. Exit, unount and reboot:
     - `exit`

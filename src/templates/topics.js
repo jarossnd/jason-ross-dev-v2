@@ -9,6 +9,7 @@ const BlogStyles = styled.div`
   ol {
     padding: 0px;
     margin: 0px;
+    text-align:center;
   }
 `;
 
@@ -35,13 +36,14 @@ const TopicStyles = styled.div`
 `;
 
 const Tags = ({ pageContext, data }) => {
+  const siteTitle = data.site.siteMetadata?.title || `Title`;
+  const posts = data.allMarkdownRemark.nodes;
   const { tag } = pageContext;
   const { edges, totalCount } = data.allMarkdownRemark;
   const tagTitle = `${tag}`;
   const tagCount = `${totalCount}`;
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? '' : 's'
-  } tagged with "${tag}"`;
+  const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
+    } tagged with "${tag}"`;
   return (
     <>
       <SEO title={tagTitle} />
@@ -52,31 +54,48 @@ const Tags = ({ pageContext, data }) => {
           <strong>{tagTitle}</strong>. View posts below or see{' '}
           <Link to="/topics">all topics</Link>.
         </p>
-        <BlogStyles>
-          <div className="container">
+
+        <div className="container">
+          <BlogStyles>
             <ol style={{ listStyle: `none` }}>
-              {edges.map(({ node }) => {
-                const { slug } = node.fields;
-                const { title } = node.frontmatter;
-                const { date } = node.frontmatter;
-                const { description } = node.frontmatter;
+              {posts?.map((post) => {
+                const title = post.frontmatter.title || post.fields.slug;
                 return (
-                  <TopicStyles>
-                    <li key={slug}>
-                      <h2>
-                        <Link to={slug}>{title}</Link>
-                      </h2>
-                      <p>{date}</p>
-                      <section>
-                        <p>{description}</p>
-                      </section>
-                    </li>
-                  </TopicStyles>
+                  <li key={post.fields.slug}>
+                    <article
+                      className="post-list-item"
+                      itemScope
+                      itemType="http://schema.org/Article"
+                    >
+                      <TopicStyles>
+                        <h3>
+                          <Link
+                            to={post.fields.slug}
+                            itemProp="url"
+                            class="post-link"
+                          >
+                            <span itemProp="headline">{title}</span>
+                          </Link>
+                        </h3>
+                        <p style={{ fontSize: `16px` }}>Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p>
+
+                        <section>
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: post.frontmatter.description || post.excerpt,
+                            }}
+                            itemProp="description"
+                          />
+                        </section>
+                      </TopicStyles>
+                    </article>
+                  </li>
                 );
               })}
             </ol>
-          </div>
-        </BlogStyles>
+          </BlogStyles>
+        </div>
+
         {/*
               This links to a page that does not yet exist.
               You'll come back to it!
@@ -110,23 +129,29 @@ Tags.propTypes = {
 export default Tags;
 export const pageQuery = graphql`
   query ($tag: String) {
+    site {
+      siteMetadata {
+        title
+      }
+    }
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            description
-            date(formatString: "MMMM DD, YYYY")
-          }
+      nodes {
+        excerpt
+        fields {
+          slug
         }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+          tags
+        }
+        timeToRead
       }
     }
   }
