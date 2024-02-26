@@ -9,12 +9,15 @@ const BlogStyles = styled.div`
   ol {
     padding: 0px;
     margin: 0px;
-    text-align:center;
+    text-align: center;
+  }
+  div:hover {
+    border: 3px solid var(--black);
   }
 `;
 
 const TopicStyles = styled.div`
-  border: 3px solid var(--black);
+  border: 3px solid transparent;
   border-radius: 15px;
   font-size: 3rem;
   text-decoration: none;
@@ -42,8 +45,9 @@ const Tags = ({ pageContext, data }) => {
   const { edges, totalCount } = data.allMarkdownRemark;
   const tagTitle = `${tag}`;
   const tagCount = `${totalCount}`;
-  const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
-    } tagged with "${tag}"`;
+  const tagHeader = `${totalCount} post${
+    totalCount === 1 ? '' : 's'
+  } tagged with "${tag}"`;
   return (
     <>
       <SEO title={tagTitle} />
@@ -77,12 +81,16 @@ const Tags = ({ pageContext, data }) => {
                             <span itemProp="headline">{title}</span>
                           </Link>
                         </h3>
-                        <p style={{ fontSize: `16px` }}>Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p>
+                        <p style={{ fontSize: `16px` }}>
+                          Date: {post.frontmatter.date} | 🕑 {post.timeToRead}{' '}
+                          min
+                        </p>
 
                         <section>
                           <p
                             dangerouslySetInnerHTML={{
-                              __html: post.frontmatter.description || post.excerpt,
+                              __html:
+                                post.frontmatter.description || post.excerpt,
                             }}
                             itemProp="description"
                           />

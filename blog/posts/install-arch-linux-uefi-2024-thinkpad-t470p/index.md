@@ -1,13 +1,13 @@
 ---
 title: Installing Arch Linux with UEFI 2024 on a ThinkPad T470p
 date: "2024-02-25"
-description: "I am going to walk you through installing Arch Linux with UEFI from beginning to end on a Lenovo Thinkpad T470p laptop."
+description: "I am going to walk you through installing Arch Linux with UEFI from beginning to end on a Lenovo ThinkPad T470p laptop."
 tags: ['linux']
 ---
 
-This is a more recent article I put together on how to install Arch linux with EUFI on a Lenovo Thinkpad T470p with secure boot disabled. This article assumes you are using a US keyboard layout. You should also read the official Arch installation guide https://wiki.archlinux.org/index.php/installation_guide.
+This is a more recent article I put together on how to install Arch linux with EUFI on a Lenovo ThinkPad T470p with secure boot disabled. This article assumes you are using a US keyboard layout. You should also read the official Arch installation guide https://wiki.archlinux.org/index.php/installation_guide.
 
-My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I call this out because you will see my notes referencing `/dev/nvme0n1` in the notes below.
+My ThinkPad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I call this out because you will see my notes referencing `/dev/nvme0n1` in the notes below.
 
 1. Verify boot mode:
     - This is an important set when working with a UEFI system. Run the below command and if the directory does not exist, the system may not be booted in UEFI mode.
@@ -57,7 +57,6 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     - `cryptsetup luksOpen /dev/nvme0n1p2 luks`
 
 11. Create logical partitions
-
     - `pvcreate /dev/mapper/luks`
     - `vgcreate vol_grp /dev/mapper/luks`
     - `lvcreate --size 8G vol_grp --name swap`
@@ -66,7 +65,6 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
 ![Commands when creating logical partitions](/assets/create-logical-partitions.png)
 
 12. Format the root and swap partitions
-
     - `mkfs.ext4 -L root /dev/mapper/vol_grp-root`
     - `mkswap /dev/mapper/vol_grp-swap`
 
@@ -107,6 +105,7 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     ::1		localhost
     127.0.1.1	myhostname.localdomain	myhostname
     ```
+
 21. Set the root password
     - `passwd`
 
@@ -125,7 +124,8 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     BINARIES=()
     FILES=()
     HOOKS=(base udev autodetect modconf block encrypt lvm2 resume filesystems keyboard fsck)
-    ```
+
+    ```bash
     - `mkinitcpio -p linux`
     - `bootctl --path=/boot install`
 
@@ -135,7 +135,7 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
 
 25. Find the UUID of encrypted partition using `blkid`
     - `blkid`
-    ` vim /boot/loader/entries/archlinux.conf`
+    `vim /boot/loader/entries/archlinux.conf`
 
     Then enter the following information:
 
@@ -157,4 +157,3 @@ My Thinkpad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     - `sudo systemctl enable --now throttled.service`
 
 Thanks for visiting!
-

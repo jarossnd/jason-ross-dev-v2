@@ -52,7 +52,7 @@ export default function UsesPage() {
         <p>
           I often get asked what type of software and hardware I use so I keep
           track of it all on this page. I change this up often so check back for
-          regular updates.
+          regular updates. This page was last updated on Jan 24, 2023.
         </p>
         <UsesStyles>
           <div className="container">

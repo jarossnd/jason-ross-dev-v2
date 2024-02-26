@@ -87,7 +87,10 @@ const TagsPage = ({
     <SEO title="Topics" />
     <div className="item1">
       <h1>Topics</h1>
-      <p>Select a category below to read more about the posts I've written on that subject.</p>
+      <p>
+        Below are topics that I have written posts on. Select a topic below to
+        read more about that given subject.
+      </p>
       <TopicStyles>
         <div className="container">
           <ul>
@@ -95,8 +98,7 @@ const TagsPage = ({
               <li key={tag.fieldValue}>
                 <Link to={`/topics/${kebabCase(tag.fieldValue)}/`}>
                   {tag.fieldValue}
-                </Link>
-                {' '}
+                </Link>{' '}
                 ({tag.totalCount})
               </li>
             ))}

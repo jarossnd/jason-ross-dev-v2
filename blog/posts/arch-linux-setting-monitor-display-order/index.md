@@ -13,7 +13,7 @@ I recently reimaged my machine with a fresh installation of Arch Linux. I found 
 
 The first thing you need to do is run `xrandr` which will display your current monitor configuration along with what your monitors are called. I have 1 34" LG monitor using HDMI and a second HP monitor using DVI. Here is my output:
 
-```
+```text
 Screen 0: minimum 320 x 200, current 4480 x 1080, maximum 16384 x 16384
 DVI-D-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 553mm x 311mm
    1920x1080     60.00*+  59.96    59.93  
@@ -122,13 +122,13 @@ There are two issues for me with this output:
 
 Let's fix issue #1 first by setting the correct monitor order:
 
-```
+```bash
 xrandr --output HDMI-1 --left-of DVI-D-1
 ```
 
 The monitors should now be in the correct order. Next, let's set the correct primary monitor:
 
-```
+```bash
 xrandr --output HDMI-1 --primary
 ```
 
@@ -136,7 +136,7 @@ If you had a lot of windows open, you might see the windows move since you chang
 
 If you wanted to run both command in one line, it would look like this:
 
-```
+```bash
 xrandr --output HDMI-1 --primary --left-of DVI-D-1
 ```
 
@@ -191,6 +191,5 @@ ssh-agent dwm
 ```
 
 Since I'm running dwm, it is important that I put the xrandr line above `ssh-agent dwm` otherwise it will not work.
-
 
 That is all you need to do to set the monitor order in Arch Linux.

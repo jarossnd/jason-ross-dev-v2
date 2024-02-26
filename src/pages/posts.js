@@ -7,7 +7,7 @@ const BlogStyles = styled.div`
   ol {
     padding: 0px;
     margin: 0px;
-    text-align:center;
+    text-align: center;
   }
 
   div:hover {
@@ -16,7 +16,7 @@ const BlogStyles = styled.div`
 `;
 
 const PostStyles = styled.div`
-border: 3px solid transparent;
+  border: 3px solid transparent;
   border-radius: 15px;
   font-size: 3rem;
   text-decoration: none;
@@ -60,8 +60,8 @@ const BlogIndex = ({ data, location }) => {
       <h1>Posts</h1>
       <p>
         My latest articles can be found below. If you want to view posts related
-        to a specific topic, please see <Link to="/topics">topics</Link>.
-        Subscribe to my RSS feed{' '}
+        to a specific topic, please see the <Link to="/topics">topics</Link>{' '}
+        page. Get notified when I create new posts by subscribing to my RSS feed{' '}
         <a href="https://www.jasonross.dev/rss.xml">here</a>.
       </p>
       <SEO title="Posts" />
@@ -86,7 +86,9 @@ const BlogIndex = ({ data, location }) => {
                         <span itemProp="headline">{title}</span>
                       </Link>
                     </h3>
-                    <p style={{ fontSize: `16px` }}>Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p>
+                    <p style={{ fontSize: `16px` }}>
+                      Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min
+                    </p>
 
                     <section>
                       <p
