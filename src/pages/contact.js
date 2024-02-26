@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SEO from '../components/SEO';
 
 const MyDetailsStyles = styled.div`
-  border: 3px solid var(--black);
+border: 3px solid transparent;
   border-radius: 15px;
   font-size: 3rem;
   text-decoration: none;
@@ -23,7 +23,7 @@ const MyDetailsStyles = styled.div`
 
 const FormContactStyles = styled.div`
   #contact-form {
-    border: 3px solid var(--black);
+    border: 3px solid transparent;
     border-radius: 15px;
     font-size: 3rem;
     text-decoration: none;

@@ -4,11 +4,20 @@ import styled from 'styled-components';
 import SEO from '../components/SEO';
 
 const RecentPostsStyles = styled.div`
+ol {
+  padding: 0px;
+  margin: 0px;
+  text-align:center;
+}
+
+div:hover {
+  border: 3px solid var(--black);
+}
 
 `;
 
 const PostStyles = styled.div`
-border: 3px solid var(--black);
+border: 3px solid transparent;
 border-radius: 15px;
 font-size: 3rem;
 text-decoration: none;
@@ -17,6 +26,7 @@ padding: 2rem;
 background-color: var(--blue);
 h3 {
   margin: 0px;
+  text-align:center;
 }
 .post-link {
   text-decoration: none;
@@ -26,7 +36,9 @@ a:hover {
   border-bottom: 3px solid var(--yellow);
   border-color: var(--yellow);
   border-bottom-color: var(--yellow);
-}`;
+}
+
+`;
 
 const IndexPage = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
@@ -72,7 +84,7 @@ const IndexPage = ({ data, location }) => {
                   itemType="http://schema.org/Article"
                 >
                   <PostStyles>
-                    <h2>
+                    <h3>
                       <Link
                         to={post.fields.slug}
                         itemProp="url"
@@ -80,8 +92,8 @@ const IndexPage = ({ data, location }) => {
                       >
                         <span itemProp="headline">{title}</span>
                       </Link>
-                    </h2>
-                    <p>Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p> 
+                    </h3>
+                    <p style={{ fontSize: `16px`}}>Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p> 
 
                     <section>
                       <p

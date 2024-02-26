@@ -11,13 +11,17 @@ const DonateStyles = styled.div`
   }
 
   .donate-container {
-    border: 3px solid var(--black);
+    border: 3px solid transparent;
     border-radius: 15px;
     font-size: 3rem;
     text-decoration: none;
     margin-bottom: 20px;
     padding: 2rem;
     background-color: var(--blue);
+  }
+
+  .donate-container:hover{
+    border: 3px solid var(--black);
   }
 
   .crypto-string {

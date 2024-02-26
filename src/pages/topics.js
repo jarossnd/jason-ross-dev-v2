@@ -36,7 +36,7 @@ const TopicStyles = styled.div`
   }
 
   .container {
-    border: 3px solid var(--black);
+    border: 3px solid transparent;
     border-radius: 15px;
     font-size: 3rem;
     text-decoration: none;

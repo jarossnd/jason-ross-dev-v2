@@ -8,10 +8,14 @@ const BlogStyles = styled.div`
     padding: 0px;
     margin: 0px;
   }
+
+  div:hover {
+    border: 3px solid var(--black);
+  }
 `;
 
 const PostStyles = styled.div`
-  border: 3px solid var(--black);
+border: 3px solid transparent;
   border-radius: 15px;
   font-size: 3rem;
   text-decoration: none;
