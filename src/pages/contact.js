@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SEO from '../components/SEO';
 
 const MyDetailsStyles = styled.div`
-border: 3px solid transparent;
+  border: 3px solid transparent;
   border-radius: 15px;
   font-size: 3rem;
   text-decoration: none;
@@ -124,17 +124,19 @@ export default function ContactPage() {
         <h1>Contact</h1>
         <h2>Website Issues</h2>
         <p>
-          Feel free to open an issue on my{' '}
+          You can find my contact details below. There is also a contact form
+          where you can submit your message. I do not return messages for
+          marketing related email or spam. If you have found a typo or a 🐛 bug
+          on this site, please feel free to open an issue on my{' '}
           <a
             href="https://github.com/jarossnd/jason-ross-dev/issues"
             target="_blank"
             rel="noopener noreferrer"
           >
             GitHub repro
-          </a>{' '}
-          if you have identified an issue on this website.
+          </a>
+          .
         </p>
-        <p />
       </div>
       <div className="item2" />
       <div className="item3">
