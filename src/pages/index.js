@@ -93,7 +93,7 @@ const IndexPage = ({ data, location }) => {
                         <span itemProp="headline">{title}</span>
                       </Link>
                     </h3>
-                    <p style={{ fontSize: `16px`}}>Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p> 
+                    <p style={{ fontSize: `16px`}}>Post Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p> 
 
                     <section>
                       <p

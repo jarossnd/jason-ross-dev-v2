@@ -1,6 +1,6 @@
 import React from 'react'
 import './gallery.css'
-import {useStaticQuery, graphql} from 'gatsby'
+import {useStaticQuery, graphql, Link} from 'gatsby'
 const jayaGram = () => {
     const data = useStaticQuery(graphql`
       query CloudinaryImage {
@@ -8,6 +8,13 @@ const jayaGram = () => {
           edges {
             node {
               secure_url
+              context {
+                custom {
+                  alt
+                  caption
+                }
+              }
+              resource_type
             }
           }
         }
@@ -19,7 +26,8 @@ const jayaGram = () => {
         <div className="image-grid">
           {clImages.map((image, index) => (
             <div className="image-item" key={`${index}-cl`}>
-              <img src={image.node.secure_url} alt={"no alt :("} />
+              <Link href={image.node.secure_url}><img src={image.node.secure_url} alt={image.node.context.custom.alt} /></Link>
+              <figcaption style={{textAlign: `center`, paddingTop: `8px`}}>{image.node.context.custom.caption}</figcaption>
             </div>
           ))}
         </div>
