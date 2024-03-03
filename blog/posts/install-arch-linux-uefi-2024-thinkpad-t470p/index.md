@@ -124,10 +124,12 @@ My ThinkPad uses a NVMe (Non-Volatile Memory Express) storage interface drive. I
     BINARIES=()
     FILES=()
     HOOKS=(base udev autodetect modconf block encrypt lvm2 resume filesystems keyboard fsck)
+    ```
 
     ```bash
     - `mkinitcpio -p linux`
     - `bootctl --path=/boot install`
+    ```
 
 24. Boot loader settings
     - `echo default archlinux >> /boot/loader/loader.conf`
