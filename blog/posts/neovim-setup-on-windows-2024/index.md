@@ -1,6 +1,6 @@
 ---
-title: My Neovim Setup on Windows
-date: "2022-05-10"
+title: My Neovim Setup on Windows in 2024
+date: "2024-05-13"
 description: "Yes, you can use Vim on Windows and here is my setup and configuration for your consumption."
 tags: ['windows-terminal', 'vim']
 ---
@@ -60,12 +60,12 @@ pip install pynvim
 Now add the following line to your `init.vim` file pointing to the Python executable:
 
 ```Bash
-let g:python3_host_prog='C:\Users\<USERNAME>>\AppData\Local\Programs\Python\Python312/python.exe'
+let g:python3_host_prog='C:\Users\<USERNAME>\AppData\Local\Programs\Python\Python312/python.exe'
 ```
 
 ## Seting up your vimrc file
 
-On Windows you init.vim (aka vimrc) file will be located in the following location `%localappdata%/AppData\Local\nvim\init.vim`. You will need to create the nvim folder and the init.vim file if it doesn't already exist.
+On Windows you init.vim (aka vimrc) file will be located in the following location `%localappdata%\nvim\init.vim`. You will need to create the nvim folder and the init.vim file if it doesn't already exist.
 
 ## Install vim-plug
 
