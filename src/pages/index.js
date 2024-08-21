@@ -68,7 +68,7 @@ const IndexPage = ({ data, location }) => {
             here
           </a>
           . I typically write about Linux, utilities, servers, web dev, and
-          occasionally some off topics. 
+          occasionally some off topics. Most recently I have been getting in shape and particpating in running events.
         </p>
         <SEO title="Technology Enthusiast" />
         <h2>Latest Posts</h2>
