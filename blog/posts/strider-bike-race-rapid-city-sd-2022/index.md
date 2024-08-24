@@ -2,7 +2,7 @@
 title: Strider Cup, Rapid City, SD 2022
 date: "2022-08-30"
 description: "My son participated in the Strider Cup in Rapid City, SD in August, 2022. This post contains information about our trip."
-tags: ['strider-bikes', 'competition', 'vacation']
+tags: ['strider-bikes', 'competition', 'vacation', 'sports']
 ---
 
 ## Overview
