@@ -32,7 +32,7 @@ Below are my stats from Strava:
 
 Super fun race with a couple hundred people so the energy was there during the starting line. The route up North Shore Drive was create as it appears the road had recently been resurfaced. There was also plenty of space and tree cover during the route. I will definitely be back next year.
 
-![Any Beardsley Memorial 5k 2024 Close Up] (/assets/andy-beardsley-memorial-5k-01.jpg)
+![Any Beardsley Memorial 5k 2024 Close Up](/assets/andy-beardsley-memorial-5k-01.jpg)
 
 ![Any Beardsley Memorial 5k 2024 Starting Line](/assets/andy-beardsley-memorial-5k-02-starting-line.jpg)
 
