@@ -29,7 +29,7 @@ My official finish time was 37:59 with a pace min/mi of 12:13. It wasn't by far 
 
 ![Altru Beach Party 5k 2024 Official Time](/assets/altru-beach-party-5k-grand-forks-nd-2024-official-time.png)
 
-![Altru Beach Party 5k 2024 Office Stats](/assets/altru-beach-party-5k-grand-forks-nd-2024-official-stats.png)
+![Altru Beach Party 5k 2024 Official Stats](/assets/altru-beach-party-5k-grand-forks-nd-2024-official-stats.png)
 
 
 ## Strava Stats
