@@ -38,6 +38,7 @@ h1 {
   h3:before {
     content: "### ";
   }
+
 `;
 
 const BlogPostTemplate = ({ data, location }) => {
@@ -58,7 +59,7 @@ const BlogPostTemplate = ({ data, location }) => {
       >
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>Post Date: {post.frontmatter.date}</p>
+          <p>Post Date: <time style={{ textAlign: `center;` }}>{post.frontmatter.date}</time></p>
         </header>
         <PostStyles>
           <section

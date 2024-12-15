@@ -5,7 +5,7 @@
  */
 code[class*="language-"],
 pre[class*="language-"] {
-    color: white;
+    color: var(--grey);
     background: none;
     font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
     text-align: left;
@@ -34,8 +34,8 @@ pre[class*="language-"],
 
 /* Code blocks */
 pre[class*="language-"] {
-    border-radius: .5em;
-    border: 3px solid var(--black);
+    border-radius: 0.5em;
+    /*border: 3px solid var(--black);*/
     /* #282A2B */
     margin: .5em 0;
     overflow: auto;
@@ -84,7 +84,7 @@ code[class*="language-"] ::selection {
 
     padding: .1em .2em .1em .2em;
     white-space: normal;
-    color: var(--white);
+    color: var(--grey);
     font-size: .75em;
 }
 

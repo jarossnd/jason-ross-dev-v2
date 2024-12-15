@@ -11,12 +11,12 @@ Lately, I have been diving more and more into Arch Linux and using suckless mini
 
 The other week I found an older HP laptop I had lying around that is around 5 years old. I couldn't remember the BIOS password and it was configured for UEFI. Instead of doing a password reset I decided to install Arch Linux on the laptop leaving UEFI in place. Once I successfully did that, I decided to make a video on it for others to follow.
 
-Below are the steps on how I did the install. I have also included the instructions on GitHub [here](https://github.com/jarossnd/arch-linux-uefi-grub/blob/main/install-notes.md).
+Below are the steps on how I did the installation. I have also included the instructions on GitHub [here](https://github.com/jarossnd/arch-linux-uefi-grub/blob/main/install-notes.md).
 
 > Note: This article assumes you are using a US keyboard layout and we will also be setting up swap as a file instead of a partition. You should also read the official Arch installation guide https://wiki.archlinux.org/index.php/installation_guide. 
 
 1. Verify boot mode:
-    - This is an important set when working with a UEFI system. Run the below command and if the directory does not exist, the system may not be booted in UEFI mode.
+    - This is an important set when working with a UEFI system. Run the command below and if the directory does not exist, the system may not be booted in UEFI mode.
     - `ls /sys/firmware/efi/efivars` (If the directory exist your computer supports EFI)
 
 2. Ping some site on the Internet to verify connection:
@@ -140,7 +140,7 @@ Below are the steps on how I did the install. I have also included the instructi
     - `mkswap /swapfile`
     - `echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab`
 
-28. Exit, unount and reboot:
+28. Exit, unmount and reboot:
     - `exit`
     - `umount -a`
     - `reboot`

@@ -31,7 +31,9 @@ For those that live in PowerShell, this option typically works best because you 
 1. Open a PowerShell window as an Administrator
 2. Run the following cmdlet to install SPO Management Shell:
 
-`Install-Module -Name Microsoft.Online.SharePoint.PowerShell`
+```PowerShell
+Install-Module -Name Microsoft.Online.SharePoint.PowerShell
+```
 
 3. The next time you open PowerShell, the SharePoint Online Management Shell cmdlets should be available for use. If not, you can always import the module by running the following:
 
