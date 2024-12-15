@@ -66,7 +66,7 @@ export default function DonatePage() {
             <p className="crypto-string">
               45S6eqcm4nZ8fCMiXYEg75dX8pWYixxE9eeqBte89cGWj1XVZ5wi6qeceFY9guGxvd9nMX2jiPfwe1Vm1Hnxid7FMc7C5uZ
             </p>
-            {/*<img src={imgXmrQRCode} alt="XMR Icon" width="200" height="200"/>*/}
+            {<img src={imgXmrQRCode} alt="XMR Icon" width="200" height="200"/>}
           </div>
           <div className="donate-container">
             <h2>
