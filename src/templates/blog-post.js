@@ -7,8 +7,36 @@ import Comments from '../components/comments.js';
 
 const CommentStyles = styled.nav``;
 const PostStyles = styled.nav`
+
+h1 {
+  text-align: left;
+  color: var(--yellow);
+}
+
   h2 {
-    text-align: center;
+    text-align: left;
+    color: var(--yellow);
+  }
+
+  h3 {
+    text-align: left;
+    color: var(--yellow);
+  }
+
+  h1:before {
+    content: "# ";
+  }
+
+  h2:before {
+    content: "## ";
+  }
+
+  h3:before {
+    content: "### ";
+  }
+
+  h3:before {
+    content: "### ";
   }
 `;
 
