@@ -1,5 +1,5 @@
 ---
-title: Install Arch Linux on a Thinkpad x220 UEFI with Encryption
+title: Install Arch Linux on a Thinkpad x220 with UEFI and Encryption
 date: "2024-12-16"
 description: "In this post I am installing Arch Linux on my Thinkpad x220 using UEFI and disk encryption."
 tags: ['linux']
