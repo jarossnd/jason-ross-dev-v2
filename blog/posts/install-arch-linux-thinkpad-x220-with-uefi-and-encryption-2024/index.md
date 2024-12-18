@@ -607,6 +607,8 @@ efibootmgr \
   --verbose 
 ```
 
+Please be aware that the above script uses both ticks (`), single quotes ('), and double quote(").
+
 Make the script execuable my running chmod:
 
 ```shellsession
