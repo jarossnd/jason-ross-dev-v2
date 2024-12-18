@@ -129,7 +129,7 @@ export default function ContactPage() {
           marketing related email or spam. If you have found a typo or a 🐛 bug
           on this site, please feel free to open an issue on my{' '}
           <a
-            href="https://github.com/jarossnd/jason-ross-dev/issues"
+            href="https://github.com/jarossnd/jason-ross-dev-v2/issues"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -142,9 +142,8 @@ export default function ContactPage() {
       <div className="item3">
         <MyDetailsStyles>
           <h2>My Details</h2>
-          <p>Twitter: @jarossnd</p>
-          <p>GitHub: @jarossnd</p>
-          <p>Code Pen: @jarossnd</p>
+          <p>X (formally Twitter): <a href="https://x.com/jarossnd" target="_blank" rel="noopener noreferrer">@jarossnd</a></p>
+          <p>GitHub: <a href="https://github.com/jarossnd" target="_blank" rel="noopener noreferrer">@jarossnd</a></p>
           <p>
             Email: <span className="ltrText">ved.ssornosaj@nosaj</span>
           </p>

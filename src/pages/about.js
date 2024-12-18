@@ -10,8 +10,7 @@ export default function AboutPage() {
         <h1>About</h1>
         <h2>Howdy, my name is Jason 😊</h2>
         <p>
-          I live in the United States in an area where summers are hot, winters
-          are cold, and windy all the time.
+          I am from and live in the United States.
         </p>
         <p>
           I enjoy anything that has to do with Linux based operating systems,
@@ -23,17 +22,18 @@ export default function AboutPage() {
           </a>
           .
         </p>
+        <p>Besides technology I enjoy topics around discipline, military, productivity, genealogy, finance, and health and fitness. I also enjoy DIY projects from custom building a desk to building a back yard pergola.</p>
         <p>
-          I started my own computer repair business when I was a young teenager
+          In my younger years I started my own computer repair business when I was a young teenager
           making house calls and fixing computers for local businesses. I used
           to advertise my business with advertisements glued to the tops of
           pizza boxes at a local pizza restaurant. A few years later I was
-          developing and designing websites while hosting the sites on my own
+          developing and designing websites while hosting the sites on my own web
           servers that I managed.
         </p>
         <p>
           Nowadays I work for a large software company helping people and
-          customers get things done.
+          customers get things done. I also have a family and I have a kid who is busy in sports.
         </p>
         <p>
           Sometimes I get questions about what hardware and software I use. You

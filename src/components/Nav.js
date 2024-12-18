@@ -82,7 +82,7 @@ const NavStyles = styled.nav`
     margin-top: 0px;
     transform: rotate(-405deg);
   }
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: 960px) {
     .top-nav {
       height: 25px;
     }
@@ -201,6 +201,16 @@ class Nav extends Component {
                   }}
                 >
                   Topics
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/images"
+                  onClick={() => {
+                    this.setState({ checked: false });
+                  }}
+                >
+                  Images
                 </Link>
               </li>
               <li>
