@@ -2,4 +2,4 @@
 
 ## Overview
 
-This is the repo of www.jasonross.dev which is my personal website.
+This is the repo of my personal website which lives at www.jasonross.dev using GatsbyJS and hosted with Netlify.

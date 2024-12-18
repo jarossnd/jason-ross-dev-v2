@@ -7,7 +7,7 @@ tags: ["git", "linux", "linux-config"]
 
 ## Overview
 
-This is a quick article on how to easily authenticate  to GitHub in a terminal on Arch Linux.
+This is a quick article on how to easily authenticate to GitHub in a terminal on Arch Linux.
 
 ## Prerequisites
 

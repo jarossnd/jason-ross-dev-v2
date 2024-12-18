@@ -19,7 +19,7 @@ I ran the first wave since I wasn't interested in doing obstacles along the way.
 
 ## Course Map
 
-Below is the course map. The route was located in downtown Grand Forks, ND and we ran along the Red River. Just a few blocks over, Grand Forks was having their street fair so there were many people downtown. The start and finish line were in separate locations. The green dot below is the starting line and the red dot is the finish line.
+Below is the course map. The route was in downtown Grand Forks, ND and we ran along the Red River. Just a few blocks over, Grand Forks was having their street fair so there were many people downtown. The start and finish line were in separate locations. The green dot below is the starting line, and the red dot is the finish line.
 
 ![Altru Beach Party 5k 2024 Course Map](/assets/altru-beach-party-5k-grand-forks-nd-2024-course-map.png)
 

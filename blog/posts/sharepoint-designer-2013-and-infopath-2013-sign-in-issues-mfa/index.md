@@ -7,7 +7,7 @@ tags: ['sharepoint-online', 'ms-office']
 
 ## Overview
 
-SharePoint Designer and InfoPath Designer 2013 are old technologies that some individuals and organizations use. Office 2013 was shipped with modern authentication turned on. The first version of Microsoft Office that did that was Office 2016. Most users have multi-factor authentication turned on with the work and school account. That said, when trying to log into SharePoint Designer or InfoPath they might receive an error message saying: "Your account is in a bad state. Please sign-in to this account online to address the issue."
+SharePoint Designer and InfoPath Designer 2013 are old technologies that some individuals and organizations use. Office 2013 was shipped with modern authentication turned off. The first version of Microsoft Office that had modern authentication turned on by default was ffice 2016. Most user accounts have multi-factor authentication turned on with their work and school account. That said, when trying to log into SharePoint Designer or InfoPath they might receive an error message saying: "Your account is in a bad state. Please sign-in to this account online to address the issue." This is because you need to have modern authentication turned on for an account that has 2-factor authentication turned on.
 
 ## Resolution
 
