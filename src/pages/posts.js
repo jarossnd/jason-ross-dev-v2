@@ -11,25 +11,33 @@ const BlogStyles = styled.div`
   }
 
   div:hover {
-    border: 3px solid var(--black);
+    border: 2px solid var(--yellow);
   }
 `;
 
 const PostStyles = styled.div`
-  border: 3px solid transparent;
+  border: 2px solid transparent;
   border-radius: 15px;
   font-size: 3rem;
   text-decoration: none;
   margin-bottom: 2rem;
   padding: 2rem;
   background-color: var(--blue);
-  h3 {
-    margin: 0px;
-  }
-  .post-link {
-    text-decoration: none;
-    color: var(--yellow);
-  }
+h3 {
+  margin: 0px;
+  text-align:center;
+  color: var(--yellow);
+}
+.post-link {
+  text-decoration: none;
+  color: var(--yellow);
+}
+.post-info {
+  color: var(--grey);
+}
+p {
+color: var(--white);
+}
   a:hover {
     border-bottom: 3px solid var(--yellow);
     border-color: var(--yellow);
@@ -71,22 +79,23 @@ const BlogIndex = ({ data, location }) => {
             const title = post.frontmatter.title || post.fields.slug;
             return (
               <li key={post.fields.slug}>
-                <article
+                <Link
+                        to={post.fields.slug}
+                        itemProp="url"
+                        class="post-link"
+                      >
+                        <article
                   className="post-list-item"
                   itemScope
                   itemType="http://schema.org/Article"
                 >
                   <PostStyles>
                     <h3>
-                      <Link
-                        to={post.fields.slug}
-                        itemProp="url"
-                        class="post-link"
-                      >
+                      
                         <span itemProp="headline">{title}</span>
-                      </Link>
+                      
                     </h3>
-                    <p style={{ fontSize: `16px` }}>
+                    <p class="post-info "style={{ fontSize: `16px` }}>
                       Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min
                     </p>
 
@@ -99,7 +108,7 @@ const BlogIndex = ({ data, location }) => {
                       />
                     </section>
                   </PostStyles>
-                </article>
+                </article></Link>
               </li>
             );
           })}
