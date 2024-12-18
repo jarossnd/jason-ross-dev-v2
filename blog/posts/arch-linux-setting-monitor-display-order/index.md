@@ -2,7 +2,7 @@
 title: Setting Monitor Display Order in Arch Linux
 date: "2022-04-07"
 description: "Setting the monitor display order in Arch Linux using Xrandr for a multi-monitor setup"
-tags: ["linux", "linux-config"]
+tags: ["linux", "arch-linux", "linux-config"]
 ---
 
 ## Overview

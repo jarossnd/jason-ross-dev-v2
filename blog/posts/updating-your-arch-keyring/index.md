@@ -2,7 +2,7 @@
 title: Updating your Arch Keyring
 date: "2022-06-04"
 description: "I went to update my Arch system today but received errors. The solution was to update the Arch keyring."
-tags: ['linux', 'arch-linux']
+tags: ["linux", "arch-linux", "linux-config"]
 ---
 
 I went to update an Arch based system today that was several months outdated. I received the following after running `sudo pacman -Syu`:

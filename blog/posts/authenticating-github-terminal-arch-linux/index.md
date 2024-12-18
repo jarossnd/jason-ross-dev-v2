@@ -2,7 +2,7 @@
 title: Authenticating to GitHub in the Terminal in Arch Linux
 date: "2022-04-07"
 description: "How to authenticate to GitHub in the Terminal in Arch Linux so you can make changes to your private repos!"
-tags: ["git", "linux", "linux-config"]
+tags: ["git", "linux", "arch-linux", "linux-config"]
 ---
 
 ## Overview

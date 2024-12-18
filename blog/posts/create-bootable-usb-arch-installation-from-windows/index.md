@@ -2,7 +2,7 @@
 title: Create a Bootable USB Arch Installation from Windows
 date: "2024-02-25"
 description: "Here are my instructions on how to create a bootable USB drive containing the Arch installation from Windows."
-tags: ['linux']
+tags: ['linux', 'arch-linux']
 ---
 
 These steps are for anyone wanting to install Arch linux from a bootable USB flash drive and only have access to a Windows machine.
