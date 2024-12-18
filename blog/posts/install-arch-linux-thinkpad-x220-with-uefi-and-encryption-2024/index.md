@@ -1,8 +1,8 @@
 ---
-title: Install Arch Linux on a Thinkpad x220 with UEFI and Encryption
-date: "2024-12-16"
-description: "In this post I am installing Arch Linux on my Thinkpad x220 using UEFI and disk encryption."
-tags: ['linux']
+title: Install Arch Linux on a ThinkPad x220 with UEFI and Encryption
+date: "2024-12-18"
+description: "In this post I am installing Arch Linux on my ThinkPad x220 using UEFI and disk encryption. This article contains all steps from creating the installation media, paritioning the disk, and installing Arch Linux."
+tags: ['linux', 'arch-linux', 'thinkpad']
 ---
 
 ## Overview

@@ -2,7 +2,7 @@
 title: Installing Arch Linux with UEFI 2024 on a ThinkPad T470p
 date: "2024-02-25"
 description: "I am going to walk you through installing Arch Linux with UEFI from beginning to end on a Lenovo ThinkPad T470p laptop."
-tags: ['linux']
+tags: ['linux', 'arch-linux', 'thinkpad']
 ---
 
 This is a more recent article I put together on how to install Arch linux with EUFI on a Lenovo ThinkPad T470p with secure boot disabled. This article assumes you are using a US keyboard layout. You should also read the official Arch installation guide https://wiki.archlinux.org/index.php/installation_guide.
