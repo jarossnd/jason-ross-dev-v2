@@ -5,6 +5,7 @@ import imgXmr from '../img/assets/xmr.svg';
 import imgBitcoin from '../img/assets/bitcoin.svg';
 import imgPaypal from '../img/assets/paypal.svg';
 import imgXmrQRCode from '../img/qr_codes/xmr-jason-ross-dev.png';
+import imgEth from '../img/assets/eth.svg';
 
 const DonateStyles = styled.div`
   h2 {
@@ -51,8 +52,7 @@ export default function DonatePage() {
         <h1>Donate</h1>
         <p>
           Did you find a blog post or video helpful? Show your appreciation and
-          send some coin. Monero is preferred but I also accept BitCoin and
-          PayPal.
+          send some coin. Never expected but always welcome.
         </p>
       </div>
       <div className="item3">
@@ -76,6 +76,16 @@ export default function DonatePage() {
             <p>Donate using Bitcoin BTC using the following:</p>
             <p className="crypto-string">
               bc1qtew9qam62c9l4v32alvqehdw79jxly3dsk9w8p
+            </p>
+          </div>
+          <div className="donate-container">
+            <h2>
+            <img src={imgEth} alt="Ethereum Icon" width="30" height="30" />
+            &nbsp;Ethereum
+            </h2>
+            <p>Donate using Ethereum ETH using the following:</p>
+            <p className="crypto-string">
+              0xe49f6BcC4FE582562b4567f5656AAce91ccA156D
             </p>
           </div>
           <div className="donate-container">
