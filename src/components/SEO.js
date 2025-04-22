@@ -10,13 +10,14 @@ export default function SEO({ children, location, description, title, image }) {
           title
           description
           twitter
+          siteUrl
         }
       }
     }
   `);
   return (
     <Helmet titleTemplate={`%s - ${site.siteMetadata.title}`}>
-      <html lang="en" />
+      <html lang="en" dir="ltr" />
       <title>{title}</title>
       {/* Fav Icons */}
       <link rel="icon" type="image/svc+xml" href="/favicon.svg" />
@@ -25,6 +26,15 @@ export default function SEO({ children, location, description, title, image }) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta charSet="utf-8" />
       <meta name="description" content={site.siteMetadata.description} />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          url: site.siteMetadata.siteUrl,
+          name: site.siteMetadata.title,
+          description: site.siteMetadata.description,
+        })}
+      </script>
       {children}
     </Helmet>
   );

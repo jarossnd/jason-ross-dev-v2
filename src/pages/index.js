@@ -47,6 +47,38 @@ a:hover {
 
 `;
 
+const Post = ({ post }) => {
+  const title = post.frontmatter.title || post.fields.slug;
+  return (
+    <li key={post.fields.slug}>
+      <Link to={post.fields.slug} itemProp="url" className="post-link">
+        <article
+          className="post-list-item"
+          itemScope
+          itemType="http://schema.org/Article"
+        >
+          <PostStyles>
+            <h3>
+              <span itemProp="headline">{title}</span>
+            </h3>
+            <p className="post-info" style={{ fontSize: `16px` }}>
+              Post Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min
+            </p>
+            <section>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: post.frontmatter.description || post.excerpt,
+                }}
+                itemProp="description"
+              />
+            </section>
+          </PostStyles>
+        </article>
+      </Link>
+    </li>
+  );
+};
+
 const IndexPage = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const posts = data.allMarkdownRemark.nodes;
@@ -80,37 +112,11 @@ const IndexPage = ({ data, location }) => {
         <SEO title="Technology Enthusiast" />
         <h2>Latest Posts</h2>
         <BlogStyles>
-        <ol style={{ listStyle: `none` }}>
-          {posts?.map((post) => {
-            const title = post.frontmatter.title || post.fields.slug;
-            return (
-              <li key={post.fields.slug}>
-                <Link to={post.fields.slug} itemProp="url" class="post-link">
-                  <article
-                    className="post-list-item"
-                    itemScope
-                    itemType="http://schema.org/Article"
-                  >
-                    <PostStyles>
-                      <h3>
-                        <span itemProp="headline">{title}</span>
-                      </h3>
-                      <p class="post-info "style={{ fontSize: `16px` }}>Post Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min</p> 
-                      <section>
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: post.frontmatter.description || post.excerpt,
-                          }}
-                          itemProp="description"
-                        />
-                      </section>
-                    </PostStyles>
-                  </article>
-                </Link>
-              </li>
-            );
-          })}
-        </ol>
+          <ol style={{ listStyle: `none` }}>
+            {posts?.map((post) => (
+              <Post key={post.fields.slug} post={post} />
+            ))}
+          </ol>
         </BlogStyles>
     </div>
   );

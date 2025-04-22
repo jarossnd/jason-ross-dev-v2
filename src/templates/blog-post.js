@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Bio from '../components/bio';
 import SEO from '../components/SEO';
-import Comments from '../components/comments.js';
+
+const Comments = React.lazy(() => import('../components/comments.js'));
 
 const CommentStyles = styled.nav``;
 const PostStyles = styled.nav`
@@ -35,8 +36,8 @@ h1 {
     content: "### ";
   }
 
-  h3:before {
-    content: "### ";
+  time {
+    text-align: center;
   }
 
 `;
@@ -59,7 +60,7 @@ const BlogPostTemplate = ({ data, location }) => {
       >
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>Post Date: <time style={{ textAlign: `center;` }}>{post.frontmatter.date}</time></p>
+          <p>Post Date: <time>{post.frontmatter.date}</time></p>
         </header>
         <PostStyles>
           <section
@@ -68,7 +69,9 @@ const BlogPostTemplate = ({ data, location }) => {
           />
         </PostStyles>
         <CommentStyles>
-          <Comments />
+          <Suspense fallback={<div>Loading comments...</div>}>
+            <Comments />
+          </Suspense>
         </CommentStyles>
         <hr />
         <footer>
@@ -77,38 +80,13 @@ const BlogPostTemplate = ({ data, location }) => {
             🐛 Found a typo or something that needs to be corrected?{' '}
             <a
               href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}
+              aria-label="Edit this post on GitHub"
             >
               Edit on GitHub
             </a>
           </p>
         </footer>
       </article>
-      {/* <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav> */}
     </div>
   );
 };

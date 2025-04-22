@@ -83,6 +83,11 @@ const FormContactStyles = styled.div`
     background: var(--yellow);
     font-weight: bold;
   }
+  input:focus,
+  button:focus {
+    outline: 2px solid var(--yellow);
+    outline-offset: 2px;
+  }
   h3 {
     margin: 0px;
   }
@@ -162,15 +167,14 @@ export default function ContactPage() {
               <input type="hidden" name="bot-field" />
               <input type="hidden" name="form-name" value="contactForm" />
               <p>
-                <label>
-                  <span>Name:</span>
-                  <input type="text" name="name" placeholder="Name" />
-                </label>
+                <label htmlFor="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Name" />
               </p>
               <p>
                 <label>
                   <span>Email:</span>
-                  <input type="text" name="email" placeholder="Email" />
+                  <input type="email" name="email" placeholder="Email" required />
+                  <span className="error-message">Please enter a valid email address.</span>
                 </label>
               </p>
               <p>

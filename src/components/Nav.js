@@ -55,7 +55,7 @@ const NavStyles = styled.nav`
     position: absolute;
     height: 4px;
     width: 30px;
-    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.4s ease, background-color 0.4s ease;
     border-radius: 2px;
   }
 
@@ -144,10 +144,25 @@ const NavStyles = styled.nav`
   }
 `;
 
+const menuItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Posts', path: '/posts' },
+  { name: 'Topics', path: '/topics' },
+  { name: 'Images', path: '/images' },
+  { name: 'Uses', path: '/uses' },
+  { name: 'Donate', path: '/donate' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
+];
+
 class Nav extends Component {
   state = {
     scrolledClass: 'notFixed',
     checked: false,
+  };
+
+  setChecked = (checked) => {
+    this.setState({ checked });
   };
 
   render() {
@@ -155,106 +170,35 @@ class Nav extends Component {
     return (
       <div>
         <NavStyles>
-          <section className="top-nav">
-            <div>
-              <Link to="/">&lt;JR /&gt;</Link>
-            </div>
-            <input id="mobileMenuCheckbox" type="checkbox" checked={checked} />
+          <nav aria-label="Main Navigation">
+            <section className="top-nav">
+              <div>
+                <Link to="/">&lt;JR /&gt;</Link>
+              </div>
+              <input id="mobileMenuCheckbox" type="checkbox" checked={checked} />
 
-            <label
-              className="menu-button-container"
-              htmlFor="mobileMenuCheckbox"
-              onClick={() => {
-                this.setState({
-                  checked: !checked,
-                });
-              }}
-            >
-              <div className="menu-button" />
-            </label>
-            <ul className="menu">
-              <li>
-                <Link
-                  to="/"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/posts"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Posts
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/topics"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Topics
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/images"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Images
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/uses"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Uses
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/donate"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Donate
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  onClick={() => {
-                    this.setState({ checked: false });
-                  }}
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </section>
+              <label
+                className="menu-button-container"
+                htmlFor="mobileMenuCheckbox"
+                onClick={() => {
+                  this.setState({
+                    checked: !checked,
+                  });
+                }}
+              >
+                <div className="menu-button" />
+              </label>
+              <ul className="menu">
+                {menuItems.map(({ name, path }) => (
+                  <li key={name}>
+                    <Link to={path} onClick={() => this.setChecked(false)}>
+                      {name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </nav>
         </NavStyles>
       </div>
     );

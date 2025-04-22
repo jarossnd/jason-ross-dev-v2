@@ -43,6 +43,16 @@ const UsesStyles = styled.div`
   }
 `;
 
+const hardwarePersonal = [
+  { emoji: '🖥️', name: 'Desktop', description: 'Custom built AMD Ryzen 9 5950X 4th Gen, 64GB RAM, and 6TB of storage' },
+  { emoji: '💻', name: 'Laptop', description: 'Macbook Pro M2 16"' },
+  { emoji: '🖥️', name: 'Monitor', description: 'Two Samsung - Odyssey G51C 32" monitors' },
+  { emoji: '🖱️', name: 'Mouse', description: 'Logitech - MX Master 3' },
+  { emoji: '⌨️', name: 'Keyboard', description: 'Logitech - G915' },
+  { emoji: '📱', name: 'Phone', description: 'iPhone 14 Pro Max' },
+  { emoji: '⌚', name: 'Watch', description: 'Apple Watch Ultra' },
+];
+
 export default function UsesPage() {
   return (
     <>
@@ -52,22 +62,17 @@ export default function UsesPage() {
         <p>
           I often get asked what type of software and hardware I use so I keep
           track of it all on this page. I change this up often so check back for
-          regular updates. This page was last updated on Jan 24, 2023.
+          regular updates. This page was last updated on {new Date().toLocaleDateString()}.
         </p>
         <UsesStyles>
           <div className="container">
             <h2>Hardware (Personal)</h2>
             <ul>
-              <li>
-                🖥️ Desktop: Custom built AMD Ryzen 9 5950X 4th Gen, 64GB RAM,
-                and 6TB of storage
-              </li>
-              <li>💻 Laptop: Macbook Pro M2 16"</li>
-              <li>🖥️ Monitor: Two Samsung - Odyssey G51C 32" monitors</li>
-              <li>🖱️ Mouse: Logitech - MX Master 3</li>
-              <li>⌨️ Keyboard: Logitech - G915</li>
-              <li>📱 Phone: iPhone 14 Pro Max</li>
-              <li>⌚ Watch: Apple Watch Ultra</li>
+              {hardwarePersonal.map((item) => (
+                <li key={item.name}>
+                  {item.emoji} {item.name}: {item.description}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="container">

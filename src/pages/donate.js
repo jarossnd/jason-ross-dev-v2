@@ -8,14 +8,19 @@ import imgXmrQRCode from '../img/qr_codes/xmr-jason-ross-dev.png';
 import imgEth from '../img/assets/eth.svg';
 
 const DonateStyles = styled.div`
+  :root {
+    --donate-border-radius: 15px;
+    --donate-font-size: 3rem;
+  }
+
   h2 {
     margin: 0px;
   }
 
   .donate-container {
     border: 3px solid transparent;
-    border-radius: 15px;
-    font-size: 3rem;
+    border-radius: var(--donate-border-radius);
+    font-size: var(--donate-font-size);
     text-decoration: none;
     margin-bottom: 20px;
     padding: 2rem;
@@ -34,7 +39,7 @@ const DonateStyles = styled.div`
   @media screen and (max-width: 760px) {
     .donate-container {
       border: 3px solid var(--black);
-      border-radius: 15px;
+      border-radius: var(--donate-border-radius);
       font-size: 2rem;
       text-decoration: none;
       margin-bottom: 10px;
@@ -43,6 +48,32 @@ const DonateStyles = styled.div`
     }
   }
 `;
+
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text);
+  alert('Copied to clipboard!');
+};
+
+const DonateOption = ({ imgSrc, altText, title, description, value, link }) => (
+  <div className="donate-container">
+    <h2>
+      <img src={imgSrc} alt={altText} width="30" height="30" />
+      &nbsp;{title}
+    </h2>
+    <p>{description}</p>
+    {value && (
+      <>
+        <p className="crypto-string">{value}</p>
+        <button onClick={() => copyToClipboard(value)}>Copy Address</button>
+      </>
+    )}
+    {link && (
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        {link}
+      </a>
+    )}
+  </div>
+);
 
 export default function DonatePage() {
   return (
@@ -57,52 +88,34 @@ export default function DonatePage() {
       </div>
       <div className="item3">
         <DonateStyles>
-          <div className="donate-container">
-            <h2>
-              <img src={imgXmr} alt="XMR Icon" width="30" height="30" />
-              &nbsp;Monero
-            </h2>
-            <p>Donate using Monero XMR using the following:</p>
-            <p className="crypto-string">
-              45S6eqcm4nZ8fCMiXYEg75dX8pWYixxE9eeqBte89cGWj1XVZ5wi6qeceFY9guGxvd9nMX2jiPfwe1Vm1Hnxid7FMc7C5uZ
-            </p>
-            {<img src={imgXmrQRCode} alt="XMR Icon" width="200" height="200"/>}
-          </div>
-          <div className="donate-container">
-            <h2>
-              <img src={imgBitcoin} alt="XMR Icon" width="30" height="30" />
-              &nbsp;BitCoin
-            </h2>
-            <p>Donate using Bitcoin BTC using the following:</p>
-            <p className="crypto-string">
-              bc1qtew9qam62c9l4v32alvqehdw79jxly3dsk9w8p
-            </p>
-          </div>
-          <div className="donate-container">
-            <h2>
-            <img src={imgEth} alt="Ethereum Icon" width="30" height="30" />
-            &nbsp;Ethereum
-            </h2>
-            <p>Donate using Ethereum ETH using the following:</p>
-            <p className="crypto-string">
-              0xe49f6BcC4FE582562b4567f5656AAce91ccA156D
-            </p>
-          </div>
-          <div className="donate-container">
-            <h2>
-              <img src={imgPaypal} alt="XMR Icon" width="30" height="30" />
-              &nbsp;PayPal
-            </h2>
-            You can donate using{' '}
-            <a
-              href="https://www.paypal.com/donate?hosted_button_id=VAQTBWLXBKD3S"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              this
-            </a>
-            &nbsp;PayPal link.
-          </div>
+          <DonateOption
+            imgSrc={imgXmr}
+            altText="Monero Icon"
+            title="Monero"
+            description="Donate using Monero XMR using the following:"
+            value="45S6eqcm4nZ8fCMiXYEg75dX8pWYixxE9eeqBte89cGWj1XVZ5wi6qeceFY9guGxvd9nMX2jiPfwe1Vm1Hnxid7FMc7C5uZ"
+          />
+          <DonateOption
+            imgSrc={imgBitcoin}
+            altText="XMR Icon"
+            title="BitCoin"
+            description="Donate using Bitcoin BTC using the following:"
+            value="bc1qtew9qam62c9l4v32alvqehdw79jxly3dsk9w8p"
+          />
+          <DonateOption
+            imgSrc={imgEth}
+            altText="Ethereum Icon"
+            title="Ethereum"
+            description="Donate using Ethereum ETH using the following:"
+            value="0xe49f6BcC4FE582562b4567f5656AAce91ccA156D"
+          />
+          <DonateOption
+            imgSrc={imgPaypal}
+            altText="XMR Icon"
+            title="PayPal"
+            description="You can donate using the following PayPal link:"
+            link="https://www.paypal.com/donate?hosted_button_id=VAQTBWLXBKD3S"
+          />
         </DonateStyles>
       </div>
     </>
