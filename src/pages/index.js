@@ -28,6 +28,7 @@ h3 {
   margin: 0px;
   text-align:center;
   color: var(--yellow);
+  font-size: var(--font-size-h3);
 }
 .post-link {
   text-decoration: none;

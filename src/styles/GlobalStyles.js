@@ -12,6 +12,12 @@ const GlobalStyles = createGlobalStyle`
         --orange: #FE7F2D;
         --purple: #C04ABC;
         --green: #639A88;
+
+        --font-size-h1: 5rem;
+        --font-size-h2: 4rem;
+        --font-size-h3: 3rem;
+        --font-size-p: 3rem;
+        --font-size-list: 3rem;
     }
 
     html {
@@ -62,6 +68,11 @@ const GlobalStyles = createGlobalStyle`
     }
     @media screen and (max-width: 760px) {
         body {
+            --font-size-h1: 4rem;
+            --font-size-h2: 3rem;
+            --font-size-h3: 2rem;
+            --font-size-p: 2rem;
+            --font-size-list: 2rem;
             padding-right: 1rem;
             padding-left: 1rem;
         }

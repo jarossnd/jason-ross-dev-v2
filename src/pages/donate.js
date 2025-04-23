@@ -27,13 +27,28 @@ const DonateStyles = styled.div`
     background-color: var(--blue);
   }
 
-  .donate-container:hover{
+  .donate-container:hover {
     border: 3px solid var(--black);
   }
 
   .crypto-string {
     font-size: 2rem;
     overflow-wrap: break-word;
+  }
+
+  button {
+    border: 2px solid yellow;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    background-color: black; /* Dark background */
+    color: white; /* White text */
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  button:hover {
+    background-color: yellow;
+    color: black;
   }
 
   @media screen and (max-width: 760px) {

@@ -41,75 +41,41 @@ const ContentStyles = styled.div`
     }
     background: var(--dark);
     color: var(--white);
-    h1 {
-        font-size: 5rem;
-        color: var(--yellow);
-        text-align: center;
-    }
-    h2 {
-        font-size: 4rem;
-        color: var(--white);
-        text-align: center;
-    }
-    h3 {
-        font-size: 3rem;
-        color: var(--white);
-    }
-    p {
-        font-size: 3rem;
-    }
-
-    ul li {
-        font-size: 3rem;
-    }
-
-    ol li {
-        font-size: 3rem;
-    }
-
-    @media screen and (max-width: 760px) {
-        h1 {
-        font-size: 4rem;
-        color: var(--yellow);
-        text-align: center;
-    }
-    h2 {
-        font-size: 3rem;
-        color: var(--white);
-        text-align: center;
-    }
-    h3 {
-        font-size: 2rem;
-        color: var(--white);
-        text-align: center;
-    }
-    p {
-        font-size: 2rem;
-        line-height: 1.5;
-    }
-
-    ul li {
-        font-size: 2rem;
-    }
-
-    ol li {
-        font-size: 2rem;
-    }
 
     @media screen and (max-width: 760px) {
         padding-right: 1rem;
         padding-left: 1rem;
     }
 
+    h1 {
+        font-size: var(--font-size-h1);
+        color: var(--yellow);
+        text-align: center;
+    }
+    h2 {
+        font-size: var(--font-size-h2);
+        color: var(--white);
+        text-align: center;
+    }
+    h3 {
+        font-size: var(--font-size-h3);
+        color: var(--white);
+    }
+    p, ul li, ol li {
+        font-size: var(--font-size-p);
+    }
+
 `;
 
 export default function Layout({ children }) {
   return (
-    <div>
+    <>
       <GlobalStyles />
       <Nav />
-      <ContentStyles>{children}</ContentStyles>
+      <main>
+        <ContentStyles>{children}</ContentStyles>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

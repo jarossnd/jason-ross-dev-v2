@@ -10,35 +10,35 @@ const CommentStyles = styled.nav``;
 const PostStyles = styled.nav`
 
 h1 {
-  text-align: left;
   color: var(--yellow);
 }
 
-  h2 {
-    text-align: left;
-    color: var(--yellow);
-  }
+h2 {
 
-  h3 {
-    text-align: left;
-    color: var(--yellow);
-  }
+  color: var(--yellow);
+  text-align: left;
+}
 
-  h1:before {
-    content: "# ";
-  }
+h3 {
+  color: var(--yellow);
+  text-align: left;
+}
 
-  h2:before {
-    content: "## ";
-  }
+h1:before {
+  content: "# ";
+}
 
-  h3:before {
-    content: "### ";
-  }
+h2:before {
+  content: "## ";
+}
 
-  time {
-    text-align: center;
-  }
+h3:before {
+  content: "### ";
+}
+
+time {
+  text-align: center;
+}
 
 `;
 
@@ -60,7 +60,9 @@ const BlogPostTemplate = ({ data, location }) => {
       >
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>Post Date: <time>{post.frontmatter.date}</time></p>
+          <p style={{ textAlign: 'center' }}>
+            Post Date: <time>{post.frontmatter.date}</time>
+          </p>
         </header>
         <PostStyles>
           <section
