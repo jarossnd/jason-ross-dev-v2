@@ -6,14 +6,12 @@ import styled from 'styled-components';
 import SEO from '../components/SEO';
 
 const BlogStyles = styled.div`
-  ol {
-    padding: 0px;
-    margin: 0px;
-    text-align: center;
-  }
-  div:hover {
-    border: 3px solid var(--black);
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
 `;
 
 const TopicStyles = styled.div`
@@ -24,17 +22,26 @@ const TopicStyles = styled.div`
   margin-bottom: 2rem;
   padding: 2rem;
   background-color: var(--blue);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
   h3 {
     margin: 0px;
   }
+
   .post-link {
     text-decoration: none;
     color: var(--yellow);
+    transition: color 0.3s ease;
   }
-  a:hover {
-    border-bottom: 3px solid var(--yellow);
-    border-color: var(--yellow);
-    border-bottom-color: var(--yellow);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--yellow); /* Add yellow border on hover */
+  }
+
+  .post-link:hover {
+    color: var(--white);
   }
 `;
 
@@ -81,10 +88,16 @@ const Tags = ({ pageContext, data }) => {
                             <span itemProp="headline">{title}</span>
                           </Link>
                         </h3>
-                        <p style={{ fontSize: `16px` }}>
-                          Date: {post.frontmatter.date} | 🕑 {post.timeToRead}{' '}
-                          min
-                        </p>
+                        <p style={{ 
+  fontSize: `16px`, 
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  gap: '10px' 
+}}>
+  <span>📅 {post.frontmatter.date}</span> | 
+  <span>🕑 {post.timeToRead} min</span>
+</p>
 
                         <section>
                           <p
@@ -103,6 +116,12 @@ const Tags = ({ pageContext, data }) => {
             </ol>
           </BlogStyles>
         </div>
+
+        <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <Link to="/topics" style={{ fontSize: '1.5rem', color: 'var(--yellow)' }}>
+            Explore All Topics →
+          </Link>
+        </p>
 
         {/*
               This links to a page that does not yet exist.

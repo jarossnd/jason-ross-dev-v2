@@ -66,6 +66,18 @@ const GlobalStyles = createGlobalStyle`
         border-radius: 1rem;
         border: 3px solid var(--dark);
     }
+  .cursor {
+  display: inline-block;
+  width: 15px;
+  background-color: var(--white);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
     @media screen and (max-width: 760px) {
         body {
             --font-size-h1: 4rem;

@@ -18,17 +18,32 @@ const DonateStyles = styled.div`
   }
 
   .donate-container {
-    border: 3px solid transparent;
-    border-radius: var(--donate-border-radius);
+    border: 2px solid transparent;
+    border-radius: 15px;
     font-size: var(--donate-font-size);
     text-decoration: none;
     margin-bottom: 20px;
     padding: 2rem;
     background-color: var(--blue);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   }
 
   .donate-container:hover {
-    border: 3px solid var(--black);
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--yellow); /* Apply yellow border on hover */
   }
 
   .crypto-string {
@@ -37,18 +52,24 @@ const DonateStyles = styled.div`
   }
 
   button {
-    border: 2px solid yellow;
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
-    background-color: black; /* Dark background */
-    color: white; /* White text */
-    cursor: pointer;
+    width: 100px; /* Match the full-width style in contact.js */
+    padding: 0.5em;
+    border: none;
+    background: var(--yellow);
+    color: #333;
     font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, font-weight 0.3s ease;
   }
 
   button:hover {
-    background-color: yellow;
-    color: black;
+    background: var(--yellow);
+    font-weight: bold;
+  }
+
+  button:focus {
+    outline: 2px solid var(--yellow);
+    outline-offset: 2px;
   }
 
   @media screen and (max-width: 760px) {

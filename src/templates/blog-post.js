@@ -63,6 +63,35 @@ const BlogPostTemplate = ({ data, location }) => {
           <p style={{ textAlign: 'center' }}>
             Post Date: <time>{post.frontmatter.date}</time>
           </p>
+          <div style={{ textAlign: 'center', margin: '1rem 0' }}>
+            {post.frontmatter.tags.map(tag => (
+              <Link
+                key={tag}
+                to={`/topics/${tag}/`}
+                style={{
+                  display: 'inline-block',
+                  backgroundColor: 'var(--yellow)',
+                  color: 'var(--black)',
+                  padding: '0.25rem 0.5rem',
+                  margin: '0.5rem 0.5rem', // Increased margin for better spacing
+                  borderRadius: '5px',
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'scale(1.1)';
+                  e.target.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'scale(1)';
+                  e.target.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+                }}
+              >
+                #{tag}
+              </Link>
+            ))}
+          </div>
         </header>
         <PostStyles>
           <section
@@ -76,13 +105,14 @@ const BlogPostTemplate = ({ data, location }) => {
           </Suspense>
         </CommentStyles>
         <hr />
-        <footer>
-          <p style={{ textAlign: `center;` }}>
+        <footer style={{ backgroundColor: 'var(--light-gray)', padding: '1rem', textAlign: 'center' }}>
+          <p>
             <Bio />
             🐛 Found a typo or something that needs to be corrected?{' '}
             <a
               href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}
               aria-label="Edit this post on GitHub"
+              style={{ color: 'var(--yellow)', textDecoration: 'underline' }}
             >
               Edit on GitHub
             </a>
