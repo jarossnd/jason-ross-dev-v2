@@ -12,6 +12,12 @@ const BlogStyles = styled.div`
   padding: 0px;
   margin: 0px;
   text-align: center;
+
+    ol {
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+  }
 `;
 
 const TopicStyles = styled.div`
