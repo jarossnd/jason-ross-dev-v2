@@ -45,7 +45,6 @@ const ProjectsStyles = styled.div`
 export default function ProjectsPage() {
   return (
     <>
-      <SEO title="Projects" />
       <div className="item1">
         <h1>Projects</h1>
         <h2>Here are a list of my projects...</h2>
@@ -66,3 +65,5 @@ export default function ProjectsPage() {
     </>
   );
 }
+
+export const Head = () => <SEO title="Projects" />;

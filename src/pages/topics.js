@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 // Utilities
 import kebabCase from 'lodash/kebabCase';
 // Components
-import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import SEO from '../components/SEO';
@@ -84,7 +83,6 @@ const TagsPage = ({
   },
 }) => (
   <>
-    <SEO title="Topics" />
     <div className="item1">
       <h1>Topics</h1>
       <p>
@@ -108,6 +106,7 @@ const TagsPage = ({
     </div>
   </>
 );
+
 TagsPage.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
@@ -125,7 +124,10 @@ TagsPage.propTypes = {
     }),
   }),
 };
+
 export default TagsPage;
+
+export const Head = () => <SEO title="Topics" />;
 export const pageQuery = graphql`
   query {
     site {
@@ -134,7 +136,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(limit: 2000) {
-      group(field: frontmatter___tags) {
+      group(field: { frontmatter: { tags: SELECT } }) {
         fieldValue
         totalCount
       }

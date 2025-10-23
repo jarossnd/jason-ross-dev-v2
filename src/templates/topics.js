@@ -63,7 +63,6 @@ const Tags = ({ pageContext, data }) => {
   } tagged with "${tag}"`;
   return (
     <>
-      <SEO title={tagTitle} />
       <div className="item1">
         <h1>Topics: {tagTitle}</h1>
         <p>
@@ -137,6 +136,7 @@ const Tags = ({ pageContext, data }) => {
     </>
   );
 };
+
 Tags.propTypes = {
   pageContext: PropTypes.shape({
     tag: PropTypes.string.isRequired,
@@ -159,7 +159,10 @@ Tags.propTypes = {
     }),
   }),
 };
+
 export default Tags;
+
+export const Head = ({ pageContext }) => <SEO title={pageContext.tag} />;
 export const pageQuery = graphql`
   query ($tag: String) {
     site {
@@ -169,7 +172,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       limit: 2000
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount

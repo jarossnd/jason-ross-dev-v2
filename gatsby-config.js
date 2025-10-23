@@ -37,7 +37,7 @@ module.exports = {
             output: 'rss.xml',
             query: `
         {
-          allMarkdownRemark(sort: {fields: frontmatter___date, order: ASC}) {
+          allMarkdownRemark(sort: {frontmatter: {date: ASC}}) {
             nodes {
               frontmatter {
                 title
@@ -158,7 +158,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-styled-components',
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-mdx',
     {
       resolve: 'gatsby-source-filesystem',

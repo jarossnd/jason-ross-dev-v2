@@ -56,7 +56,6 @@ const hardwarePersonal = [
 export default function UsesPage() {
   return (
     <>
-      <SEO title="Uses" />
       <div className="item1">
         <h1>Uses</h1>
         <p>
@@ -140,3 +139,5 @@ export default function UsesPage() {
     </>
   );
 }
+
+export const Head = () => <SEO title="Uses" />;

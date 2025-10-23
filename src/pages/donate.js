@@ -114,7 +114,6 @@ const DonateOption = ({ imgSrc, altText, title, description, value, link }) => (
 export default function DonatePage() {
   return (
     <>
-      <SEO title="Donate" />
       <div className="item1">
         <h1>Donate</h1>
         <p>
@@ -157,3 +156,5 @@ export default function DonatePage() {
     </>
   );
 }
+
+export const Head = () => <SEO title="Donate" />;

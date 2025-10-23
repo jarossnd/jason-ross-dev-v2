@@ -149,8 +149,6 @@ const IndexPage = ({ data, location }) => {
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
-        <SEO title="Technology Enthusiast" />
-
         <p>No recent posts found.</p>
       </Layout>
     );
@@ -170,7 +168,6 @@ const IndexPage = ({ data, location }) => {
         . I typically write about Linux, utilities, servers, web dev, and
         occasionally some off topics. Most recently I have been getting in shape and participating in running events.
       </p>
-      <SEO title="Technology Enthusiast" />
       <h2>Latest Posts</h2>
       <BlogStyles>
         <ol style={{ listStyle: `none` }}>
@@ -185,6 +182,8 @@ const IndexPage = ({ data, location }) => {
 
 export default IndexPage;
 
+export const Head = () => <SEO title="Technology Enthusiast" />;
+
 export const pageQuery = graphql`
   query {
     site {
@@ -192,7 +191,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(limit: 3, sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(limit: 3, sort: { frontmatter: { date: DESC } }) {
       nodes {
         excerpt
         fields {

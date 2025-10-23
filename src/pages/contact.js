@@ -124,7 +124,6 @@ const FormContactStyles = styled.div`
 export default function ContactPage() {
   return (
     <>
-      <SEO title="Contact" />
       <div className="item1">
         <h1>Contact</h1>
         <h2>Website Issues</h2>
@@ -197,3 +196,5 @@ export default function ContactPage() {
     </>
   );
 }
+
+export const Head = () => <SEO title="Contact" />;

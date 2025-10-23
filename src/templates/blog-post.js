@@ -49,10 +49,6 @@ const BlogPostTemplate = ({ data, location }) => {
 
   return (
     <div location={location} title={siteTitle} className="item2">
-      <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-      />
       <article
         className="blog-post"
         itemScope
@@ -124,6 +120,13 @@ const BlogPostTemplate = ({ data, location }) => {
 };
 
 export default BlogPostTemplate;
+
+export const Head = ({ data }) => (
+  <SEO
+    title={data.markdownRemark.frontmatter.title}
+    description={data.markdownRemark.frontmatter.description || data.markdownRemark.excerpt}
+  />
+);
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
