@@ -123,10 +123,10 @@ const TypingEffect = ({ text, speed = 100 }) => {
       }
     }, speed);
 
-    // Stop the cursor blinking after 10 seconds
+    // Stop the cursor blinking after 5 seconds (reduced from 10)
     const cursorTimeout = setTimeout(() => {
       setShowCursor(false);
-    }, 10000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
@@ -162,7 +162,7 @@ const IndexPage = ({ data, location }) => {
         Welcome to my corner on the internet! I talk about technology and other
         topics on my blog, and you will find other useful pages on this site.
         Sometimes I post videos on my YouTube channel found{' '}
-        <a href="https://www.youtube.com/channel/UCP6Y5xvu8VSyXjFHwGMgc6g">
+        <a href="https://www.youtube.com/channel/UCP6Y5xvu8VSyXjFHwGMgc6g" aria-label="Jason's YouTube Channel">
           here
         </a>
         . I typically write about Linux, utilities, servers, web dev, and

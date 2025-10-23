@@ -11,11 +11,11 @@ I worked on an issue today where some translated site pages had the "First Publi
 
 Below is a screenshot showing that the Before-Again.aspx page is missing the "First Published Date" metadata:
 
-![Site Pages Library Missing First Published Date](/assets/sitepages-library-pl-missing-first-publish-date.png)
+![Site Pages Library Missing First Published Date](assets/sitepages-library-pl-missing-first-publish-date.png)
 
 We need to know the ID of the page so it might be helpful to add the ID column to your Site Pages view to easily identify the page ID.
 
-![Site Pages Library with ID column added to the view](/assets/sitepages-library-pl-id-column.png)
+![Site Pages Library with ID column added to the view](assets/sitepages-library-pl-id-column.png)
 
 Below is PnP PowerShell to update the First Published Date field. You first need to know the ID of the page. You will need to set the `$myPageID` variable to equal the ID of the page you want to update the metadata.
 
@@ -33,4 +33,4 @@ Set-PnPListItem -List 'SitePages' -Identity $myPageID -Values @{"FirstPublishedD
 
 Below is the end result of the column now having the date. Notice that the time is set to midnight, you can include a time if you want but I left it at midnight so I could easily identify which pages I had updated the metadata with PowerShell.
 
-![Site Pages Library with ID column added to the view](/assets/sitepages-library-pl-has-first-published-after-ps.png)
+![Site Pages Library with ID column added to the view](assets/sitepages-library-pl-has-first-published-after-ps.png)

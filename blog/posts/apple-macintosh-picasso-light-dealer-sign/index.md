@@ -7,7 +7,7 @@ tags: ["personal", "apple", "mac"]
 
 ## Apple Macintosh 'Picasso' Light Dealer Sign
 
-![Apple Macintosh 'Picasso' Light Dealer Sign](/assets/apple-macintosh-picasso-light.jpeg)
+![Apple Macintosh 'Picasso' Light Dealer Sign](assets/apple-macintosh-picasso-light.jpeg)
 
 The Apple Macintosh 'Picasso" light is one of my most treasured items, and I was fortunate to receive the sign after the passing of my grandparents. I remember being a child and they would have this sign lit up in their computer office and it remained there all the way until their passing. Every time I look at this sign it reminds me of being in their house again.
 

@@ -7,6 +7,35 @@ import SEO from '../components/SEO';
 const Comments = React.lazy(() => import('../components/comments.js'));
 
 const CommentStyles = styled.nav``;
+
+const PostHeader = styled.header`
+  .post-date {
+    text-align: center;
+  }
+  
+  .tags-container {
+    text-align: center;
+    margin: 1rem 0;
+  }
+`;
+
+const TagLink = styled(Link)`
+  display: inline-block;
+  background-color: var(--yellow);
+  color: var(--black);
+  padding: 0.25rem 0.5rem;
+  margin: 0.5rem 0.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+`;
+
 const PostStyles = styled.nav`
 
 h1 {
@@ -42,6 +71,17 @@ time {
 
 `;
 
+const PostFooter = styled.footer`
+  background-color: var(--light-gray);
+  padding: 1rem;
+  text-align: center;
+
+  a {
+    color: var(--yellow);
+    text-decoration: underline;
+  }
+`;
+
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
@@ -54,41 +94,22 @@ const BlogPostTemplate = ({ data, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
-        <header>
+        <PostHeader>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p style={{ textAlign: 'center' }}>
+          <p className="post-date">
             Post Date: <time>{post.frontmatter.date}</time>
           </p>
-          <div style={{ textAlign: 'center', margin: '1rem 0' }}>
+          <div className="tags-container">
             {post.frontmatter.tags.map(tag => (
-              <Link
+              <TagLink
                 key={tag}
                 to={`/topics/${tag}/`}
-                style={{
-                  display: 'inline-block',
-                  backgroundColor: 'var(--yellow)',
-                  color: 'var(--black)',
-                  padding: '0.25rem 0.5rem',
-                  margin: '0.5rem 0.5rem', // Increased margin for better spacing
-                  borderRadius: '5px',
-                  textDecoration: 'none',
-                  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'scale(1.1)';
-                  e.target.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'scale(1)';
-                  e.target.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-                }}
               >
                 #{tag}
-              </Link>
+              </TagLink>
             ))}
           </div>
-        </header>
+        </PostHeader>
         <PostStyles>
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
@@ -101,19 +122,18 @@ const BlogPostTemplate = ({ data, location }) => {
           </Suspense>
         </CommentStyles>
         <hr />
-        <footer style={{ backgroundColor: 'var(--light-gray)', padding: '1rem', textAlign: 'center' }}>
+        <PostFooter>
           <p>
             <Bio />
             🐛 Found a typo or something that needs to be corrected?{' '}
             <a
               href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}
               aria-label="Edit this post on GitHub"
-              style={{ color: 'var(--yellow)', textDecoration: 'underline' }}
             >
               Edit on GitHub
             </a>
           </p>
-        </footer>
+        </PostFooter>
       </article>
     </div>
   );

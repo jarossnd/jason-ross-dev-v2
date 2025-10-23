@@ -157,6 +157,33 @@ module.exports = {
         head: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Jason Ross - Technology Enthusiast`,
+        short_name: `Jason Ross`,
+        description: `The homepage of web developer and technology enthusiast Jason Ross. We discuss everything having to do with technology and there are no limits!`,
+        start_url: `/`,
+        background_color: `#0E0F19`,
+        theme_color: `#ffdd1a`,
+        display: `standalone`,
+        icon: `src/images/icon.png`,
+        icons: [
+          {
+            src: `src/images/icon.png`,
+            sizes: `192x192`,
+            type: `image/png`,
+          },
+          {
+            src: `src/images/icon.png`,
+            sizes: `512x512`,
+            type: `image/png`,
+          },
+        ],
+        cache_busting_mode: `none`,
+      },
+    },
+    `gatsby-plugin-offline`,
     'gatsby-plugin-styled-components',
     'gatsby-plugin-mdx',
     {

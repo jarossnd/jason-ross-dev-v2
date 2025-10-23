@@ -75,6 +75,6 @@ If you are getting a bunch of red text when trying to run a cmdlet, the first th
 
 I have seen folks attempt to run a cmdlet and they get an error message. Typically, it is a syntax error such as a misspelling, extra character, or forget to close a string. If you are sure you have your command typed correctly, it might be that your SharePoint Online Management Shell is outdated. Windows Updates does not automatically update this module for you. It is your job to make sure you have the latest version. If you have the MSI version installed on your machine, here is an easy method to compare your version of the SPO Management Shell to what you currently have installed: 
 
-![Programs and Features](/assets/spo-mgmt-shell-version-number-download-page.png)
+![Programs and Features](assets/spo-mgmt-shell-version-number-download-page.png)
 
-![Programs and Features](/assets/add-remove-programs-spo-mgmt-shell.png)
+![Programs and Features](assets/add-remove-programs-spo-mgmt-shell.png)

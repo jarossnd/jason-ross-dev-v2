@@ -217,7 +217,7 @@ const BlogIndex = ({ data, location }) => {
                 <Link
                         to={post.fields.slug}
                         itemProp="url"
-                        class="post-link"
+                        className="post-link"
                       >
                         <article
                   className="post-list-item"
@@ -230,7 +230,7 @@ const BlogIndex = ({ data, location }) => {
                         <span itemProp="headline">{title}</span>
                       
                     </h3>
-                    <p class="post-info "style={{ fontSize: `16px` }}>
+                    <p className="post-info" style={{ fontSize: `16px` }}>
                       Date: {post.frontmatter.date} | 🕑 {post.timeToRead} min
                     </p>
 

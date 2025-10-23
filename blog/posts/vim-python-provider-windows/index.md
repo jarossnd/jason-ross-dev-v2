@@ -9,7 +9,7 @@ tags: ['python', 'vim']
 
 You just downloaded and configured Vim on Windows. Upon running :healthcheck, you see warnings about not being able to find Python as seen below:
 
-![Vim health check cannot find Python and shows a warning about being unable to load Python 3](/assets/vim-python-warnings.png)
+![Vim health check cannot find Python and shows a warning about being unable to load Python 3](assets/vim-python-warnings.png)
 
 ```text
 ## Python 3 provider (optional)
@@ -33,7 +33,7 @@ Before we get started, I should state that I am using Neovim.
 
 First, you need to download and install Python if you haven't already done this. During the setup, make sure to also add to select "Add Python 3.10 to PATH":
 
-![Python setup screen showing to select add python to environment variables](/assets/python-310-to-path.png)
+![Python setup screen showing to select add python to environment variables](assets/python-310-to-path.png)
 
 Once Python is installed, close any open PowerShell sessions and re-launch PowerShell. Open your vim init file and add the following line:
 
@@ -47,7 +47,7 @@ If you do not know the location of your init.vim config file on Windows, it is l
 
 Save your Vim config file and restart vim and run `:checkhealth` again. We resolved the issue of not being able to load Python 3 but we are still seeing the other warning about `import neovim`.
 
-![Vim health check cannot find Python and shows a warning about import neovim](/assets/vim-python-import-neovim-warning.png)
+![Vim health check cannot find Python and shows a warning about import neovim](assets/vim-python-import-neovim-warning.png)
 
 ```text
 ## Python 3 provider (optional)

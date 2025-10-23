@@ -71,8 +71,23 @@ export default function Layout({ children }) {
   return (
     <>
       <GlobalStyles />
+      <a href="#main-content" style={{ 
+        position: 'absolute', 
+        left: '-10000px', 
+        top: 'auto', 
+        width: '1px', 
+        height: '1px', 
+        overflow: 'hidden',
+        '&:focus': {
+          position: 'static',
+          width: 'auto',
+          height: 'auto'
+        }
+      }}>
+        Skip to main content
+      </a>
       <Nav />
-      <main>
+      <main id="main-content">
         <ContentStyles>{children}</ContentStyles>
       </main>
       <Footer />

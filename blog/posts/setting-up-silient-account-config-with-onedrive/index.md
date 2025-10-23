@@ -26,19 +26,19 @@ dsregcmd /status
 
 Your device is joined to Microsoft Entra ID if you see AzureAdJoined equal YES. Below is a screenshot:
 
-![Running dsregcmd /status in Command Prompt](/assets/dsregcmd-status.png)
+![Running dsregcmd /status in Command Prompt](assets/dsregcmd-status.png)
 
 ## Turning on Silent Account Config
 
 Once you have confirmed with `dsregcmd /status` that the machine is Microsoft Entra ID joined, the next step is to turn on Silent Account Config. Since I have this turned on for a single machine, I went the registry route and created the following key: `[HKLM\SOFTWARE\Policies\Microsoft\OneDrive]"SilentAccountConfig"=dword:00000001`.
 
-![Silent Account Config enabled in the Registry](/assets/silient-account-config-enabled.png)
+![Silent Account Config enabled in the Registry](assets/silient-account-config-enabled.png)
 
 ## Validating Silent Account Config Worked
 
 Now sign out of Windows and sign back in with the work or school account and validate if OneDrive automatically signed in or not. You can also check the registry to see if Silent Account Config was successsful. OneDrive will create two registry key values in `HKEY_CURRENT_USER\SOFTWARE\Microsoft\OneDrive`. See `ClientEverSignedIn` and `SilentBusinessConfigCompleted` in the below screenshot:
 
-![Validating Silent Account Config was successful in the registry](/assets/validating-silient-account-config.png)
+![Validating Silent Account Config was successful in the registry](assets/validating-silient-account-config.png)
 
 ## Video
 

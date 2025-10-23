@@ -175,7 +175,7 @@ class Nav extends Component {
               <div>
                 <Link to="/">&lt;JR /&gt;</Link>
               </div>
-              <input id="mobileMenuCheckbox" type="checkbox" checked={checked} />
+              <input id="mobileMenuCheckbox" type="checkbox" checked={checked} aria-label="Toggle mobile menu" />
 
               <label
                 className="menu-button-container"
@@ -185,6 +185,7 @@ class Nav extends Component {
                     checked: !checked,
                   });
                 }}
+                aria-label="Mobile menu button"
               >
                 <div className="menu-button" />
               </label>

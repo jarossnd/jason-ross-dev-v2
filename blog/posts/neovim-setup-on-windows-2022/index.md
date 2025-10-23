@@ -31,7 +31,7 @@ choco install neovim -y
 
 Restart the terminal and type `nvim` and you will see the Neovim welcome page:
 
-![Neovim Startup](/assets/neo-vim-startup.png)
+![Neovim Startup](assets/neo-vim-startup.png)
 
 While this article isn't how to use Neovim, if you have never used it before, here are a few quick commands for your reference so you can get around Neovim:
 
@@ -66,13 +66,13 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 Example:
 
-![Nevim Plug Manager Install](/assets/nvim-plug-manager-install.gif)
+![Nevim Plug Manager Install](assets/nvim-plug-manager-install.gif)
 
 ## Configure Neovim
 
 Now we need to find which directory we should place our init.vim file which is where we will store the Neovim config. In Neovim, we can run `:echo stdpath('config')` to find the location as seen below:
 
-![Neovim Startup](/assets/nvim-find-config-path.gif)
+![Neovim Startup](assets/nvim-find-config-path.gif)
 
 Create a file called `init.vim` in the directory where you ran `:echo stdpath('config')`. For example:
 
@@ -95,11 +95,11 @@ call plug#end()
 
 Example:
 
-![](/assets/nvim-create-init-vim-file.gif)
+![](assets/nvim-create-init-vim-file.gif)
 
 Save the file, quit Neovim and restart. Run `:PlugInstall` to installed the plugs:
 
-![](/assets/nvim-plug-install.gif)
+![](assets/nvim-plug-install.gif)
 
 
 In the previous section, we installed vim-plug to manage our Neovim plugins. Now, we will finish configuring the init.vim file with our customizations:
@@ -276,7 +276,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 Quit Neovim and open again. It will open with an error message which is expected because we have not run `:PlugInstall` since we copy and pasted the latest config. Once you have finished running `:PlugInstall`, restart Neovim and you should now see the customizations:
 
-![](/assets/nvim-with-customizations-but-no-icons.png)
+![](assets/nvim-with-customizations-but-no-icons.png)
 
 ## Installing NerdFont
 
@@ -294,4 +294,4 @@ I am going to use [SpaceMono](https://www.nerdfonts.com/font-downloads). Open th
 
 This is an example of NerdTree working with icons:
 
-![](/assets/nvim-nerdtree-icons.png)
+![](assets/nvim-nerdtree-icons.png)

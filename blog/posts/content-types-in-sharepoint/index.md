@@ -32,14 +32,14 @@ We need to create our Content Type at the Site level and below are the steps to 
 
 1. Gear Icon (top right)
 2. Site Contents
-    ![Gear Icon Menu Options](/assets/01-ctypes-site-contents.png)
+    ![Gear Icon Menu Options](assets/01-ctypes-site-contents.png)
 3. Site Settings
-    ![Site Settings button the Toolbar](/assets/02-ctypes-site-settings.png)
+    ![Site Settings button the Toolbar](assets/02-ctypes-site-settings.png)
 4. Site Content Types under the Web Designer Galleries heading
-    ![Showing site content types under the web designer galleries heading](/assets/03-ctypes-site-content-types.png)
+    ![Showing site content types under the web designer galleries heading](assets/03-ctypes-site-content-types.png)
 5. Create Content Type
 6. I am creating a Vehicle content type with the following:
-    ![Showing site content types under the web designer galleries heading](/assets/04-ctypes-vehicle-content-types.png)
+    ![Showing site content types under the web designer galleries heading](assets/04-ctypes-vehicle-content-types.png)
 7. Click Save
 8. Create the following columns in the Content Type:
 
@@ -71,7 +71,7 @@ After we enabled allow management of content types, under list settings there is
 
 After we clicked OK we are now back in list settings. Under the "Content Types" heading, click "Change new button order and default content types". We will unselect Item and only keep Vehicle selected.
 
-![Changing the new button order](/assets/06-ctypes-change-new-button-order.png)
+![Changing the new button order](assets/06-ctypes-change-new-button-order.png)
 
 Do this for all 4 lists.
 
