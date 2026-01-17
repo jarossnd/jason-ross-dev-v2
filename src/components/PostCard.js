@@ -114,9 +114,15 @@ const PostCard = React.memo(({ post, showExcerpt = true }) => {
               <span itemProp="headline">{title}</span>
             </h3>
             <p className="post-info">
-              <span>📅 {post.frontmatter.date}</span>
-              <span>|</span>
-              <span>🕑 {post.timeToRead} min</span>
+              <span>
+                <span aria-hidden="true">📅</span>
+                <span className="sr-only">Published:</span> {post.frontmatter.date}
+              </span>
+              <span aria-hidden="true">|</span>
+              <span>
+                <span aria-hidden="true">🕑</span>
+                <span className="sr-only">Reading time:</span> {post.timeToRead} min
+              </span>
             </p>
             {showExcerpt && (
               <section>

@@ -152,21 +152,35 @@ export default function ContactPage() {
               <input type="hidden" name="bot-field" />
               <input type="hidden" name="form-name" value="contactForm" />
               <p>
-                <input type="text" id="name" name="name" placeholder="Name" />
-              </p>
-              <p>
-                <label>
-                  <span>Email:</span>
-                  <input type="email" name="email" placeholder="Email" required />
-                  <span className="error-message">Please enter a valid email address.</span>
+                <label htmlFor="name">
+                  <span>Name:</span>
+                  <input type="text" id="name" name="name" placeholder="Name" required />
                 </label>
               </p>
               <p>
-                <label>
+                <label htmlFor="email">
+                  <span>Email:</span>
+                  <input 
+                    type="email" 
+                    id="email"
+                    name="email" 
+                    placeholder="Email" 
+                    required 
+                    aria-describedby="email-error"
+                  />
+                  <span id="email-error" className="error-message" role="alert">
+                    Please enter a valid email address.
+                  </span>
+                </label>
+              </p>
+              <p>
+                <label htmlFor="message">
                   <span>Message:</span>
                   <textarea
+                    id="message"
                     name="message"
                     placeholder="Your message goes here"
+                    required
                   />
                 </label>
               </p>

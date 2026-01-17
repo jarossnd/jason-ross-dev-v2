@@ -165,10 +165,12 @@ const BlogPostTemplate = ({ data, location }) => {
         <PostFooter>
           <Bio />
           <p>
-            🐛 Found a typo or something that needs to be corrected?{' '}
+            <span aria-hidden="true">🐛</span> Found a typo or something that needs to be corrected?{' '}
             <a
               href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}
-              aria-label="Edit this post on GitHub"
+              aria-label="Edit this post on GitHub (opens in new window)"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Edit on GitHub
             </a>

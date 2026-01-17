@@ -126,7 +126,6 @@ const PostDisclaimer = ({ postDate, updatedArticle, updatedArticleTitle }) => {
         onClick={handleDismiss}
         aria-label="Dismiss disclaimer"
         title="Dismiss"
-        tabIndex="-1"
       >
         ×
       </button>

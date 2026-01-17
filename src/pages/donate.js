@@ -100,12 +100,22 @@ const DonateOption = ({ imgSrc, altText, title, description, value, link }) => (
     {value && (
       <>
         <p className="crypto-string">{value}</p>
-        <button onClick={() => copyToClipboard(value)}>Copy Address</button>
+        <button 
+          onClick={() => copyToClipboard(value)}
+          aria-label={`Copy ${title} address to clipboard`}
+        >
+          Copy Address
+        </button>
       </>
     )}
     {link && (
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        {link}
+      <a 
+        href={link} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label={`Donate via ${title} (opens in new window)`}
+      >
+        Donate Now
       </a>
     )}
   </div>

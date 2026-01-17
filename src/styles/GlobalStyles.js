@@ -67,6 +67,19 @@ const GlobalStyles = createGlobalStyle`
         max-width: 100%;
     }
 
+    /* Screen reader only text */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
     /* Scrollbar Style */
 
     body::-webkit-scrollbar {
@@ -131,6 +144,18 @@ const GlobalStyles = createGlobalStyle`
         input[type="email"],
         textarea {
             font-size: 16px; /* Prevents iOS zoom */
+        }
+    }
+
+    /* Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
         }
     }
 `;
