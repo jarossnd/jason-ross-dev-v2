@@ -33,21 +33,18 @@ const TopicStyles = styled.div`
 
   @media screen and (max-width: 760px) {
     ul {
-      column-count: 2;
-      padding-left: 2rem;
+      column-count: 1;
+      padding-left: 0;
+      text-align: center;
     }
     ul li {
       padding-left: 0px;
       position: unset;
+      margin-bottom: 1rem;
     }
 
     ul li:before {
-      margin: 0 0 0 -34px;
-      text-align: right;
-      width: 2em;
-      display: inline-block;
-      position: absolute;
-      height: 100%;
+      display: none;
     }
   }
 `;
