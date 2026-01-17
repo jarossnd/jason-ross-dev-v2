@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Bio from '../components/bio';
 import SEO from '../components/SEO';
 import PostDisclaimer from '../components/PostDisclaimer';
+import { formatGitDate, formatGitFullDate } from '../utils/dateUtils';
 
 const Comments = React.lazy(() => import('../components/comments.js'));
 
@@ -132,7 +133,7 @@ const BlogPostTemplate = ({ data, location }) => {
         <PostHeader>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p className="post-date">
-            Post Date: <time>{post.frontmatter.date}</time>
+            📅 Committed: <time>{post.frontmatter.date}</time>
           </p>
           <div className="tags-container">
             {post.frontmatter.tags.map(tag => (

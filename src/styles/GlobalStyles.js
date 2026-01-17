@@ -158,6 +158,63 @@ const GlobalStyles = createGlobalStyle`
             scroll-behavior: auto !important;
         }
     }
+
+    /* Code Block Copy Button */
+    .code-block-wrapper {
+        position: relative;
+        margin-bottom: 2rem;
+    }
+
+    .copy-code-button {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: var(--yellow);
+        color: var(--black);
+        font-family: 'Roboto Mono', monospace;
+        font-size: 1.4rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: bold;
+        opacity: 0;
+        z-index: 10;
+    }
+
+    .code-block-wrapper:hover .copy-code-button {
+        opacity: 1;
+    }
+
+    .copy-code-button:hover {
+        background: var(--white);
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    .copy-code-button:focus {
+        outline: 2px solid var(--yellow);
+        outline-offset: 2px;
+        opacity: 1;
+    }
+
+    .copy-code-button.copied {
+        background: var(--green);
+        color: var(--white);
+    }
+
+    @media screen and (max-width: 760px) {
+        .copy-code-button {
+            display: none; /* Hide on mobile - covers code */
+        }
+    }
+
+    /* Prism Line Numbers */
+    pre[class*="language-"].line-numbers {
+        position: relative;
+        padding-left: 5em;
+        counter-reset: linenumber;
 `;
 
 export default GlobalStyles;

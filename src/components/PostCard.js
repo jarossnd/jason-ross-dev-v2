@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { formatGitDate, formatGitFullDate } from '../utils/dateUtils';
 
 const PostCardStyles = styled.div`
   border: 3px solid transparent;
@@ -116,7 +117,8 @@ const PostCard = React.memo(({ post, showExcerpt = true }) => {
             <p className="post-info">
               <span>
                 <span aria-hidden="true">📅</span>
-                <span className="sr-only">Published:</span> {post.frontmatter.date}
+                <span className="sr-only">Published:</span>{' '}
+                Committed: {post.frontmatter.date}
               </span>
               <span aria-hidden="true">|</span>
               <span>

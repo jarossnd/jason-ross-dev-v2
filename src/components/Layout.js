@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Nav from './Nav';
 import Footer from './Footer';
+import CodeCopyButton from './CodeCopyButton';
+import CommandPalette from './CommandPalette';
+import BootSequence from './BootSequence';
 import 'normalize.css';
 import GlobalStyles from '../styles/GlobalStyles';
 
@@ -71,6 +74,9 @@ export default function Layout({ children }) {
   return (
     <>
       <GlobalStyles />
+      <BootSequence />
+      <CodeCopyButton />
+      <CommandPalette />
       <a href="#main-content" style={{ 
         position: 'absolute', 
         left: '-10000px', 
