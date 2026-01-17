@@ -39,14 +39,14 @@ const FormContactStyles = styled.div`
   textarea,
   button {
     width: 100%;
-    padding: 0.5em;
+    padding: var(--spacing-xs);
     border: none;
-    border-radius: 15px;
+    border-radius: var(--radius-md);
   }
   input[type='text'],
   input[type='email'],
   textarea {
-    margin: 0 0 1em;
+    margin: 0 0 var(--spacing-sm);
     border: 1px solid var(--yellow);
     outline: none;
   }
@@ -55,7 +55,7 @@ const FormContactStyles = styled.div`
     border-color: #d5144d;
   }
   textarea {
-    height: 6em;
+    height: 6rem;
   }
   input[type='submit'],
   button {
@@ -81,13 +81,13 @@ const FormContactStyles = styled.div`
   }
   @media screen and (max-width: 760px) {
     #contact-form h2 {
-      font-size: 2em;
+      font-size: var(--font-size-body);
       line-height: 1.5;
     }
     label > span {
       vertical-align: top;
       display: inline-block;
-      padding: 0.5em;
+      padding: var(--spacing-xs);
       border: 1px solid transparent;
       text-align: right;
     }
@@ -97,7 +97,7 @@ const FormContactStyles = styled.div`
       line-height: 1.5;
     }
     textarea {
-      height: 10em;
+      height: 10rem;
     }
     input[type='submit'],
     button {

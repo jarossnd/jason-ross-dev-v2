@@ -18,7 +18,7 @@ const NavStyles = styled.nav`
     color: var(--yellow);
     height: 50px;
     padding: 1em;
-    font-size: 3rem;
+    font-size: var(--font-size-p);
   }
 
   .menu {
@@ -55,7 +55,8 @@ const NavStyles = styled.nav`
     position: absolute;
     height: 4px;
     width: 30px;
-    transition: transform 0.4s ease, background-color 0.4s ease;
+    transition: transform var(--transition-medium) var(--easing-standard), 
+                background-color var(--transition-medium) var(--easing-standard);
     border-radius: 2px;
   }
 
@@ -116,13 +117,13 @@ const NavStyles = styled.nav`
       margin: 0;
       padding: 0;
       border: 0;
-      transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      transition: height 400ms var(--easing-bounce);
     }
     #mobileMenuCheckbox:checked ~ .menu li {
       border: 1px solid #333;
       height: 1em;
       padding: 1em;
-      transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      transition: height 400ms var(--easing-bounce);
       visibility: visible;
     }
     #mobileMenuCheckbox:checked ~ .menu a {

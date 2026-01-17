@@ -5,12 +5,12 @@ import styled from 'styled-components';
  * Used across multiple pages for content sections
  */
 const ContentContainer = styled.div`
-  border: 3px solid ${props => props.borderColor || 'transparent'};
-  border-radius: 15px;
-  font-size: 3rem;
+  border: var(--border-width) solid ${props => props.borderColor || 'transparent'};
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-p);
   text-decoration: none;
-  margin-bottom: 20px;
-  padding: 2rem;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
   background-color: var(--blue);
 
   h2 {
@@ -27,13 +27,13 @@ const ContentContainer = styled.div`
   }
 
   @media screen and (max-width: 760px) {
-    border: 3px solid var(--black);
-    font-size: 2rem;
-    margin-bottom: 10px;
-    padding: 1rem;
+    border: var(--border-width) solid var(--black);
+    font-size: var(--font-size-body);
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
     
     ul {
-      padding-left: 2rem;
+      padding-left: var(--spacing-lg);
     }
 
     ul li {

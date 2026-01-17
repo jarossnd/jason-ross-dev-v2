@@ -14,7 +14,7 @@ const BootContainer = styled.div`
   overflow-y: auto;
   z-index: 99999;
   display: ${props => props.show ? 'block' : 'none'};
-  animation: ${props => props.fadeOut ? 'fadeOut 0.5s ease-out forwards' : 'none'};
+  animation: ${props => props.fadeOut ? `fadeOut var(--transition-slow) var(--easing-out) forwards` : 'none'};
 
   @keyframes fadeOut {
     from {
@@ -34,7 +34,7 @@ const BootContainer = styled.div`
 const BootLine = styled.div`
   margin-bottom: 0.3rem;
   opacity: ${props => props.visible ? 1 : 0};
-  transition: opacity 0.1s ease-in;
+  transition: opacity var(--transition-fast) var(--easing-in-out);
   line-height: 1.4;
   font-size: 1.4rem;
 

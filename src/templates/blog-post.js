@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Bio from '../components/bio';
 import SEO from '../components/SEO';
 import PostDisclaimer from '../components/PostDisclaimer';
-import { formatGitDate, formatGitFullDate } from '../utils/dateUtils';
 
 const Comments = React.lazy(() => import('../components/comments.js'));
 
@@ -17,7 +16,7 @@ const PostHeader = styled.header`
   
   .tags-container {
     text-align: center;
-    margin: 1rem 0;
+    margin: var(--spacing-sm) 0;
   }
 `;
 
@@ -25,12 +24,13 @@ const TagLink = styled(Link)`
   display: inline-block;
   background-color: var(--yellow);
   color: var(--black);
-  padding: 0.25rem 0.5rem;
-  margin: 0.5rem 0.5rem;
-  border-radius: 5px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin: var(--spacing-xs) var(--spacing-xs);
+  border-radius: var(--radius-sm);
   text-decoration: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-normal) var(--easing-standard), 
+              box-shadow var(--transition-normal) var(--easing-standard);
 
   &:hover {
     transform: scale(1.1);
@@ -39,8 +39,8 @@ const TagLink = styled(Link)`
 
   @media screen and (max-width: 760px) {
     min-height: unset; /* Override global min-height for tags */
-    padding: 0.5rem 1rem;
-    font-size: 1.6rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-meta);
   }
 `;
 
@@ -79,7 +79,7 @@ time {
 
 @media screen and (max-width: 760px) {
   p, li {
-    font-size: 2.2rem; /* Match body font size */
+    font-size: var(--font-size-body); /* Match body font size */
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
@@ -96,12 +96,12 @@ time {
 
   /* Code blocks more readable on mobile */
   code {
-    font-size: 1.8rem;
+    font-size: var(--font-size-small);
     word-break: break-word;
   }
 
   pre code {
-    font-size: 1.6rem;
+    font-size: var(--font-size-meta);
   }
 }
 
@@ -109,7 +109,7 @@ time {
 
 const PostFooter = styled.footer`
   background-color: var(--light-gray);
-  padding: 1rem;
+  padding: var(--spacing-sm);
   text-align: center;
 
   a {

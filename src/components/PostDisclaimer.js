@@ -4,18 +4,18 @@ import styled from 'styled-components';
 
 const DisclaimerBox = styled.div`
   background-color: var(--dark);
-  border: 3px solid var(--yellow);
-  border-radius: 15px;
-  padding: 2rem;
-  margin: 2rem 0;
-  font-size: 3rem;
+  border: var(--border-width) solid var(--yellow);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+  font-size: var(--font-size-p);
   position: relative;
 
   p {
     margin: 0;
     line-height: 1.6;
     color: var(--white);
-    padding-right: 4rem;
+    padding-right: var(--spacing-2xl);
   }
 
   a {
@@ -35,19 +35,19 @@ const DisclaimerBox = styled.div`
 
   .close-button {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
     background: none;
     border: none;
     color: var(--yellow);
-    font-size: 3rem;
+    font-size: var(--font-size-p);
     cursor: pointer;
     padding: 0;
-    width: 3rem;
-    height: 3rem;
+    width: var(--spacing-xl);
+    height: var(--spacing-xl);
     line-height: 1;
     font-family: 'Roboto Mono', monospace;
-    transition: transform 0.2s;
+    transition: transform var(--transition-normal) var(--easing-standard);
 
     &:hover {
       transform: scale(1.2);
@@ -60,19 +60,19 @@ const DisclaimerBox = styled.div`
   }
 
   @media screen and (max-width: 760px) {
-    padding: 1.5rem;
-    font-size: 2rem;
-    margin: 1.5rem 0;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-body);
+    margin: var(--spacing-md) 0;
 
     p {
-      padding-right: 3rem;
-      font-size: 2rem;
+      padding-right: var(--spacing-xl);
+      font-size: var(--font-size-body);
     }
 
     .close-button {
-      font-size: 2.5rem;
-      width: 2.5rem;
-      height: 2.5rem;
+      font-size: var(--font-size-p);
+      width: var(--spacing-lg);
+      height: var(--spacing-lg);
       top: 0.75rem;
       right: 0.75rem;
     }

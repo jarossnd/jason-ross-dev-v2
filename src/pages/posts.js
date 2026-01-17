@@ -20,21 +20,21 @@ const PaginationStyles = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  margin: 4rem 0;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-2xl) 0;
   flex-wrap: wrap;
   font-family: 'Roboto Mono', monospace;
 
   button {
     background-color: var(--blue);
     color: var(--yellow);
-    border: 3px solid transparent;
-    padding: 1.5rem 3rem;
-    border-radius: 15px;
+    border: var(--border-width) solid transparent;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 3rem;
+    font-size: var(--font-size-p);
     font-family: 'Roboto Mono', monospace;
-    transition: all 0.2s ease;
+    transition: all var(--transition-normal) var(--easing-standard);
 
     &:hover:not(:disabled) {
       background-color: var(--yellow);
@@ -52,13 +52,13 @@ const PaginationStyles = styled.div`
 
   .page-info {
     color: var(--white);
-    font-size: 3rem;
-    margin: 0 1rem;
+    font-size: var(--font-size-p);
+    margin: 0 var(--spacing-sm);
   }
 
   .page-numbers {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-sm);
     flex-wrap: wrap;
     align-items: center;
   }
@@ -66,13 +66,13 @@ const PaginationStyles = styled.div`
   .page-number {
     background-color: var(--blue);
     color: var(--yellow);
-    border: 3px solid transparent;
-    padding: 1rem 2rem;
-    border-radius: 15px;
+    border: var(--border-width) solid transparent;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 3rem;
+    font-size: var(--font-size-p);
     font-family: 'Roboto Mono', monospace;
-    transition: all 0.2s ease;
+    transition: all var(--transition-normal) var(--easing-standard);
     min-width: 6rem;
     text-align: center;
 
@@ -92,27 +92,27 @@ const PaginationStyles = styled.div`
 
   .ellipsis {
     color: var(--yellow);
-    font-size: 3rem;
-    padding: 0 1rem;
+    font-size: var(--font-size-p);
+    padding: 0 var(--spacing-sm);
   }
 
   @media screen and (max-width: 760px) {
-    gap: 1rem;
+    gap: var(--spacing-sm);
     
     button {
-      padding: 1rem 2rem;
-      font-size: 2.5rem;
+      padding: var(--spacing-sm) var(--spacing-lg);
+      font-size: var(--font-size-p);
     }
 
     .page-number {
-      padding: 0.75rem 1.5rem;
-      font-size: 2.5rem;
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: var(--font-size-p);
       min-width: 5rem;
     }
 
     .page-info,
     .ellipsis {
-      font-size: 2.5rem;
+      font-size: var(--font-size-p);
     }
   }
 `;

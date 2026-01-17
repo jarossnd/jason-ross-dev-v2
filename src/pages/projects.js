@@ -12,27 +12,27 @@ const ProjectsStyles = styled.div`
   }
 
   .container {
-    border: 3px solid var(--black);
-    border-radius: 15px;
-    font-size: 3rem;
+    border: var(--border-width) solid var(--black);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-p);
     text-decoration: none;
-    margin-bottom: 20px;
-    padding: 2rem;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
     background-color: var(--blue);
   }
 
   @media screen and (max-width: 760px) {
     .container {
-      border: 3px solid var(--black);
-      border-radius: 15px;
-      font-size: 2rem;
+      border: var(--border-width) solid var(--black);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-body);
       text-decoration: none;
-      margin-bottom: 10px;
-      padding: 1rem;
+      margin-bottom: var(--spacing-sm);
+      padding: var(--spacing-sm);
       background-color: var(--blue);
     }
     ul {
-      padding-left: 2rem;
+      padding-left: var(--spacing-lg);
     }
 
     ul li {

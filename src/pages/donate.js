@@ -8,36 +8,22 @@ import imgXmrQRCode from '../img/qr_codes/xmr-jason-ross-dev.png';
 import imgEth from '../img/assets/eth.svg';
 
 const DonateStyles = styled.div`
-  :root {
-    --donate-border-radius: 15px;
-    --donate-font-size: 3rem;
-  }
-
   h2 {
     margin: 0px;
   }
 
   .donate-container {
-    border: 2px solid transparent;
-    border-radius: 15px;
-    font-size: var(--donate-font-size);
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-p);
     text-decoration: none;
-    margin-bottom: 20px;
-    padding: 2rem;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
     background-color: var(--blue);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    animation: fadeIn 0.5s ease-in-out;
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    transition: transform var(--transition-medium) var(--easing-standard), 
+                box-shadow var(--transition-medium) var(--easing-standard), 
+                border-color var(--transition-medium) var(--easing-standard);
+    animation: fadeIn var(--transition-slow) var(--easing-in-out);
   }
 
   .donate-container:hover {
@@ -47,7 +33,7 @@ const DonateStyles = styled.div`
   }
 
   .crypto-string {
-    font-size: 2rem;
+    font-size: var(--font-size-body);
     overflow-wrap: break-word;
   }
 
@@ -57,9 +43,10 @@ const DonateStyles = styled.div`
     border: none;
     background: var(--yellow);
     color: #333;
-    font-size: 1rem;
+    font-size: var(--font-size-tiny);
     cursor: pointer;
-    transition: background 0.3s ease, font-weight 0.3s ease;
+    transition: background var(--transition-medium) var(--easing-standard), 
+                font-weight var(--transition-medium) var(--easing-standard);
   }
 
   button:hover {
@@ -74,12 +61,12 @@ const DonateStyles = styled.div`
 
   @media screen and (max-width: 760px) {
     .donate-container {
-      border: 3px solid var(--black);
-      border-radius: var(--donate-border-radius);
-      font-size: 2rem;
+      border: var(--border-width) solid var(--black);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-body);
       text-decoration: none;
-      margin-bottom: 10px;
-      padding: 1rem;
+      margin-bottom: var(--spacing-sm);
+      padding: var(--spacing-sm);
       background-color: var(--blue);
     }
   }

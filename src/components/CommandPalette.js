@@ -12,9 +12,9 @@ const Overlay = styled.div`
   display: ${props => props.isOpen ? 'flex' : 'none'};
   align-items: flex-start;
   justify-content: center;
-  padding: 10vh 2rem 2rem 2rem;
+  padding: 10vh var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
   z-index: 9999;
-  animation: fadeIn 0.2s ease-in-out;
+  animation: fadeIn var(--transition-normal) var(--easing-in-out);
   overflow-y: auto;
 
   @keyframes fadeIn {
@@ -29,12 +29,12 @@ const Overlay = styled.div`
 
 const PaletteContainer = styled.div`
   background-color: var(--dark);
-  border: 3px solid var(--yellow);
-  border-radius: 15px;
+  border: var(--border-width) solid var(--yellow);
+  border-radius: var(--radius-md);
   width: calc(100% - 4rem);
   max-width: 600px;
   box-shadow: 0 0 30px rgba(255, 221, 26, 0.5);
-  animation: slideDown 0.2s ease-out;
+  animation: slideDown var(--transition-normal) var(--easing-out);
   overflow: hidden;
 
   @keyframes slideDown {
@@ -55,23 +55,23 @@ const PaletteContainer = styled.div`
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 2rem;
+  padding: var(--spacing-lg);
   background-color: var(--blue);
   border: none;
   border-bottom: 2px solid var(--grey);
   color: var(--white);
   font-family: 'Roboto Mono', monospace;
-  font-size: 2rem;
+  font-size: var(--font-size-body);
   outline: none;
-  border-radius: 15px 15px 0 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 
   &::placeholder {
     color: var(--grey);
   }
 
   @media screen and (max-width: 760px) {
-    font-size: 1.8rem;
-    padding: 1.5rem;
+    font-size: var(--font-size-small);
+    padding: var(--spacing-md);
   }
 `;
 
@@ -101,53 +101,53 @@ const ResultsList = styled.ul`
 `;
 
 const ResultItem = styled.li`
-  padding: 1.5rem 2rem;
+  padding: var(--spacing-md) var(--spacing-lg);
   cursor: pointer;
   background-color: ${props => props.isSelected ? 'var(--blue)' : 'transparent'};
-  transition: all 0.15s ease;
+  transition: all var(--transition-fast) var(--easing-standard);
 
   &:hover {
     background-color: var(--blue);
   }
 
   &:last-child {
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
   }
 
   @media screen and (max-width: 760px) {
-    padding: 1.2rem 1.5rem;
+    padding: var(--spacing-sm) var(--spacing-md);
   }
 `;
 
 const ResultTitle = styled.div`
   color: var(--white);
-  font-size: 1.8rem;
+  font-size: var(--font-size-small);
   font-weight: bold;
   margin-bottom: 0.5rem;
 
   @media screen and (max-width: 760px) {
-    font-size: 1.6rem;
+    font-size: var(--font-size-meta);
   }
 `;
 
 const ResultDescription = styled.div`
   color: var(--grey);
-  font-size: 1.4rem;
+  font-size: var(--font-size-tiny);
 
   @media screen and (max-width: 760px) {
-    font-size: 1.2rem;
+    font-size: var(--font-size-tiny);
   }
 `;
 
 const ResultIcon = styled.span`
-  margin-right: 1rem;
-  font-size: 2rem;
+  margin-right: var(--spacing-sm);
+  font-size: var(--font-size-body);
 `;
 
 const Hint = styled.div`
-  padding: 1rem 2rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
   color: var(--grey);
-  font-size: 1.2rem;
+  font-size: var(--font-size-tiny);
   text-align: center;
   border-top: 1px solid var(--grey);
 `;

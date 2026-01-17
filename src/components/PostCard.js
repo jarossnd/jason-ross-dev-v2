@@ -2,29 +2,19 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { formatGitDate, formatGitFullDate } from '../utils/dateUtils';
 
 const PostCardStyles = styled.div`
-  border: 3px solid transparent;
-  border-radius: 15px;
-  font-size: 3rem;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-p);
   text-decoration: none;
-  margin-bottom: 2rem;
-  padding: 2rem;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
   background-color: var(--blue);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  animation: fadeIn 0.5s ease-in-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  transition: transform var(--transition-medium) var(--easing-standard), 
+              box-shadow var(--transition-medium) var(--easing-standard), 
+              border-color var(--transition-medium) var(--easing-standard);
+  animation: fadeIn var(--transition-slow) var(--easing-in-out);
 
   &:hover {
     transform: scale(1.05);
@@ -42,7 +32,7 @@ const PostCardStyles = styled.div`
   .post-link {
     text-decoration: none;
     color: var(--yellow);
-    transition: color 0.3s ease;
+    transition: color var(--transition-medium) var(--easing-standard);
   }
 
   .post-link:hover {
@@ -51,12 +41,12 @@ const PostCardStyles = styled.div`
 
   .post-info {
     color: var(--grey);
-    font-size: 1.6rem;
+    font-size: var(--font-size-meta);
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: var(--spacing-sm);
   }
 
   p {
@@ -64,24 +54,24 @@ const PostCardStyles = styled.div`
   }
 
   a:hover {
-    border-bottom: 3px solid var(--yellow);
+    border-bottom: var(--border-width) solid var(--yellow);
     border-color: var(--yellow);
     border-bottom-color: var(--yellow);
   }
 
   @media screen and (max-width: 760px) {
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-body);
 
     h3 {
       font-size: var(--font-size-h3);
     }
 
     .post-info {
-      font-size: 1.8rem;
+      font-size: var(--font-size-small);
       flex-direction: column;
-      gap: 0.5rem;
+      gap: var(--spacing-xs);
 
       span:nth-child(2) {
         display: none; /* Hide the | separator on mobile */

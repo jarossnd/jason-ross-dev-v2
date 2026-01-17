@@ -18,6 +18,49 @@ const GlobalStyles = createGlobalStyle`
         --font-size-h3: 3rem;
         --font-size-p: 3rem;
         --font-size-list: 3rem;
+        --font-size-body: 2rem;
+        --font-size-small: 1.8rem;
+        --font-size-meta: 1.6rem;
+        --font-size-tiny: 1.4rem;
+
+        /* Spacing scale - based on 8px/10px base */
+        --spacing-xs: 0.5rem;   /* 4px desktop / 5px mobile */
+        --spacing-sm: 1rem;     /* 8px desktop / 10px mobile */
+        --spacing-md: 1.5rem;   /* 12px desktop / 15px mobile */
+        --spacing-lg: 2rem;     /* 16px desktop / 20px mobile */
+        --spacing-xl: 3rem;     /* 24px desktop / 30px mobile */
+        --spacing-2xl: 4rem;    /* 32px desktop / 40px mobile */
+
+        /* Border radius */
+        --radius-sm: 5px;
+        --radius-md: 15px;
+
+        /* Border width */
+        --border-width: 3px;
+
+        /* Animation & Transition Timings */
+        --transition-fast: 0.15s;
+        --transition-normal: 0.2s;
+        --transition-medium: 0.3s;
+        --transition-slow: 0.5s;
+        
+        /* Easing functions */
+        --easing-standard: ease;
+        --easing-in-out: ease-in-out;
+        --easing-out: ease-out;
+        --easing-bounce: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* Global animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     html {
@@ -28,11 +71,11 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
-        font-size: 2rem;
+        font-size: var(--font-size-body);
         color: var(--white);
         line-height: 1.5;
-        padding-right: 2rem;
-        padding-left: 2rem;
+        padding-right: var(--spacing-lg);
+        padding-left: var(--spacing-lg);
         overflow-y: scroll;
         overflow-x: hidden; /* Prevent horizontal scroll */
         max-width: 100vw;
@@ -123,9 +166,13 @@ const GlobalStyles = createGlobalStyle`
             --font-size-h3: 2.4rem;
             --font-size-p: 2.2rem;
             --font-size-list: 2.2rem;
+            --font-size-body: 2.2rem;
+            --font-size-small: 1.8rem;
+            --font-size-meta: 1.6rem;
+            --font-size-tiny: 1.4rem;
             font-size: 2.2rem; /* 22px on mobile (was 16px) */
-            padding-right: 1rem;
-            padding-left: 1rem;
+            padding-right: var(--spacing-sm);
+            padding-left: var(--spacing-sm);
             line-height: 1.6; /* Better readability on mobile */
         }
 

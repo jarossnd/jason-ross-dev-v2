@@ -22,14 +22,16 @@ const BlogStyles = styled.div`
 `;
 
 const TopicStyles = styled.div`
-  border: 3px solid transparent;
-  border-radius: 15px;
-  font-size: 3rem;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-p);
   text-decoration: none;
-  margin-bottom: 2rem;
-  padding: 2rem;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
   background-color: var(--blue);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform var(--transition-medium) var(--easing-standard), 
+              box-shadow var(--transition-medium) var(--easing-standard), 
+              border-color var(--transition-medium) var(--easing-standard);
 
   h3 {
     margin: 0px;
@@ -38,7 +40,7 @@ const TopicStyles = styled.div`
   .post-link {
     text-decoration: none;
     color: var(--yellow);
-    transition: color 0.3s ease;
+    transition: color var(--transition-medium) var(--easing-standard);
   }
 
   &:hover {
