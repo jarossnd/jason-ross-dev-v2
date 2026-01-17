@@ -1,5 +1,6 @@
 const path = require(`path`);
 const _ = require('lodash');
+const { execSync } = require('child_process');
 
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
@@ -107,6 +108,39 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value,
     });
+
+    // Get git commit history for this file
+    const fileNode = getNode(node.parent);
+    if (fileNode && fileNode.absolutePath) {
+      try {
+        // Get last 5 commits for this file
+        const gitLog = execSync(
+          `git log -5 --pretty=format:"%h|%ad|%s" --date=short -- "${fileNode.absolutePath}"`,
+          { encoding: 'utf-8' }
+        );
+        
+        const commits = gitLog
+          .split('\n')
+          .filter(line => line.trim())
+          .map(line => {
+            const [hash, date, message] = line.split('|');
+            return { hash, date, message };
+          });
+
+        createNodeField({
+          name: `gitCommits`,
+          node,
+          value: commits,
+        });
+      } catch (error) {
+        console.log(`Could not get git history for ${fileNode.absolutePath}`);
+        createNodeField({
+          name: `gitCommits`,
+          node,
+          value: [],
+        });
+      }
+    }
   }
 };
 

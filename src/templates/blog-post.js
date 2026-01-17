@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Bio from '../components/bio';
 import SEO from '../components/SEO';
 import PostDisclaimer from '../components/PostDisclaimer';
+import Changelog from '../components/Changelog';
 
 const Comments = React.lazy(() => import('../components/comments.js'));
 
@@ -17,6 +18,127 @@ const PostHeader = styled.header`
   .tags-container {
     text-align: center;
     margin: var(--spacing-sm) 0;
+  }
+`;
+
+const GitLogMeta = styled.div`
+  background-color: var(--dark);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: var(--font-size-small);
+  
+  .meta-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+  
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+  
+  .meta-label {
+    color: var(--yellow);
+    font-weight: bold;
+  }
+  
+  .meta-value {
+    color: var(--grey);
+  }
+  
+  .commit-button {
+    background: none;
+    border: none;
+    color: var(--grey);
+    font-family: 'Roboto Mono', monospace;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    transition: color var(--transition-fast) var(--easing-standard);
+    
+    &:hover {
+      color: var(--yellow);
+    }
+  }
+  
+  .settings-button {
+    background: none;
+    border: 2px solid var(--yellow);
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: all var(--transition-fast) var(--easing-standard);
+    margin-left: var(--spacing-sm);
+    
+    &.active {
+      background-color: var(--yellow);
+    }
+    
+    &.active::after {
+      content: '✓';
+      position: absolute;
+      color: var(--dark);
+      font-size: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+    }
+    
+    &:hover {
+      box-shadow: 0 0 8px rgba(255, 221, 26, 0.3);
+    }
+  }
+  
+  .settings-label {
+    color: var(--yellow);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    transition: color var(--transition-fast) var(--easing-standard);
+    
+    &:hover {
+      color: var(--grey);
+    }
+  }
+  
+  @media screen and (max-width: 760px) {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-meta);
+    
+    .meta-line {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-xs);
+    }
+    
+    .settings-label {
+      font-size: var(--font-size-meta);
+    }
+  }
+`;
+
+const TagsLine = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin: var(--spacing-md) 0;
+  
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    justify-content: center;
   }
 `;
 
@@ -61,17 +183,19 @@ h3 {
   text-align: left;
 }
 
-h1:before {
-  content: "# ";
-}
+${props => props.$showHashes && `
+  h1:before {
+    content: "# ";
+  }
 
-h2:before {
-  content: "## ";
-}
+  h2:before {
+    content: "## ";
+  }
 
-h3:before {
-  content: "### ";
-}
+  h3:before {
+    content: "### ";
+  }
+`}
 
 time {
   text-align: center;
@@ -122,6 +246,23 @@ const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const { previous, next } = data;
+  const [changelogOpen, setChangelogOpen] = React.useState(false);
+  const [showMarkdownHashes, setShowMarkdownHashes] = React.useState(() => {
+    // Load from localStorage on initial render
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('showMarkdownHashes');
+      return saved === null ? true : saved === 'true';
+    }
+    return true;
+  });
+
+  const handleToggleHashes = () => {
+    const newValue = !showMarkdownHashes;
+    setShowMarkdownHashes(newValue);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('showMarkdownHashes', newValue);
+    }
+  };
 
   return (
     <div location={location} title={siteTitle} className="item2">
@@ -132,10 +273,47 @@ const BlogPostTemplate = ({ data, location }) => {
       >
         <PostHeader>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p className="post-date">
-            📅 Committed: <time>{post.frontmatter.date}</time>
-          </p>
-          <div className="tags-container">
+          <GitLogMeta>
+            <div className="meta-line">
+              <div className="meta-item">
+                <span className="meta-label">Date:</span>
+                <time className="meta-value">{post.frontmatter.date}</time>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Author:</span>
+                <span className="meta-value">Jason Ross &lt;jason@localhost&gt;</span>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Commit:</span>
+                <button 
+                  className="commit-button"
+                  onClick={() => setChangelogOpen(!changelogOpen)}
+                  aria-expanded={changelogOpen}
+                  aria-label="Toggle changelog"
+                >
+                  {post.id.substring(0, 7)} {changelogOpen ? '▼' : '▶'}
+                </button>
+              </div>
+              <div className="meta-item">
+                <span 
+                  className="settings-label"
+                  onClick={handleToggleHashes}
+                >
+                  Markdown:
+                </span>
+                <button 
+                  className={`settings-button ${showMarkdownHashes ? 'active' : ''}`}
+                  onClick={handleToggleHashes}
+                  aria-label="Toggle markdown header hashes"
+                  aria-pressed={showMarkdownHashes}
+                />
+              </div>
+            </div>
+          </GitLogMeta>
+        </PostHeader>
+        {changelogOpen && <Changelog slug={post.fields.slug} commits={post.fields.gitCommits || []} />}
+        <TagsLine>
+          <div className="tags-list">
             {post.frontmatter.tags.map(tag => (
               <TagLink
                 key={tag}
@@ -145,13 +323,13 @@ const BlogPostTemplate = ({ data, location }) => {
               </TagLink>
             ))}
           </div>
-        </PostHeader>
+        </TagsLine>
         <PostDisclaimer 
           postDate={post.frontmatter.date}
           updatedArticle={post.frontmatter.updatedArticle}
           updatedArticleTitle={data.updatedPost?.frontmatter?.title}
         />
-        <PostStyles>
+        <PostStyles $showHashes={showMarkdownHashes}>
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
@@ -295,6 +473,11 @@ export const pageQuery = graphql`
       }
       fields {
         slug
+        gitCommits {
+          hash
+          date
+          message
+        }
       }
     }
     updatedPost: markdownRemark(
