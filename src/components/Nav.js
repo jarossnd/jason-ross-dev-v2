@@ -175,16 +175,17 @@ class Nav extends Component {
               <div>
                 <Link to="/">&lt;JR /&gt;</Link>
               </div>
-              <input id="mobileMenuCheckbox" type="checkbox" checked={checked} aria-label="Toggle mobile menu" />
+              <input 
+                id="mobileMenuCheckbox" 
+                type="checkbox" 
+                checked={checked} 
+                onChange={(e) => this.setChecked(e.target.checked)}
+                aria-label="Toggle mobile menu" 
+              />
 
               <label
                 className="menu-button-container"
                 htmlFor="mobileMenuCheckbox"
-                onClick={() => {
-                  this.setState({
-                    checked: !checked,
-                  });
-                }}
                 aria-label="Mobile menu button"
               >
                 <div className="menu-button" />

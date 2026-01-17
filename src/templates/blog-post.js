@@ -123,8 +123,8 @@ const BlogPostTemplate = ({ data, location }) => {
         </CommentStyles>
         <hr />
         <PostFooter>
+          <Bio />
           <p>
-            <Bio />
             🐛 Found a typo or something that needs to be corrected?{' '}
             <a
               href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}

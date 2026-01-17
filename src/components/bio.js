@@ -44,7 +44,7 @@ const Bio = () => {
         />
       )}
       {author?.name && (
-        <p style={{ textAlign: `center;` }}>
+        <p style={{ textAlign: `center` }}>
           ✏️ Written by <strong>{author.name}. </strong>
           Opinions expressed are solely my own and do not express the views or opinions of my employer.
           {` `}

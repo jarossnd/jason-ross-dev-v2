@@ -4,21 +4,10 @@ const COMMENTS_ID = 'comments-container';
 
 const Comments = () => {
   useEffect(() => {
-    // Clean up utterances OAuth parameters from URL if present
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
-      if (url.searchParams.has('utterances')) {
-        // Remove the utterances parameter from the URL
-        url.searchParams.delete('utterances');
-        // Use replaceState to update the URL without reloading the page
-        window.history.replaceState({}, '', url.pathname + url.search + url.hash);
-      }
-    }
-
     const script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';
     script.setAttribute('repo', 'jarossnd/jason-ross-dev-comments');
-    script.setAttribute('issue-term', 'url');
+    script.setAttribute('issue-term', 'pathname');
     script.setAttribute('theme', 'photon-dark');
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
