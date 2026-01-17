@@ -29,11 +29,10 @@ const Overlay = styled.div`
 
 const PaletteContainer = styled.div`
   background-color: var(--dark);
-  border: var(--border-width) solid var(--yellow);
+  border: none;
   border-radius: var(--radius-md);
   width: calc(100% - 4rem);
   max-width: 600px;
-  box-shadow: 0 0 30px rgba(255, 221, 26, 0.5);
   animation: slideDown var(--transition-normal) var(--easing-out);
   overflow: hidden;
 
