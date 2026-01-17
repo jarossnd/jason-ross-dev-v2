@@ -35,6 +35,12 @@ const TagLink = styled(Link)`
     transform: scale(1.1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
+
+  @media screen and (max-width: 760px) {
+    min-height: unset; /* Override global min-height for tags */
+    padding: 0.5rem 1rem;
+    font-size: 1.6rem;
+  }
 `;
 
 const PostStyles = styled.nav`
@@ -68,6 +74,34 @@ h3:before {
 
 time {
   text-align: center;
+}
+
+@media screen and (max-width: 760px) {
+  p, li {
+    font-size: 2.2rem; /* Match body font size */
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Better spacing for lists on mobile */
+  ul, ol {
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
+
+  /* Code blocks more readable on mobile */
+  code {
+    font-size: 1.8rem;
+    word-break: break-word;
+  }
+
+  pre code {
+    font-size: 1.6rem;
+  }
 }
 
 `;

@@ -23,6 +23,7 @@ const GlobalStyles = createGlobalStyle`
     html {
         font-size: 8px;
         background-color: var(--blue);
+        overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
     body {
@@ -33,6 +34,8 @@ const GlobalStyles = createGlobalStyle`
         padding-right: 2rem;
         padding-left: 2rem;
         overflow-y: scroll;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+        max-width: 100vw;
     }
 
     a {
@@ -44,6 +47,24 @@ const GlobalStyles = createGlobalStyle`
         border-bottom: 3px solid var(--yellow);
         border-color: var(--yellow);
         border-bottom-color: var(--yellow);
+    }
+
+    /* Responsive images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Responsive videos */
+    video,
+    iframe {
+        max-width: 100%;
+    }
+
+    /* Code blocks scrollable on mobile */
+    pre {
+        overflow-x: auto;
+        max-width: 100%;
     }
 
     /* Scrollbar Style */
@@ -79,14 +100,37 @@ const GlobalStyles = createGlobalStyle`
   }
 }
     @media screen and (max-width: 760px) {
+        html {
+            font-size: 10px; /* Increase base size for mobile: 10px instead of 8px */
+        }
+
         body {
             --font-size-h1: 4rem;
             --font-size-h2: 3rem;
-            --font-size-h3: 2rem;
-            --font-size-p: 2rem;
-            --font-size-list: 2rem;
+            --font-size-h3: 2.4rem;
+            --font-size-p: 2.2rem;
+            --font-size-list: 2.2rem;
+            font-size: 2.2rem; /* 22px on mobile (was 16px) */
             padding-right: 1rem;
             padding-left: 1rem;
+            line-height: 1.6; /* Better readability on mobile */
+        }
+
+        /* Better touch targets for mobile */
+        a, button, input, textarea {
+            min-height: 44px; /* iOS recommended touch target */
+        }
+
+        /* Improve tap highlight */
+        * {
+            -webkit-tap-highlight-color: rgba(255, 221, 26, 0.3);
+        }
+
+        /* Prevent zoom on input focus for iOS */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            font-size: 16px; /* Prevents iOS zoom */
         }
     }
 `;

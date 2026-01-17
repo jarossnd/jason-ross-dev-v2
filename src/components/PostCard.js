@@ -67,6 +67,30 @@ const PostCardStyles = styled.div`
     border-color: var(--yellow);
     border-bottom-color: var(--yellow);
   }
+
+  @media screen and (max-width: 760px) {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+
+    h3 {
+      font-size: var(--font-size-h3);
+    }
+
+    .post-info {
+      font-size: 1.8rem;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      span:nth-child(2) {
+        display: none; /* Hide the | separator on mobile */
+      }
+    }
+
+    &:hover {
+      transform: scale(1.02); /* Reduced scale for mobile */
+    }
+  }
 `;
 
 /**

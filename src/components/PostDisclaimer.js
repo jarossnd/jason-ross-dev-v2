@@ -58,6 +58,25 @@ const DisclaimerBox = styled.div`
       outline-offset: 2px;
     }
   }
+
+  @media screen and (max-width: 760px) {
+    padding: 1.5rem;
+    font-size: 2rem;
+    margin: 1.5rem 0;
+
+    p {
+      padding-right: 3rem;
+      font-size: 2rem;
+    }
+
+    .close-button {
+      font-size: 2.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
 `;
 
 const PostDisclaimer = ({ postDate, updatedArticle, updatedArticleTitle }) => {
