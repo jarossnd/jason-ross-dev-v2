@@ -1,16 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import SEO from '../components/SEO';
+import ContentContainer from '../components/ContentContainer';
 
 const MyDetailsStyles = styled.div`
-  border: 3px solid transparent;
-  border-radius: 15px;
-  font-size: 3rem;
-  text-decoration: none;
-  margin-bottom: 20px;
-  padding: 2rem;
-  background-color: var(--blue);
-
   span.ltrText {
     unicode-bidi: bidi-override;
     direction: rtl;
@@ -22,16 +15,6 @@ const MyDetailsStyles = styled.div`
 `;
 
 const FormContactStyles = styled.div`
-  #contact-form {
-    border: 3px solid transparent;
-    border-radius: 15px;
-    font-size: 3rem;
-    text-decoration: none;
-    margin-bottom: 20px;
-    padding: 2rem;
-    background-color: var(--blue);
-  }
-
   h2 {
     margin: 0px;
   }
@@ -144,18 +127,20 @@ export default function ContactPage() {
       </div>
       <div className="item2" />
       <div className="item3">
-        <MyDetailsStyles>
-          <h2>My Details</h2>
-          <p>X (formally Twitter): <a href="https://x.com/jarossnd" target="_blank" rel="noopener noreferrer">@jarossnd</a></p>
-          <p>GitHub: <a href="https://github.com/jarossnd" target="_blank" rel="noopener noreferrer">@jarossnd</a></p>
-          <p>
-            Email: <span className="ltrText">ved.ssornosaj@nosaj</span>
-          </p>
-        </MyDetailsStyles>
+        <ContentContainer>
+          <MyDetailsStyles>
+            <h2>My Details</h2>
+            <p>X (formally Twitter): <a href="https://x.com/jarossnd" target="_blank" rel="noopener noreferrer">@jarossnd</a></p>
+            <p>GitHub: <a href="https://github.com/jarossnd" target="_blank" rel="noopener noreferrer">@jarossnd</a></p>
+            <p>
+              Email: <span className="ltrText">ved.ssornosaj@nosaj</span>
+            </p>
+          </MyDetailsStyles>
+        </ContentContainer>
       </div>
       <div className="item4">
-        <FormContactStyles>
-          <section id="contact-form">
+        <ContentContainer>
+          <FormContactStyles>
             <h2>Contact Form</h2>
             <form
               name="contactForm"
@@ -190,8 +175,8 @@ export default function ContactPage() {
                 <button type="submit">Send</button>
               </p>
             </form>
-          </section>
-        </FormContactStyles>
+            </FormContactStyles>
+          </ContentContainer>
       </div>
     </>
   );

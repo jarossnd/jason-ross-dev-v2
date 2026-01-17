@@ -37,6 +37,7 @@ const Bio = () => {
           image={avatar}
           alt={author?.name || ``}
           className="bio-avatar"
+          loading="lazy"
           imgStyle={{
             borderRadius: `50%`,
           }}

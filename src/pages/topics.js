@@ -6,6 +6,7 @@ import kebabCase from 'lodash/kebabCase';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import SEO from '../components/SEO';
+import ContentContainer from '../components/ContentContainer';
 
 const TopicStyles = styled.div`
   ul {
@@ -30,30 +31,7 @@ const TopicStyles = styled.div`
     height: 100%;
   }
 
-  h2 {
-    margin: 0px;
-  }
-
-  .container {
-    border: 3px solid transparent;
-    border-radius: 15px;
-    font-size: 3rem;
-    text-decoration: none;
-    margin-bottom: 20px;
-    padding: 2rem;
-    background-color: var(--blue);
-  }
-
   @media screen and (max-width: 760px) {
-    .container {
-      border: 3px solid var(--black);
-      border-radius: 15px;
-      font-size: 2rem;
-      text-decoration: none;
-      margin-bottom: 10px;
-      padding: 1rem;
-      background-color: var(--blue);
-    }
     ul {
       column-count: 2;
       padding-left: 2rem;
@@ -90,7 +68,8 @@ const TagsPage = ({
         read more about that given subject.
       </p>
       <TopicStyles>
-        <div className="container">
+        <ContentContainer>
+          <h2>All Topics</h2>
           <ul>
             {group.map((tag) => (
               <li key={tag.fieldValue}>
@@ -101,7 +80,7 @@ const TagsPage = ({
               </li>
             ))}
           </ul>
-        </div>
+        </ContentContainer>
       </TopicStyles>
     </div>
   </>

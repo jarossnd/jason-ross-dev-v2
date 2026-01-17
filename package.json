@@ -20,7 +20,7 @@
     "dotenv": "^17.2.3",
     "gatsby": "^5.15.0",
     "gatsby-plugin-feed": "^5.15.0",
-    "gatsby-plugin-google-analytics": "^5.15.0",
+    "gatsby-plugin-google-gtag": "^5.15.0",
     "gatsby-plugin-image": "^3.15.0",
     "gatsby-plugin-manifest": "^5.15.0",
     "gatsby-plugin-mdx": "^5.15.0",
@@ -41,15 +41,13 @@
     "gatsby-transformer-remark": "^6.15.0",
     "gatsby-transformer-sharp": "^5.15.0",
     "lodash": "^4.17.21",
-    "netlify-cli": "^23.13.4",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.29.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^7.5.1",
-    "styled-components": "^6.0.0-rc.3",
+    "styled-components": "^6.1.13",
     "typeface-roboto-mono": "^1.1.13"
   },
   "devDependencies": {
@@ -70,6 +68,7 @@
     "eslint-plugin-prettier": "^4.2.5",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "netlify-cli": "^23.13.4",
     "prettier": "^3.8.0",
     "typescript": "^5.1.3"
   }

@@ -151,10 +151,14 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: `G-S4R8Y7B1VF`,
-        head: true,
+        trackingIds: [
+          'G-S4R8Y7B1VF', // Google Analytics 4
+        ],
+        pluginConfig: {
+          head: true,
+        },
       },
     },
     {

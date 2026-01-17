@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SEO from '../components/SEO';
+import ContentContainer from '../components/ContentContainer';
 
 const LinksStyles = styled.div`
   ul {
@@ -26,30 +27,7 @@ const LinksStyles = styled.div`
     height: 100%;
   }
 
-  h2 {
-    margin: 0px;
-  }
-
-  .container {
-    border: 3px solid var(--black);
-    border-radius: 15px;
-    font-size: 3rem;
-    text-decoration: none;
-    margin-bottom: 20px;
-    padding: 2rem;
-    background-color: var(--blue);
-  }
-
   @media screen and (max-width: 760px) {
-    .container {
-      border: 3px solid var(--black);
-      border-radius: 15px;
-      font-size: 2rem;
-      text-decoration: none;
-      margin-bottom: 10px;
-      padding: 1rem;
-      background-color: var(--blue);
-    }
     ul {
       column-count: 3;
       padding-left: 2rem;
@@ -69,7 +47,6 @@ const LinksStyles = styled.div`
       height: 100%;
     }
   }
-  }
 `;
 
 export default function ProjectsPage() {
@@ -84,7 +61,7 @@ export default function ProjectsPage() {
           populate this page.
         </p>
         <LinksStyles>
-          <div className="container">
+          <ContentContainer borderColor="var(--black)">
             <h2>My Links</h2>
             <ul>
               <li>
@@ -115,8 +92,8 @@ export default function ProjectsPage() {
                 </a>
               </li>
             </ul>
-          </div>
-          <div className="container">
+          </ContentContainer>
+          <ContentContainer borderColor="var(--black)">
             <h2>Linux</h2>
             <ul>
               <li>
@@ -147,8 +124,8 @@ export default function ProjectsPage() {
                 </a>
               </li>
             </ul>
-          </div>
-          <div className="container">
+          </ContentContainer>
+          <ContentContainer borderColor="var(--black)">
             <h2>Vim</h2>
             <ul>
               <li>
@@ -179,7 +156,7 @@ export default function ProjectsPage() {
                 </a>
               </li>
             </ul>
-          </div>
+          </ContentContainer>
         </LinksStyles>
       </div>
     </>

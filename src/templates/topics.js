@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import SEO from '../components/SEO';
+import PostCard from '../components/PostCard';
 
 const BlogStyles = styled.div`
   display: grid;
@@ -74,50 +75,9 @@ const Tags = ({ pageContext, data }) => {
         <div className="container">
           <BlogStyles>
             <ol style={{ listStyle: `none` }}>
-              {posts?.map((post) => {
-                const title = post.frontmatter.title || post.fields.slug;
-                return (
-                  <li key={post.fields.slug}>
-                    <article
-                      className="post-list-item"
-                      itemScope
-                      itemType="http://schema.org/Article"
-                    >
-                      <TopicStyles>
-                        <h3>
-                          <Link
-                            to={post.fields.slug}
-                            itemProp="url"
-                            class="post-link"
-                          >
-                            <span itemProp="headline">{title}</span>
-                          </Link>
-                        </h3>
-                        <p style={{ 
-  fontSize: `16px`, 
-  display: 'flex', 
-  justifyContent: 'center', 
-  alignItems: 'center', 
-  gap: '10px' 
-}}>
-  <span>📅 {post.frontmatter.date}</span> | 
-  <span>🕑 {post.timeToRead} min</span>
-</p>
-
-                        <section>
-                          <p
-                            dangerouslySetInnerHTML={{
-                              __html:
-                                post.frontmatter.description || post.excerpt,
-                            }}
-                            itemProp="description"
-                          />
-                        </section>
-                      </TopicStyles>
-                    </article>
-                  </li>
-                );
-              })}
+              {posts?.map((post) => (
+                <PostCard key={post.fields.slug} post={post} />
+              ))}
             </ol>
           </BlogStyles>
         </div>
