@@ -3,6 +3,7 @@ import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Bio from '../components/bio';
 import SEO from '../components/SEO';
+import PostDisclaimer from '../components/PostDisclaimer';
 
 const Comments = React.lazy(() => import('../components/comments.js'));
 
@@ -110,6 +111,11 @@ const BlogPostTemplate = ({ data, location }) => {
             ))}
           </div>
         </PostHeader>
+        <PostDisclaimer 
+          postDate={post.frontmatter.date}
+          updatedArticle={post.frontmatter.updatedArticle}
+          updatedArticleTitle={data.updatedPost?.frontmatter?.title}
+        />
         <PostStyles>
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
@@ -141,12 +147,85 @@ const BlogPostTemplate = ({ data, location }) => {
 
 export default BlogPostTemplate;
 
-export const Head = ({ data }) => (
-  <SEO
-    title={data.markdownRemark.frontmatter.title}
-    description={data.markdownRemark.frontmatter.description || data.markdownRemark.excerpt}
-  />
-);
+export const Head = ({ data, location }) => {
+  const post = data.markdownRemark;
+  const featuredImage = post.frontmatter.featuredImage?.childImageSharp?.gatsbyImageData?.images?.fallback?.src;
+  const imageUrl = featuredImage ? `${data.site.siteMetadata.siteUrl}${featuredImage}` : undefined;
+
+  return (
+    <>
+      <SEO
+        title={post.frontmatter.title}
+        description={post.frontmatter.description || post.excerpt}
+        location={location}
+        image={imageUrl}
+        article={true}
+      />
+      {/* Article-specific Open Graph */}
+      <meta property="article:published_time" content={new Date(post.frontmatter.date).toISOString()} />
+      <meta property="article:author" content="Jason Ross" />
+      {post.frontmatter.tags && post.frontmatter.tags.map(tag => (
+        <meta key={tag} property="article:tag" content={tag} />
+      ))}
+      
+      {/* Enhanced Structured Data for BlogPosting */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.frontmatter.title,
+          description: post.frontmatter.description || post.excerpt,
+          image: imageUrl,
+          datePublished: new Date(post.frontmatter.date).toISOString(),
+          dateModified: new Date(post.frontmatter.date).toISOString(),
+          author: {
+            "@type": "Person",
+            name: "Jason Ross",
+            url: data.site.siteMetadata.siteUrl,
+          },
+          publisher: {
+            "@type": "Person",
+            name: "Jason Ross",
+            url: data.site.siteMetadata.siteUrl,
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": location.href,
+          },
+          keywords: post.frontmatter.tags?.join(", "),
+        })}
+      </script>
+      
+      {/* Breadcrumb Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: data.site.siteMetadata.siteUrl,
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Blog",
+              item: `${data.site.siteMetadata.siteUrl}/posts`,
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: post.frontmatter.title,
+              item: location.href,
+            },
+          ],
+        })}
+      </script>
+    </>
+  );
+};
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
@@ -157,6 +236,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
     markdownRemark(id: { eq: $id }) {
@@ -168,6 +248,24 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         description
         tags
+        status
+        updatedArticle
+        featuredImage {
+          childImageSharp {
+            gatsbyImageData(width: 1200, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          }
+        }
+      }
+      fields {
+        slug
+      }
+    }
+    updatedPost: markdownRemark(
+      fields: { slug: { eq: $id } }
+      frontmatter: { updatedArticle: { ne: null } }
+    ) {
+      frontmatter {
+        title
       }
       fields {
         slug

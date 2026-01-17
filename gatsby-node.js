@@ -18,6 +18,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         allMarkdownRemark(
           sort: { frontmatter: { date: ASC } }
           limit: 2000
+          filter: {
+            frontmatter: {
+              status: { nin: ["draft", "archived"] }
+            }
+          }
         ) {
           nodes {
             id
@@ -26,10 +31,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
             frontmatter {
               tags
+              status
             }
           }
         }
-        tagsGroup: allMarkdownRemark(limit: 2000) {
+        tagsGroup: allMarkdownRemark(
+          limit: 2000
+          filter: {
+            frontmatter: {
+              status: { nin: ["draft", "archived"] }
+            }
+          }
+        ) {
           group(field: { frontmatter: { tags: SELECT } }) {
             fieldValue
           }
@@ -131,6 +144,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       description: String
       date: Date @dateformat
+      status: String
+      updatedArticle: String
+      featuredImage: File @fileByRelativePath
     }
 
     type Fields {

@@ -20,64 +20,99 @@ const PaginationStyles = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin: 3rem 0;
+  gap: 2rem;
+  margin: 4rem 0;
   flex-wrap: wrap;
+  font-family: 'Roboto Mono', monospace;
 
   button {
     background-color: var(--blue);
     color: var(--yellow);
-    border: 2px solid var(--yellow);
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    border: 3px solid transparent;
+    padding: 1.5rem 3rem;
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 1.6rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    font-size: 3rem;
+    font-family: 'Roboto Mono', monospace;
+    transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
       background-color: var(--yellow);
       color: var(--black);
-      transform: scale(1.05);
+      border-color: var(--yellow);
+      transform: translateY(-2px);
     }
 
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.3;
       cursor: not-allowed;
+      color: var(--grey);
     }
   }
 
   .page-info {
     color: var(--white);
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 3rem;
+    margin: 0 1rem;
   }
 
   .page-numbers {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   .page-number {
     background-color: var(--blue);
     color: var(--yellow);
-    border: 2px solid var(--yellow);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    border: 3px solid transparent;
+    padding: 1rem 2rem;
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 1.4rem;
-    transition: all 0.3s ease;
+    font-size: 3rem;
+    font-family: 'Roboto Mono', monospace;
+    transition: all 0.2s ease;
+    min-width: 6rem;
+    text-align: center;
 
     &:hover {
       background-color: var(--yellow);
       color: var(--black);
+      border-color: var(--yellow);
+      transform: translateY(-2px);
     }
 
     &.active {
       background-color: var(--yellow);
       color: var(--black);
-      font-weight: bold;
+      border-color: var(--yellow);
+    }
+  }
+
+  .ellipsis {
+    color: var(--yellow);
+    font-size: 3rem;
+    padding: 0 1rem;
+  }
+
+  @media screen and (max-width: 760px) {
+    gap: 1rem;
+    
+    button {
+      padding: 1rem 2rem;
+      font-size: 2.5rem;
+    }
+
+    .page-number {
+      padding: 0.75rem 1.5rem;
+      font-size: 2.5rem;
+      min-width: 5rem;
+    }
+
+    .page-info,
+    .ellipsis {
+      font-size: 2.5rem;
     }
   }
 `;
@@ -164,6 +199,12 @@ const BlogIndex = ({ data, location }) => {
         </ol>
       </BlogStyles>
 
+      <div style={{ textAlign: 'center', marginTop: '3rem', marginBottom: '2rem' }}>
+        <p style={{ fontSize: '3rem', color: 'var(--white)' }}>
+          Showing {indexOfFirstPost + 1} - {Math.min(indexOfLastPost, allPosts.length)} of {allPosts.length} posts
+        </p>
+      </div>
+
       <PaginationStyles>
         <button
           onClick={() => paginate(currentPage - 1)}
@@ -175,7 +216,7 @@ const BlogIndex = ({ data, location }) => {
         <div className="page-numbers">
           {getPageNumbers().map((number, index) => (
             number === '...' ? (
-              <span key={`ellipsis-${index}`} className="page-info">...</span>
+              <span key={`ellipsis-${index}`} className="ellipsis">...</span>
             ) : (
               <button
                 key={number}
@@ -195,12 +236,6 @@ const BlogIndex = ({ data, location }) => {
           Next →
         </button>
       </PaginationStyles>
-
-      <div style={{ textAlign: 'center', marginTop: '2rem', color: 'var(--grey)' }}>
-        <p>
-          Showing {indexOfFirstPost + 1} - {Math.min(indexOfLastPost, allPosts.length)} of {allPosts.length} posts
-        </p>
-      </div>
     </div>
   );
 };
@@ -216,7 +251,14 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark(
+      sort: { frontmatter: { date: DESC } }
+      filter: {
+        frontmatter: {
+          status: { nin: ["draft", "archived"] }
+        }
+      }
+    ) {
       nodes {
         excerpt
         fields {

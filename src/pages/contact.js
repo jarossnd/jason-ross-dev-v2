@@ -41,6 +41,7 @@ const FormContactStyles = styled.div`
     width: 100%;
     padding: 0.5em;
     border: none;
+    border-radius: 15px;
   }
   input[type='text'],
   input[type='email'],
@@ -151,7 +152,6 @@ export default function ContactPage() {
               <input type="hidden" name="bot-field" />
               <input type="hidden" name="form-name" value="contactForm" />
               <p>
-                <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name="name" placeholder="Name" />
               </p>
               <p>
