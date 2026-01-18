@@ -89,58 +89,96 @@ const NavStyles = styled.nav`
     }
     .menu-button-container {
       display: flex;
+      z-index: 1001;
     }
     .menu {
-      position: absolute;
+      position: fixed;
       top: 0;
-      margin-top: 57px;
       left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--blue);
       flex-direction: column;
-      width: 100%;
       justify-content: center;
       align-items: center;
-    }
-    .menu a {
-      color: var(--yellow);
+      gap: var(--spacing-lg);
+      opacity: 0;
       visibility: hidden;
-    }
-    .menu a:hover {
-      border-bottom: 0px solid var(--yellow);
-      border-color: var(--yellow);
-      border-bottom-color: var(--yellow);
-    }
-    .menu li:hover {
-      background-color: var(--dark);
-    }
-    #mobileMenuCheckbox ~ .menu li {
-      height: 0;
+      transition: opacity var(--transition-medium) var(--easing-standard),
+                  visibility 0s var(--transition-medium);
+      z-index: 1000;
       margin: 0;
       padding: 0;
-      border: 0;
-      transition: height 400ms var(--easing-bounce);
     }
-    #mobileMenuCheckbox:checked ~ .menu li {
-      border: 1px solid #333;
-      height: 1em;
-      padding: 1em;
-      transition: height 400ms var(--easing-bounce);
+    
+    #mobileMenuCheckbox:checked ~ .menu {
+      opacity: 1;
       visibility: visible;
+      transition: opacity var(--transition-medium) var(--easing-standard),
+                  visibility 0s 0s;
     }
-    #mobileMenuCheckbox:checked ~ .menu a {
-      color: var(--yellow);
-      visibility: visible;
-    }
+    
     .menu > li {
       display: flex;
       justify-content: center;
+      align-items: center;
       margin: 0;
-      padding: 0.5em 0;
-      width: 100%;
-      color: white;
-      background-color: var(--blue);
+      padding: 0;
+      width: auto;
+      background: none;
+      border: none;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all var(--transition-medium) var(--easing-bounce);
     }
-    .menu > li:not(:last-child) {
-      border-bottom: 1px solid #444;
+    
+    #mobileMenuCheckbox:checked ~ .menu li {
+      transform: translateY(0);
+      opacity: 1;
+      border: none;
+      height: auto;
+      padding: 0;
+    }
+    
+    /* Stagger animation for menu items */
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(1) { transition-delay: 0.1s; }
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(2) { transition-delay: 0.15s; }
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(3) { transition-delay: 0.2s; }
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(4) { transition-delay: 0.25s; }
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(5) { transition-delay: 0.3s; }
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(6) { transition-delay: 0.35s; }
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(7) { transition-delay: 0.4s; }
+    #mobileMenuCheckbox:checked ~ .menu li:nth-child(8) { transition-delay: 0.45s; }
+    
+    .menu a {
+      color: var(--yellow);
+      font-size: 4rem;
+      font-weight: bold;
+      text-decoration: none;
+      font-family: 'Roboto Mono', monospace;
+      transition: all var(--transition-normal) var(--easing-standard);
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: var(--radius-sm);
+      visibility: visible;
+      position: relative;
+    }
+    
+    .menu a::before {
+      content: '> ';
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all var(--transition-normal) var(--easing-standard);
+      display: inline-block;
+    }
+    
+    .menu a:hover::before {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .menu a:hover {
+      background-color: rgba(255, 221, 26, 0.1);
+      transform: translateX(10px);
     }
   }
 `;
