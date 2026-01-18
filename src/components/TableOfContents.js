@@ -13,6 +13,9 @@ const TOCContainer = styled.div`
     top: var(--spacing-lg);
     max-height: calc(100vh - var(--spacing-2xl));
     overflow-y: auto;
+    
+    /* Prevent blocking scroll events */
+    pointer-events: auto;
   }
 `;
 
@@ -92,7 +95,7 @@ const TOCLink = styled.a`
 `;
 
 const TableOfContents = ({ headings }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); // Changed to false by default
   const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
