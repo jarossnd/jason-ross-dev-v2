@@ -107,6 +107,7 @@ const NavStyles = styled.nav`
       gap: var(--spacing-lg);
       opacity: 0;
       visibility: hidden;
+      pointer-events: none;
       transition: opacity var(--transition-medium) var(--easing-standard),
                   visibility 0s var(--transition-medium);
       z-index: 1000;
@@ -128,6 +129,7 @@ const NavStyles = styled.nav`
     #mobileMenuCheckbox:checked ~ .menu {
       opacity: 1;
       visibility: visible;
+      pointer-events: auto;
       transition: opacity var(--transition-medium) var(--easing-standard),
                   visibility 0s 0s;
     }
@@ -202,6 +204,7 @@ const menuItems = [
   { name: 'Posts', path: '/posts' },
   { name: 'Topics', path: '/topics' },
   { name: 'Images', path: '/images' },
+  { name: 'Feed', path: '/feed' },
   { name: 'Uses', path: '/uses' },
   { name: 'Donate', path: '/donate' },
   { name: 'About', path: '/about' },
