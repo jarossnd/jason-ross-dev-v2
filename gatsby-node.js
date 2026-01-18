@@ -144,6 +144,46 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 };
 
+// Create source nodes for page-specific git data
+exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
+  const { createNode } = actions;
+
+  try {
+    // Get last 5 commits for uses page
+    const usesPagePath = path.resolve('./src/pages/uses.js');
+    const gitLog = execSync(
+      `git log -5 --pretty=format:"%h|%ad|%s" --date=short -- "${usesPagePath}"`,
+      { encoding: 'utf-8' }
+    );
+
+    if (gitLog) {
+      const commits = gitLog
+        .split('\n')
+        .filter(line => line.trim())
+        .map(line => {
+          const [hash, date, message] = line.split('|');
+          return { hash, date, message };
+        });
+
+      // Create a node with all commits
+      createNode({
+        id: createNodeId('uses-page-git-data'),
+        commits,
+        // Also keep the latest commit data at the top level for easy access
+        hash: commits[0]?.hash || '',
+        date: commits[0]?.date || '',
+        message: commits[0]?.message || '',
+        internal: {
+          type: 'UsesPageGitData',
+          contentDigest: createContentDigest({ commits }),
+        },
+      });
+    }
+  } catch (error) {
+    console.log('Could not get git history for uses page');
+  }
+};
+
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
 

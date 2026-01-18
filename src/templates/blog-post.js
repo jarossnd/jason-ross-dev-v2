@@ -1,10 +1,14 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Bio from '../components/bio';
 import SEO from '../components/SEO';
 import PostDisclaimer from '../components/PostDisclaimer';
 import Changelog from '../components/Changelog';
+import TableOfContents from '../components/TableOfContents';
+import HeadingAnchor from '../components/HeadingAnchor';
+import ImageLightbox from '../components/ImageLightbox';
+import UpdatedArticleBadge from '../components/UpdatedArticleBadge';
 
 const Comments = React.lazy(() => import('../components/comments.js'));
 
@@ -232,13 +236,79 @@ time {
 `;
 
 const PostFooter = styled.footer`
-  background-color: var(--light-gray);
-  padding: var(--spacing-sm);
-  text-align: center;
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid rgba(255, 221, 26, 0.2);
+`;
 
+const FooterSection = styled.div`
+  background-color: var(--dark);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  font-family: 'Roboto Mono', monospace;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const FooterTitle = styled.h3`
+  font-family: 'Roboto Mono', monospace;
+  color: var(--yellow);
+  font-size: var(--font-size-small);
+  margin: 0 0 var(--spacing-sm) 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+`;
+
+const FooterContent = styled.p`
+  color: var(--grey);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  margin: 0;
+  
   a {
     color: var(--yellow);
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--yellow);
+    transition: all var(--transition-fast);
+    
+    &:hover {
+      border-bottom-style: solid;
+      opacity: 0.8;
+    }
+  }
+  
+  strong {
+    color: var(--grey);
+    font-weight: bold;
+  }
+`;
+
+const EditButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--dark);
+  color: var(--yellow);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--yellow);
+  text-decoration: none;
+  font-family: 'Roboto Mono', monospace;
+  font-size: var(--font-size-small);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    background: var(--yellow);
+    color: var(--dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 221, 26, 0.3);
+  }
+  
+  span {
+    font-size: 1.2em;
   }
 `;
 
@@ -247,6 +317,7 @@ const BlogPostTemplate = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const { previous, next } = data;
   const [changelogOpen, setChangelogOpen] = React.useState(false);
+  const [headings, setHeadings] = useState([]);
   const [showMarkdownHashes, setShowMarkdownHashes] = React.useState(() => {
     // Load from localStorage on initial render
     if (typeof window !== 'undefined') {
@@ -255,6 +326,33 @@ const BlogPostTemplate = ({ data, location }) => {
     }
     return true;
   });
+
+  // Extract headings from post HTML for table of contents
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const article = document.querySelector('article');
+      if (article) {
+        const headingElements = article.querySelectorAll('h2, h3');
+        const tocHeadings = Array.from(headingElements).map((heading) => {
+          // Add ID to heading if it doesn't have one
+          if (!heading.id) {
+            const id = heading.textContent
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/(^-|-$)/g, '');
+            heading.id = id;
+          }
+          
+          return {
+            id: heading.id,
+            text: heading.textContent,
+            level: parseInt(heading.tagName.substring(1))
+          };
+        });
+        setHeadings(tocHeadings);
+      }
+    }
+  }, [post.html]);
 
   const handleToggleHashes = () => {
     const newValue = !showMarkdownHashes;
@@ -329,32 +427,52 @@ const BlogPostTemplate = ({ data, location }) => {
           updatedArticle={post.frontmatter.updatedArticle}
           updatedArticleTitle={data.updatedPost?.frontmatter?.title}
         />
+        {post.frontmatter.updatedArticle && (
+          <UpdatedArticleBadge 
+            updatedDate={post.frontmatter.updatedArticle}
+            updatedTitle={data.updatedPost?.frontmatter?.title}
+            updatedSlug={data.updatedPost?.fields?.slug}
+          />
+        )}
+        {headings.length > 0 && <TableOfContents headings={headings} />}
+        <HeadingAnchor />
+        <ImageLightbox />
         <PostStyles $showHashes={showMarkdownHashes}>
           <section
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"
           />
         </PostStyles>
+        <PostFooter>
+          <FooterSection>
+            <FooterTitle>About the Author</FooterTitle>
+            <FooterContent>
+              Written by <strong>Jason Ross</strong>. All opinions expressed here are my own and do not reflect the views of my employer.
+            </FooterContent>
+          </FooterSection>
+          
+          <FooterSection>
+            <FooterTitle>Found an Issue?</FooterTitle>
+            <FooterContent>
+              Spotted a typo, broken link, or technical error? Help improve this post by suggesting an edit.
+            </FooterContent>
+            <div style={{ marginTop: 'var(--spacing-md)' }}>
+              <EditButton
+                href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Edit this post on GitHub"
+              >
+                <span>✏️</span> Edit on GitHub
+              </EditButton>
+            </div>
+          </FooterSection>
+        </PostFooter>
         <CommentStyles>
           <Suspense fallback={<div>Loading comments...</div>}>
             <Comments />
           </Suspense>
         </CommentStyles>
-        <hr />
-        <PostFooter>
-          <Bio />
-          <p>
-            <span aria-hidden="true">🐛</span> Found a typo or something that needs to be corrected?{' '}
-            <a
-              href={`https://github.com/jarossnd/jason-ross-dev-v2/tree/main/blog/posts/${post.fields.slug}index.md`}
-              aria-label="Edit this post on GitHub (opens in new window)"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Edit on GitHub
-            </a>
-          </p>
-        </PostFooter>
       </article>
     </div>
   );
