@@ -86,10 +86,13 @@ const NavStyles = styled.nav`
   @media screen and (max-width: 960px) {
     .top-nav {
       height: 25px;
+      position: relative;
+      z-index: 1002;
     }
     .menu-button-container {
       display: flex;
-      z-index: 1001;
+      z-index: 1002;
+      position: relative;
     }
     .menu {
       position: fixed;
@@ -99,7 +102,7 @@ const NavStyles = styled.nav`
       height: 100vh;
       background-color: var(--blue);
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       gap: var(--spacing-lg);
       opacity: 0;
@@ -108,7 +111,18 @@ const NavStyles = styled.nav`
                   visibility 0s var(--transition-medium);
       z-index: 1000;
       margin: 0;
-      padding: 0;
+      padding: 8vh 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .menu::after {
+      content: '';
+      display: block;
+      height: 15vh;
+      width: 100%;
+      flex-shrink: 0;
     }
     
     #mobileMenuCheckbox:checked ~ .menu {
