@@ -64,10 +64,22 @@ const ImageLightbox = () => {
       img.classList.add('lightbox-enabled');
       img.style.cursor = 'pointer';
       
-      img.addEventListener('click', () => {
+      const handleImageClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         setCurrentImage(img.src);
         setLightboxOpen(true);
-      });
+      };
+      
+      img.addEventListener('click', handleImageClick);
+      
+      // If image is wrapped in a link, prevent link navigation
+      const parentLink = img.closest('a');
+      if (parentLink) {
+        parentLink.addEventListener('click', (e) => {
+          e.preventDefault();
+        });
+      }
     });
   }, []);
 
