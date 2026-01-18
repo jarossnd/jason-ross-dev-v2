@@ -1,9 +1,13 @@
 ---
 title: Installing Unite to Configure Gnome
 date: "2026-01-17"
-description: "Here are the steps I used to intall Unite on Arch Linux to configure Gnome."
+description: "Here are the steps I used to intall Unite on Arch Linux to configure GNOME."
 tags: ['gnome', 'arch-linux']
 ---
+
+## Overview
+
+Unite is a GNOME schell extension which helps users make layout tweaks to the top panel.
 
 ## GNOME – Install & Configure Unite Extension (Arch Linux)
 
@@ -16,16 +20,11 @@ cd yay
 makepkg -si
 ```
 
-This rebuilds yay against your current system libraries so it can run normally.
-
-
 ### 2. Install Unite from AUR
 
 ```bash
 yay -S gnome-shell-extension-unite
 ```
-
-
 
 The extension installs to:
 
