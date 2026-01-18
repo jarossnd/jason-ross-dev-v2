@@ -7,16 +7,6 @@ const TOCContainer = styled.div`
   border-left: 3px solid var(--yellow);
   border-radius: var(--radius-sm);
   font-family: 'Roboto Mono', monospace;
-  
-  @media (min-width: 1200px) {
-    position: sticky;
-    top: var(--spacing-lg);
-    max-height: calc(100vh - var(--spacing-2xl));
-    overflow-y: auto;
-    
-    /* Prevent blocking scroll events */
-    pointer-events: auto;
-  }
 `;
 
 const TOCHeader = styled.button`
@@ -47,8 +37,8 @@ const TOCHeader = styled.button`
 `;
 
 const TOCContent = styled.div`
-  max-height: ${props => props.$isOpen ? '1000px' : '0'};
-  overflow: hidden;
+  max-height: ${props => props.$isOpen ? '800px' : '0'};
+  overflow-y: ${props => props.$isOpen ? 'auto' : 'hidden'};
   transition: max-height var(--transition-medium) var(--easing-standard);
 `;
 
