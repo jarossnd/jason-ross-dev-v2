@@ -102,6 +102,35 @@ const CardStats = styled.div`
   opacity: 0.7;
 `;
 
+const MediaGrid = styled.div`
+  display: grid;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  grid-template-columns: ${props => {
+    const count = props.count || 1;
+    if (count === 1) return '1fr';
+    if (count === 2) return 'repeat(2, 1fr)';
+    if (count === 3) return 'repeat(3, 1fr)';
+    return 'repeat(2, 1fr)';
+  }};
+`;
+
+const MediaImage = styled.img`
+  width: 100%;
+  height: ${props => props.count === 1 ? 'auto' : '150px'};
+  max-height: ${props => props.count === 1 ? '300px' : '150px'};
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--yellow);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 221, 26, 0.3);
+  }
+`;
+
 const ViewAllLink = styled(Link)`
   display: inline-block;
   margin-top: var(--spacing-md);
@@ -205,6 +234,33 @@ const IndexPage = ({ data, location }) => {
     });
   };
 
+  const renderMedia = (post) => {
+    if (!post.media_attachments || post.media_attachments.length === 0) {
+      return null;
+    }
+    
+    const images = post.media_attachments.filter(media => media.type === 'image');
+    
+    if (images.length === 0) {
+      return null;
+    }
+    
+    return (
+      <MediaGrid count={images.length}>
+        {images.map((media, index) => (
+          <MediaImage
+            key={media.id}
+            src={media.preview_url || media.url}
+            alt={media.description || `Image ${index + 1}`}
+            count={images.length}
+            onClick={() => window.open(media.url, '_blank')}
+            loading="lazy"
+          />
+        ))}
+      </MediaGrid>
+    );
+  };
+
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -265,6 +321,8 @@ const IndexPage = ({ data, location }) => {
                   <CardContent 
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
+                  
+                  {renderMedia(post)}
                   
                   <CardStats>
                     <span>💬 {post.replies_count}</span>
