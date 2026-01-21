@@ -45,6 +45,10 @@ function textResponse(statusCode, text, origin) {
 function validateEnv() {
   const token = process.env.GITHUB_TOKEN;
   const repo = process.env.COMMENTS_REPO;
+  console.log('[validateEnv] Checking env vars...');
+  console.log('[validateEnv] GITHUB_TOKEN exists:', !!token);
+  console.log('[validateEnv] GITHUB_TOKEN length:', token?.length);
+  console.log('[validateEnv] COMMENTS_REPO:', repo);
   if (!token) throw new Error('Missing GITHUB_TOKEN env var');
   if (!repo) throw new Error('Missing COMMENTS_REPO env var');
   return { token, repo };
@@ -75,6 +79,7 @@ async function ghFetch(path, { token, method = 'GET', body } = {}) {
   });
   if (!res.ok) {
     const text = await res.text();
+    console.error('[ghFetch] Error response:', { status: res.status, path, text });
     const error = new Error(`GitHub API ${method} ${path} failed: ${res.status} ${text}`);
     error.status = res.status;
     throw error;
