@@ -87,26 +87,26 @@ async function findIssueBySlug({ token, repo, slug, postTitle }) {
   if (postTitle) {
     // First try exact match
     let q = encodeURIComponent(`repo:${repo} type:issue in:title "${postTitle}"`);
-    console.log('[findIssue] Trying exact title match:', postTitle);
+    console.log('[findIssue] Trying exact title match:', postTitle, 'query:', q);
     let data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
-    console.log('[findIssue] Exact match results:', data.items?.length);
+    console.log('[findIssue] Exact match results:', data.items?.length, 'total_count:', data.total_count);
     if (data.items && data.items.length > 0) {
-      console.log('[findIssue] Found by exact match:', data.items[0].title);
+      console.log('[findIssue] Found by exact match:', data.items[0].title, 'number:', data.items[0].number);
       return { number: data.items[0].number };
     }
     
     // Try partial match (in case issue title has extra text like " - Jason Ross")
     q = encodeURIComponent(`repo:${repo} type:issue in:title ${postTitle}`);
-    console.log('[findIssue] Trying partial title match:', postTitle);
+    console.log('[findIssue] Trying partial title match:', postTitle, 'query:', q);
     data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
-    console.log('[findIssue] Partial match results:', data.items?.length);
+    console.log('[findIssue] Partial match results:', data.items?.length, 'total_count:', data.total_count);
     if (data.items && data.items.length > 0) {
       // Find best match (issue title contains postTitle)
       for (const item of data.items) {
         const title = item.title || '';
-        console.log('[findIssue] Checking title:', title);
+        console.log('[findIssue] Checking title:', title, 'number:', item.number);
         if (title.includes(postTitle)) {
-          console.log('[findIssue] Found by partial match:', title);
+          console.log('[findIssue] Found by partial match:', title, 'number:', item.number);
           return { number: item.number };
         }
       }
@@ -115,8 +115,9 @@ async function findIssueBySlug({ token, repo, slug, postTitle }) {
 
   // Fallback: search for "Comments for {slug}" format
   const q = encodeURIComponent(`repo:${repo} type:issue in:title "Comments for"`);
-  console.log('[findIssue] Trying fallback slug search');
+  console.log('[findIssue] Trying fallback slug search for repo:', repo);
   const data = await ghFetch(`/search/issues?q=${q}&per_page=100`, { token });
+  console.log('[findIssue] Fallback results:', data.items?.length);
   
   // Look for exact match (with or without trailing slash)
   const slugNoTrail = slug.replace(/\/$/, '');
@@ -128,12 +129,12 @@ async function findIssueBySlug({ token, repo, slug, postTitle }) {
       if (title === `Comments for ${slug}` || 
           title === `Comments for ${slugNoTrail}` || 
           title === `Comments for ${slugWithTrail}`) {
-        console.log('[findIssue] Found by slug match:', title);
+        console.log('[findIssue] Found by slug match:', title, 'number:', item.number);
         return { number: item.number };
       }
     }
   }
-  console.log('[findIssue] No issue found');
+  console.log('[findIssue] No issue found for repo:', repo, 'postTitle:', postTitle, 'slug:', slug);
   return null;
 }
 
