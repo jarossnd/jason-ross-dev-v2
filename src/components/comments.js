@@ -297,7 +297,7 @@ const Comments = ({ postTitle }) => {
             onChange={(e) => setContent(e.target.value)}
             rows={5}
             required
-            style={{ width: '100%', padding: '10px', borderRadius: 6, border: '1px solid var(--grey)', background: 'var(--dark)', color: 'var(--white)' }}
+            style={{ width: '100%', padding: '10px', borderRadius: 6, border: '1px solid var(--grey)', background: 'var(--dark)', color: 'var(--white)', boxSizing: 'border-box' }}
           />
         </label>
         <div style={{ marginTop: 'var(--spacing-md)' }}>
