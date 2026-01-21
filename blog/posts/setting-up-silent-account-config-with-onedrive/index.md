@@ -36,7 +36,7 @@ Once you have confirmed with `dsregcmd /status` that the machine is Microsoft En
 
 ## Validating Silent Account Config Worked
 
-Now sign out of Windows and sign back in with the work or school account and validate if OneDrive automatically signed in or not. You can also check the registry to see if Silent Account Config was successsful. OneDrive will create two registry key values in `HKEY_CURRENT_USER\SOFTWARE\Microsoft\OneDrive`. See `ClientEverSignedIn` and `SilentBusinessConfigCompleted` in the below screenshot:
+Now sign out of Windows and sign back in with the work or school account and validate if OneDrive automatically signed in or not. You can also check the registry to see if Silent Account Config was successful. OneDrive will create two registry key values in `HKEY_CURRENT_USER\SOFTWARE\Microsoft\OneDrive`. See `ClientEverSignedIn` and `SilentBusinessConfigCompleted` in the below screenshot:
 
 ![Validating Silent Account Config was successful in the registry](assets/validating-silient-account-config.png)
 
