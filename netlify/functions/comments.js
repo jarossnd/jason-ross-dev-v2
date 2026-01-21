@@ -189,6 +189,7 @@ async function listCommentsForIssue({ token, repo, issueNumber }) {
     const body = c.body || '';
     let parentId = null;
     let cleanContent = body;
+    let authorName = 'Anonymous';
     
     // Check if comment starts with parent_id marker: [parent_id:123456]
     const parentMatch = body.match(/^\[parent_id:(\d+)\]\n?([\s\S]*)/);
@@ -197,12 +198,26 @@ async function listCommentsForIssue({ token, repo, issueNumber }) {
       cleanContent = parentMatch[2];
     }
     
+    // Extract author name from the comment body: **Name** <email> wrote:
+    const authorMatch = cleanContent.match(/^\*\*(.+?)\*\*(?:\s+<.+?>)?\s+wrote:\n\n([\s\S]*)/);
+    if (authorMatch) {
+      authorName = authorMatch[1];
+      cleanContent = authorMatch[2];
+    }
+    
+    // Remove [PENDING] marker from content
+    cleanContent = cleanContent.replace(/\n*\[PENDING\]\s*$/, '');
+    
+    // Check if comment is approved (no [PENDING] marker)
+    const approved = !body.includes('[PENDING]');
+    
     return {
       id: c.id,
-      authorName: c.user?.login || 'Guest',
-      content: cleanContent,
+      authorName,
+      content: cleanContent.trim(),
       createdAt: c.created_at,
       parentId,
+      approved,
     };
   }).reverse(); // newest first in UI
 }
