@@ -1,8 +1,16 @@
 // Netlify Function: comments
 // Backed by GitHub Issues in a separate repository
 // Env required: GITHUB_TOKEN (repo scope), COMMENTS_REPO (e.g. "jarossnd/jason-ross-dev-comments")
+// Optional: RECAPTCHA_SECRET_KEY for reCAPTCHA v3 verification
 
 const GITHUB_API = 'https://api.github.com';
+const RECAPTCHA_API = 'https://www.google.com/recaptcha/api/siteverify';
+
+// Simple in-memory rate limiter (per IP, per slug)
+// In production, use Redis or a persistent store
+const rateLimitMap = {};
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 3; // max 3 comments per IP per minute per slug
 
 function corsHeaders(origin) {
   return {
@@ -118,6 +126,8 @@ async function addCommentToIssue({ token, repo, issueNumber, name, email, conten
     `**${safeName}**${safeEmail ? ` <${safeEmail}>` : ''} wrote:`,
     '',
     safeContent,
+    '',
+    `[PENDING]`, // Mark as pending moderation by default
   ];
   const body = bodyLines.join('\n');
   const comment = await ghFetch(`/repos/${owner}/${nameRepo}/issues/${issueNumber}/comments`, {
@@ -130,11 +140,45 @@ async function addCommentToIssue({ token, repo, issueNumber, name, email, conten
     authorName: safeName,
     content: safeContent,
     createdAt: comment.created_at,
+    approved: false, // Mark as pending until approved
   };
+}
+
+function checkRateLimit(ip, slug) {
+  const key = `${ip}:${slug}`;
+  const now = Date.now();
+  if (!rateLimitMap[key]) {
+    rateLimitMap[key] = [];
+  }
+  // Clean old entries
+  rateLimitMap[key] = rateLimitMap[key].filter((t) => now - t < RATE_LIMIT_WINDOW);
+  if (rateLimitMap[key].length >= RATE_LIMIT_MAX) {
+    return false; // Rate limited
+  }
+  rateLimitMap[key].push(now);
+  return true; // OK
+}
+
+async function verifyRecaptcha(token, secretKey) {
+  if (!secretKey || !token) return true; // Skip if not configured
+  try {
+    const res = await fetch(RECAPTCHA_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${secretKey}&response=${token}`,
+    });
+    const data = await res.json();
+    // Accept if score is > 0.3 (0=bot, 1=human)
+    return data.success && (data.score || 0) > 0.3;
+  } catch {
+    // Fail open: if reCAPTCHA fails, allow the comment
+    return true;
+  }
 }
 
 exports.handler = async (event) => {
   const origin = event.headers?.origin;
+  const clientIP = event.headers?.['x-forwarded-for']?.split(',')[0] || event.headers?.['client-ip'] || 'unknown';
 
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -167,9 +211,21 @@ exports.handler = async (event) => {
       const name = (payload.name || '').trim();
       const email = (payload.email || '').trim();
       const content = (payload.content || '').trim();
+      const recaptchaToken = payload.recaptchaToken;
 
       if (!slug) return jsonResponse(400, { error: 'Missing slug' }, origin);
       if (!name || !content) return jsonResponse(400, { error: 'Name and content are required' }, origin);
+
+      // Rate limit check
+      if (!checkRateLimit(clientIP, slug)) {
+        return jsonResponse(429, { error: 'Too many comments. Please wait a moment.' }, origin);
+      }
+
+      // reCAPTCHA check
+      const recaptchaOk = await verifyRecaptcha(recaptchaToken, process.env.RECAPTCHA_SECRET_KEY);
+      if (!recaptchaOk) {
+        return jsonResponse(403, { error: 'Failed spam verification. Please try again.' }, origin);
+      }
 
       let issue = await findIssueBySlug({ token, repo, slug });
       if (!issue) {

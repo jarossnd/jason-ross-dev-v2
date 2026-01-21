@@ -1,10 +1,21 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from '@reach/router';
 
-// Custom, stylable comments widget that talks to a REST API
+// Custom, stylable comments widget with spam protection & moderation
 // Configure API base via env: GATSBY_COMMENTS_API (e.g. https://comments.yourdomain.com)
 // Defaults to Netlify Functions path when not provided.
 const apiBase = process.env.GATSBY_COMMENTS_API || '/.netlify/functions/comments';
+const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_SITE_KEY;
+
+// Load reCAPTCHA script once
+useEffect(() => {
+  if (recaptchaSiteKey && typeof window !== 'undefined' && !window.grecaptcha) {
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+    script.async = true;
+    document.head.appendChild(script);
+  }
+}, []);
 
 const Comments = () => {
   const location = useLocation();
@@ -14,6 +25,7 @@ const Comments = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [content, setContent] = useState('');
+  const [honeypot, setHoneypot] = useState(''); // spam trap
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -54,39 +66,77 @@ const Comments = () => {
   async function onSubmit(e) {
     e.preventDefault();
     if (!apiBase) return;
+
+    // Honeypot check: if filled, silently fail (pretend success)
+    if (honeypot.trim()) {
+      setSuccess(true);
+      setContent('');
+      setTimeout(() => setSuccess(false), 3000);
+      return;
+    }
+
     if (!name.trim() || !content.trim()) {
       setError('Name and comment are required.');
       return;
     }
+
     setSubmitting(true);
     setError('');
     setSuccess(false);
+
     try {
+      // Get reCAPTCHA token if available
+      let recaptchaToken = null;
+      if (recaptchaSiteKey && window.grecaptcha) {
+        recaptchaToken = await window.grecaptcha.execute(recaptchaSiteKey, { action: 'submit_comment' });
+      }
+
       const res = await fetch(`${apiBase}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ slug, name: name.trim(), email: email.trim() || undefined, content: content.trim() }),
+        body: JSON.stringify({
+          slug,
+          name: name.trim(),
+          email: email.trim() || undefined,
+          content: content.trim(),
+          recaptchaToken,
+        }),
         credentials: 'omit',
       });
+
       if (!res.ok) {
         const text = await res.text();
         throw new Error(text || `Failed to submit comment (${res.status})`);
       }
+
       const saved = await res.json();
-      // Optimistically append when API returns created comment
       if (saved && saved.comment) {
         setComments((prev) => [saved.comment, ...prev]);
       }
       setSuccess(true);
+      setName('');
+      setEmail('');
       setContent('');
+      setTimeout(() => setSuccess(false), 3000);
     } catch (e) {
       setError(e?.message || 'Failed to submit comment');
     } finally {
       setSubmitting(false);
     }
+  }
+
+  // Simple markdown to HTML (bold, italic, code, links)
+  function renderMarkdown(text) {
+    if (!text) return '';
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`(.+?)`/g, '<code style="background: var(--blue); padding: 2px 6px; border-radius: 3px;">$1</code>')
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\n/g, '<br />');
   }
 
   if (!apiBase) {
@@ -111,6 +161,17 @@ const Comments = () => {
         borderRadius: 'var(--radius-sm)',
         marginBottom: 'var(--spacing-lg)'
       }}>
+        {/* Honeypot: hidden field to catch bots */}
+        <input
+          type="text"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          style={{ display: 'none' }}
+          tabIndex="-1"
+          autoComplete="off"
+          aria-hidden="true"
+        />
+
         <div style={{ display: 'flex', gap: 'var(--spacing-md)', flexWrap: 'wrap' }}>
           <label style={{ flex: '1 1 220px' }}>
             <span style={{ display: 'block', color: 'var(--grey)', marginBottom: 6 }}>Name *</span>
@@ -133,7 +194,9 @@ const Comments = () => {
           </label>
         </div>
         <label style={{ display: 'block', marginTop: 'var(--spacing-md)' }}>
-          <span style={{ display: 'block', color: 'var(--grey)', marginBottom: 6 }}>Comment *</span>
+          <span style={{ display: 'block', color: 'var(--grey)', marginBottom: 6 }}>
+            Comment * <span style={{ fontSize: 'var(--font-size-tiny)', color: 'var(--orange)' }}>Markdown supported</span>
+          </span>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -164,22 +227,29 @@ const Comments = () => {
           {comments.map((c) => (
             <li key={c.id} style={{
               background: 'var(--dark)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              border: `1px solid ${c.approved === false ? 'rgba(255, 127, 45, 0.3)' : 'rgba(255,255,255,0.1)'}`,
               borderRadius: 'var(--radius-sm)',
               padding: 'var(--spacing-md)',
-              marginBottom: 'var(--spacing-sm)'
+              marginBottom: 'var(--spacing-sm)',
+              opacity: c.approved === false ? 0.7 : 1,
             }}>
-              <div style={{ color: 'var(--yellow)', marginBottom: 6, display: 'flex', gap: 8, alignItems: 'baseline' }}>
+              <div style={{ color: 'var(--yellow)', marginBottom: 6, display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
                 <strong>{c.authorName || 'Anonymous'}</strong>
                 {c.createdAt && (
                   <span style={{ color: 'var(--grey)', fontSize: 'var(--font-size-tiny)' }}>
                     {new Date(c.createdAt).toLocaleString()}
                   </span>
                 )}
+                {c.approved === false && (
+                  <span style={{ color: 'var(--orange)', fontSize: 'var(--font-size-tiny)', fontWeight: 'bold' }}>
+                    [Awaiting moderation]
+                  </span>
+                )}
               </div>
-              <div style={{ color: 'var(--white)' }}>
-                {c.content}
-              </div>
+              <div
+                style={{ color: 'var(--white)' }}
+                dangerouslySetInnerHTML={{ __html: renderMarkdown(c.content) }}
+              />
             </li>
           ))}
         </ul>
