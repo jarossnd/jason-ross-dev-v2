@@ -45,14 +45,18 @@ const Comments = ({ postTitle }) => {
       setLoading(true);
       setError('');
       try {
-        const res = await fetch(`${apiBase}?slug=${encodeURIComponent(slug)}&title=${encodeURIComponent(postTitle || '')}`, {
+        const url = `${apiBase}?slug=${encodeURIComponent(slug)}&title=${encodeURIComponent(postTitle || '')}`;
+        console.log('[Comments] Loading from:', url);
+        const res = await fetch(url, {
           headers: { 'Accept': 'application/json' },
           credentials: 'omit',
         });
         if (!res.ok) throw new Error(`Failed to load comments (${res.status})`);
         const data = await res.json();
+        console.log('[Comments] Loaded data:', data);
         if (!cancelled) setComments(Array.isArray(data?.comments) ? data.comments : []);
       } catch (e) {
+        console.error('[Comments] Error:', e);
         if (!cancelled) setError(e?.message || 'Failed to load comments');
       } finally {
         if (!cancelled) setLoading(false);
