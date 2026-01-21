@@ -85,11 +85,24 @@ async function ghFetch(path, { token, method = 'GET', body } = {}) {
 async function findIssueBySlug({ token, repo, slug, postTitle }) {
   // Try to find issue by post title first (for utterances compatibility)
   if (postTitle) {
-    const q = encodeURIComponent(`repo:${repo} type:issue in:title "${postTitle}"`);
-    const data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
+    // First try exact match
+    let q = encodeURIComponent(`repo:${repo} type:issue in:title "${postTitle}"`);
+    let data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
     if (data.items && data.items.length > 0) {
-      // Return first matching issue
       return { number: data.items[0].number };
+    }
+    
+    // Try partial match (in case issue title has extra text like " - Jason Ross")
+    q = encodeURIComponent(`repo:${repo} type:issue in:title ${postTitle}`);
+    data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
+    if (data.items && data.items.length > 0) {
+      // Find best match (issue title contains postTitle)
+      for (const item of data.items) {
+        const title = item.title || '';
+        if (title.includes(postTitle)) {
+          return { number: item.number };
+        }
+      }
     }
   }
 
