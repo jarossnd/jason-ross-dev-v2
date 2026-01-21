@@ -264,7 +264,15 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { token, repo } = validateEnv();
+    let { token, repo } = { token: null, repo: null };
+    try {
+      const env = validateEnv();
+      token = env.token;
+      repo = env.repo;
+    } catch (envErr) {
+      console.error('[handler] Environment validation failed:', envErr.message);
+      return jsonResponse(500, { error: `Server misconfiguration: ${envErr.message}` }, origin);
+    }
 
     if (event.httpMethod === 'GET') {
       const url = new URL(event.rawUrl || `http://localhost${event.path}${event.rawQuery ? '?' + event.rawQuery : ''}`);
@@ -320,6 +328,7 @@ exports.handler = async (event) => {
     return textResponse(405, 'Method Not Allowed', origin);
   } catch (e) {
     const msg = e?.message || 'Internal Server Error';
+    console.error('[handler] Uncaught error:', e);
     return jsonResponse(500, { error: msg }, event.headers?.origin);
   }
 };
