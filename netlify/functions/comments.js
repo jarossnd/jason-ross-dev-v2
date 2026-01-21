@@ -185,7 +185,7 @@ async function listCommentsForIssue({ token, repo, issueNumber }) {
   const comments = await ghFetch(`/repos/${owner}/${name}/issues/${issueNumber}/comments?per_page=100`, { token });
   
   // Map to frontend shape and extract parentId from body if present
-  return comments.map((c) => {
+  const allComments = comments.map((c) => {
     const body = c.body || '';
     let parentId = null;
     let cleanContent = body;
@@ -219,7 +219,12 @@ async function listCommentsForIssue({ token, repo, issueNumber }) {
       parentId,
       approved,
     };
-  }).reverse(); // newest first in UI
+  });
+  
+  // Filter out unapproved comments (only show approved ones to the public)
+  const approvedComments = allComments.filter(c => c.approved);
+  
+  return approvedComments.reverse(); // newest first in UI
 }
 
 async function addCommentToIssue({ token, repo, issueNumber, name, email, content, parentId }) {
