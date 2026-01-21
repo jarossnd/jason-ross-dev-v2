@@ -88,59 +88,49 @@ async function ghFetch(path, { token, method = 'GET', body } = {}) {
 }
 
 async function findIssueBySlug({ token, repo, slug, postTitle }) {
-  // Try to find issue by post title first (for utterances compatibility)
-  if (postTitle) {
-    // First try exact match
-    let q = encodeURIComponent(`repo:${repo} type:issue in:title "${postTitle}"`);
-    console.log('[findIssue] Trying exact title match:', postTitle, 'query:', q);
-    let data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
-    console.log('[findIssue] Exact match results:', data.items?.length, 'total_count:', data.total_count);
-    if (data.items && data.items.length > 0) {
-      console.log('[findIssue] Found by exact match:', data.items[0].title, 'number:', data.items[0].number);
-      return { number: data.items[0].number };
-    }
+  const [owner, repoName] = repo.split('/');
+  
+  // Try to find issue by fetching all issues and filtering manually
+  // This is more reliable than the search API
+  try {
+    console.log('[findIssue] Fetching all issues from', repo);
+    const allIssues = await ghFetch(`/repos/${owner}/${repoName}/issues?state=all&per_page=100`, { token });
+    console.log('[findIssue] Got', allIssues.length, 'issues');
     
-    // Try partial match (in case issue title has extra text like " - Jason Ross")
-    q = encodeURIComponent(`repo:${repo} type:issue in:title ${postTitle}`);
-    console.log('[findIssue] Trying partial title match:', postTitle, 'query:', q);
-    data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
-    console.log('[findIssue] Partial match results:', data.items?.length, 'total_count:', data.total_count);
-    if (data.items && data.items.length > 0) {
-      // Find best match (issue title contains postTitle)
-      for (const item of data.items) {
-        const title = item.title || '';
-        console.log('[findIssue] Checking title:', title, 'number:', item.number);
-        if (title.includes(postTitle)) {
-          console.log('[findIssue] Found by partial match:', title, 'number:', item.number);
-          return { number: item.number };
+    // Try to find by post title first (for utterances compatibility)
+    if (postTitle) {
+      console.log('[findIssue] Looking for postTitle:', postTitle);
+      for (const issue of allIssues) {
+        const title = issue.title || '';
+        console.log('[findIssue] Checking issue title:', title);
+        if (title === postTitle || title.includes(postTitle)) {
+          console.log('[findIssue] Found by title match!');
+          return { number: issue.number };
         }
       }
     }
-  }
-
-  // Fallback: search for "Comments for {slug}" format
-  const q = encodeURIComponent(`repo:${repo} type:issue in:title "Comments for"`);
-  console.log('[findIssue] Trying fallback slug search for repo:', repo);
-  const data = await ghFetch(`/search/issues?q=${q}&per_page=100`, { token });
-  console.log('[findIssue] Fallback results:', data.items?.length);
-  
-  // Look for exact match (with or without trailing slash)
-  const slugNoTrail = slug.replace(/\/$/, '');
-  const slugWithTrail = slug.endsWith('/') ? slug : slug + '/';
-  
-  if (data.items) {
-    for (const item of data.items) {
-      const title = item.title || '';
+    
+    // Fallback: look for "Comments for {slug}" format
+    console.log('[findIssue] Looking for Comments for slug:', slug);
+    const slugNoTrail = slug.replace(/\/$/, '');
+    const slugWithTrail = slug.endsWith('/') ? slug : slug + '/';
+    
+    for (const issue of allIssues) {
+      const title = issue.title || '';
       if (title === `Comments for ${slug}` || 
           title === `Comments for ${slugNoTrail}` || 
           title === `Comments for ${slugWithTrail}`) {
-        console.log('[findIssue] Found by slug match:', title, 'number:', item.number);
-        return { number: item.number };
+        console.log('[findIssue] Found by slug match!');
+        return { number: issue.number };
       }
     }
+    
+    console.log('[findIssue] No issue found');
+    return null;
+  } catch (e) {
+    console.error('[findIssue] Error fetching issues:', e);
+    throw e;
   }
-  console.log('[findIssue] No issue found for repo:', repo, 'postTitle:', postTitle, 'slug:', slug);
-  return null;
 }
 
 async function createIssueForSlug({ token, repo, slug, postTitle }) {
