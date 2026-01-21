@@ -309,7 +309,7 @@ const Comments = ({ postTitle }) => {
           </button>
         </div>
         {error && <p role="alert" style={{ color: 'var(--orange)', marginTop: 'var(--spacing-sm)' }}>{error}</p>}
-        {success && <p style={{ color: 'var(--green)', marginTop: 'var(--spacing-sm)' }}>Thanks! Your {replyingTo ? 'reply' : 'comment'} was posted.</p>}
+        {success && <p style={{ color: 'var(--yellow)', marginTop: 'var(--spacing-sm)' }}>Thanks! Your {replyingTo ? 'reply' : 'comment'} was posted.</p>}
       </form>
 
       {/* List */}
