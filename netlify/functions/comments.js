@@ -90,45 +90,78 @@ async function ghFetch(path, { token, method = 'GET', body } = {}) {
 async function findIssueBySlug({ token, repo, slug, postTitle }) {
   const [owner, repoName] = repo.split('/');
   
-  // Try to find issue by fetching all issues and filtering manually
-  // This is more reliable than the search API
+  // Normalize slug for comparison
+  const slugNoLeadingSlash = slug.replace(/^\//, '');
+  const slugNoTrailingSlash = slug.replace(/\/$/, '');
+  const slugNoSlashes = slug.replace(/\//g, '');
+  
   try {
-    console.log('[findIssue] Fetching all issues from', repo);
-    const allIssues = await ghFetch(`/repos/${owner}/${repoName}/issues?state=all&per_page=100`, { token });
-    console.log('[findIssue] Got', allIssues.length, 'issues');
+    console.log('[findIssue] Starting search in repo:', `${owner}/${repoName}`);
+    console.log('[findIssue] Looking for postTitle:', postTitle, 'slug:', slug);
+    
+    // Fetch all issues
+    const url = `/repos/${owner}/${repoName}/issues?state=all&per_page=100`;
+    console.log('[findIssue] Fetching from URL:', url);
+    
+    const allIssues = await ghFetch(url, { token });
+    console.log('[findIssue] Got', allIssues.length, 'issues total');
+    
+    if (allIssues.length === 0) {
+      console.log('[findIssue] No issues found in repo at all');
+      return null;
+    }
+    
+    // Log all issue titles for debugging
+    allIssues.forEach((issue, idx) => {
+      console.log(`[findIssue] Issue ${idx + 1}:`, issue.title);
+    });
     
     // Try to find by post title first (for utterances compatibility)
     if (postTitle) {
-      console.log('[findIssue] Looking for postTitle:', postTitle);
+      console.log('[findIssue] Searching for postTitle match...');
       for (const issue of allIssues) {
         const title = issue.title || '';
-        console.log('[findIssue] Checking issue title:', title);
         if (title === postTitle || title.includes(postTitle)) {
-          console.log('[findIssue] Found by title match!');
+          console.log('[findIssue] Found by title match!', title);
           return { number: issue.number };
         }
       }
     }
     
+    // Try to match against slug-based titles (e.g., "setting-up-silient-account-config-with-onedrive/")
+    console.log('[findIssue] Searching for slug-based title match...');
+    for (const issue of allIssues) {
+      const title = issue.title || '';
+      // Check various slug formats
+      if (title === slugNoLeadingSlash || 
+          title === slugNoTrailingSlash ||
+          title === slug ||
+          title === `${slugNoLeadingSlash}/` ||
+          title === `${slugNoTrailingSlash}/`) {
+        console.log('[findIssue] Found by slug match!', title);
+        return { number: issue.number };
+      }
+    }
+    
     // Fallback: look for "Comments for {slug}" format
-    console.log('[findIssue] Looking for Comments for slug:', slug);
-    const slugNoTrail = slug.replace(/\/$/, '');
+    console.log('[findIssue] Searching for "Comments for" format...');
     const slugWithTrail = slug.endsWith('/') ? slug : slug + '/';
     
     for (const issue of allIssues) {
       const title = issue.title || '';
       if (title === `Comments for ${slug}` || 
-          title === `Comments for ${slugNoTrail}` || 
+          title === `Comments for ${slugNoLeadingSlash}` || 
+          title === `Comments for ${slugNoTrailingSlash}` ||
           title === `Comments for ${slugWithTrail}`) {
-        console.log('[findIssue] Found by slug match!');
+        console.log('[findIssue] Found by "Comments for" format!', title);
         return { number: issue.number };
       }
     }
     
-    console.log('[findIssue] No issue found');
+    console.log('[findIssue] No matching issue found');
     return null;
   } catch (e) {
-    console.error('[findIssue] Error fetching issues:', e);
+    console.error('[findIssue] Error fetching issues:', e.message);
     throw e;
   }
 }
