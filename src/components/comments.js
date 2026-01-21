@@ -7,16 +7,6 @@ import { useLocation } from '@reach/router';
 const apiBase = process.env.GATSBY_COMMENTS_API || '/.netlify/functions/comments';
 const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_SITE_KEY;
 
-// Load reCAPTCHA script once
-useEffect(() => {
-  if (recaptchaSiteKey && typeof window !== 'undefined' && !window.grecaptcha) {
-    const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
-    script.async = true;
-    document.head.appendChild(script);
-  }
-}, []);
-
 const Comments = () => {
   const location = useLocation();
   const [comments, setComments] = useState([]);
@@ -28,6 +18,16 @@ const Comments = () => {
   const [honeypot, setHoneypot] = useState(''); // spam trap
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  // Load reCAPTCHA script once
+  useEffect(() => {
+    if (recaptchaSiteKey && typeof window !== 'undefined' && !window.grecaptcha) {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
 
   const slug = useMemo(() => {
     if (typeof window === 'undefined') return '';
