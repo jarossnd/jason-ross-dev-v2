@@ -7,7 +7,7 @@ import { useLocation } from '@reach/router';
 const apiBase = process.env.GATSBY_COMMENTS_API || '/.netlify/functions/comments';
 const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_SITE_KEY;
 
-const Comments = () => {
+const Comments = ({ postTitle }) => {
   const location = useLocation();
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const Comments = () => {
       setLoading(true);
       setError('');
       try {
-        const res = await fetch(`${apiBase}?slug=${encodeURIComponent(slug)}`, {
+        const res = await fetch(`${apiBase}?slug=${encodeURIComponent(slug)}&title=${encodeURIComponent(postTitle || '')}`, {
           headers: { 'Accept': 'application/json' },
           credentials: 'omit',
         });
@@ -61,7 +61,7 @@ const Comments = () => {
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, postTitle]);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -99,6 +99,7 @@ const Comments = () => {
         },
         body: JSON.stringify({
           slug,
+          postTitle,
           name: name.trim(),
           email: email.trim() || undefined,
           content: content.trim(),

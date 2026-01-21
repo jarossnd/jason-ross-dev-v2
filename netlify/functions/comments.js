@@ -82,19 +82,42 @@ async function ghFetch(path, { token, method = 'GET', body } = {}) {
   return res.json();
 }
 
-async function findIssueBySlug({ token, repo, slug }) {
-  // Prefer GitHub search API for exact title match
-  const title = `Comments for ${slug}`;
-  const q = encodeURIComponent(`repo:${repo} type:issue in:title "${title}"`);
-  const data = await ghFetch(`/search/issues?q=${q}&per_page=1`, { token });
-  const item = data.items && data.items[0];
-  if (item && item.title === title) return { number: item.number };
+async function findIssueBySlug({ token, repo, slug, postTitle }) {
+  // Try to find issue by post title first (for utterances compatibility)
+  if (postTitle) {
+    const q = encodeURIComponent(`repo:${repo} type:issue in:title "${postTitle}"`);
+    const data = await ghFetch(`/search/issues?q=${q}&per_page=10`, { token });
+    if (data.items && data.items.length > 0) {
+      // Return first matching issue
+      return { number: data.items[0].number };
+    }
+  }
+
+  // Fallback: search for "Comments for {slug}" format
+  const q = encodeURIComponent(`repo:${repo} type:issue in:title "Comments for"`);
+  const data = await ghFetch(`/search/issues?q=${q}&per_page=100`, { token });
+  
+  // Look for exact match (with or without trailing slash)
+  const slugNoTrail = slug.replace(/\/$/, '');
+  const slugWithTrail = slug.endsWith('/') ? slug : slug + '/';
+  
+  if (data.items) {
+    for (const item of data.items) {
+      const title = item.title || '';
+      if (title === `Comments for ${slug}` || 
+          title === `Comments for ${slugNoTrail}` || 
+          title === `Comments for ${slugWithTrail}`) {
+        return { number: item.number };
+      }
+    }
+  }
   return null;
 }
 
-async function createIssueForSlug({ token, repo, slug }) {
+async function createIssueForSlug({ token, repo, slug, postTitle }) {
   const [owner, name] = repo.split('/');
-  const title = `Comments for ${slug}`;
+  // Use post title if available, otherwise fall back to "Comments for {slug}"
+  const title = postTitle || `Comments for ${slug}`;
   const body = `Auto-generated thread for comments on: ${slug}`;
   const labels = ['comments'];
   const issue = await ghFetch(`/repos/${owner}/${name}/issues`, {
@@ -194,9 +217,10 @@ exports.handler = async (event) => {
     if (event.httpMethod === 'GET') {
       const url = new URL(event.rawUrl || `http://localhost${event.path}${event.rawQuery ? '?' + event.rawQuery : ''}`);
       const slug = normalizeSlug(url.searchParams.get('slug'));
+      const postTitle = url.searchParams.get('title') || '';
       if (!slug) return jsonResponse(400, { error: 'Missing slug' }, origin);
 
-      let issue = await findIssueBySlug({ token, repo, slug });
+      let issue = await findIssueBySlug({ token, repo, slug, postTitle });
       if (!issue) {
         // No thread yet
         return jsonResponse(200, { comments: [] }, origin);
@@ -208,6 +232,7 @@ exports.handler = async (event) => {
     if (event.httpMethod === 'POST') {
       const payload = JSON.parse(event.body || '{}');
       const slug = normalizeSlug(payload.slug);
+      const postTitle = payload.postTitle || '';
       const name = (payload.name || '').trim();
       const email = (payload.email || '').trim();
       const content = (payload.content || '').trim();
@@ -227,9 +252,9 @@ exports.handler = async (event) => {
         return jsonResponse(403, { error: 'Failed spam verification. Please try again.' }, origin);
       }
 
-      let issue = await findIssueBySlug({ token, repo, slug });
+      let issue = await findIssueBySlug({ token, repo, slug, postTitle });
       if (!issue) {
-        issue = await createIssueForSlug({ token, repo, slug });
+        issue = await createIssueForSlug({ token, repo, slug, postTitle });
       }
       const comment = await addCommentToIssue({ token, repo, issueNumber: issue.number, name, email, content });
       return jsonResponse(201, { comment }, origin);

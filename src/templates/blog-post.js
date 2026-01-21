@@ -470,7 +470,7 @@ const BlogPostTemplate = ({ data, location }) => {
         </PostFooter>
         <CommentStyles>
           <Suspense fallback={<div>Loading comments...</div>}>
-            <Comments />
+            <Comments postTitle={post.frontmatter.title} />
           </Suspense>
         </CommentStyles>
       </article>
