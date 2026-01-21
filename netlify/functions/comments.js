@@ -131,27 +131,49 @@ async function createIssueForSlug({ token, repo, slug, postTitle }) {
 async function listCommentsForIssue({ token, repo, issueNumber }) {
   const [owner, name] = repo.split('/');
   const comments = await ghFetch(`/repos/${owner}/${name}/issues/${issueNumber}/comments?per_page=100`, { token });
-  // Map to frontend shape
-  return comments.map((c) => ({
-    id: c.id,
-    authorName: c.user?.login || 'Guest',
-    content: c.body || '',
-    createdAt: c.created_at,
-  })).reverse(); // newest first in UI
+  
+  // Map to frontend shape and extract parentId from body if present
+  return comments.map((c) => {
+    const body = c.body || '';
+    let parentId = null;
+    let cleanContent = body;
+    
+    // Check if comment starts with parent_id marker: [parent_id:123456]
+    const parentMatch = body.match(/^\[parent_id:(\d+)\]\n?([\s\S]*)/);
+    if (parentMatch) {
+      parentId = parseInt(parentMatch[1], 10);
+      cleanContent = parentMatch[2];
+    }
+    
+    return {
+      id: c.id,
+      authorName: c.user?.login || 'Guest',
+      content: cleanContent,
+      createdAt: c.created_at,
+      parentId,
+    };
+  }).reverse(); // newest first in UI
 }
 
-async function addCommentToIssue({ token, repo, issueNumber, name, email, content }) {
+async function addCommentToIssue({ token, repo, issueNumber, name, email, content, parentId }) {
   const [owner, nameRepo] = repo.split('/');
   const safeName = (name || 'Anonymous').toString().slice(0, 100);
   const safeEmail = (email || '').toString().slice(0, 200);
   const safeContent = (content || '').toString().slice(0, 5000);
-  const bodyLines = [
+  
+  // Build body with parent_id marker if replying
+  let bodyLines = [];
+  if (parentId) {
+    bodyLines.push(`[parent_id:${parentId}]`);
+  }
+  bodyLines.push(
     `**${safeName}**${safeEmail ? ` <${safeEmail}>` : ''} wrote:`,
     '',
     safeContent,
     '',
     `[PENDING]`, // Mark as pending moderation by default
-  ];
+  );
+  
   const body = bodyLines.join('\n');
   const comment = await ghFetch(`/repos/${owner}/${nameRepo}/issues/${issueNumber}/comments`, {
     token,
@@ -164,6 +186,7 @@ async function addCommentToIssue({ token, repo, issueNumber, name, email, conten
     content: safeContent,
     createdAt: comment.created_at,
     approved: false, // Mark as pending until approved
+    parentId: parentId || null,
   };
 }
 
@@ -237,6 +260,7 @@ exports.handler = async (event) => {
       const email = (payload.email || '').trim();
       const content = (payload.content || '').trim();
       const recaptchaToken = payload.recaptchaToken;
+      const parentId = payload.parentId ? parseInt(payload.parentId, 10) : null;
 
       if (!slug) return jsonResponse(400, { error: 'Missing slug' }, origin);
       if (!name || !content) return jsonResponse(400, { error: 'Name and content are required' }, origin);
@@ -256,7 +280,7 @@ exports.handler = async (event) => {
       if (!issue) {
         issue = await createIssueForSlug({ token, repo, slug, postTitle });
       }
-      const comment = await addCommentToIssue({ token, repo, issueNumber: issue.number, name, email, content });
+      const comment = await addCommentToIssue({ token, repo, issueNumber: issue.number, name, email, content, parentId });
       return jsonResponse(201, { comment }, origin);
     }
 
