@@ -368,14 +368,15 @@ const BlogPostTemplate = ({ data, location }) => {
         className="blog-post"
         itemScope
         itemType="http://schema.org/Article"
+        data-pagefind-body
       >
         <PostHeader>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <GitLogMeta>
+          <h1 itemProp="headline" data-pagefind-meta="title">{post.frontmatter.title}</h1>
+          <GitLogMeta data-pagefind-ignore>
             <div className="meta-line">
               <div className="meta-item">
                 <span className="meta-label">Date:</span>
-                <time className="meta-value">{post.frontmatter.date}</time>
+                <time className="meta-value" data-pagefind-meta="date">{post.frontmatter.date}</time>
               </div>
               <div className="meta-item">
                 <span className="meta-label">Author:</span>
@@ -410,12 +411,13 @@ const BlogPostTemplate = ({ data, location }) => {
           </GitLogMeta>
         </PostHeader>
         {changelogOpen && <Changelog slug={post.fields.slug} commits={post.fields.gitCommits || []} />}
-        <TagsLine>
+        <TagsLine data-pagefind-ignore>
           <div className="tags-list">
             {post.frontmatter.tags.map(tag => (
               <TagLink
                 key={tag}
                 to={`/topics/${tag}/`}
+                data-pagefind-meta={`tags`}
               >
                 #{tag}
               </TagLink>
@@ -426,15 +428,17 @@ const BlogPostTemplate = ({ data, location }) => {
           postDate={post.frontmatter.date}
           updatedArticle={post.frontmatter.updatedArticle}
           updatedArticleTitle={data.updatedPost?.frontmatter?.title}
+          data-pagefind-ignore
         />
         {post.frontmatter.updatedArticle && (
           <UpdatedArticleBadge 
             updatedDate={post.frontmatter.updatedArticle}
             updatedTitle={data.updatedPost?.frontmatter?.title}
             updatedSlug={data.updatedPost?.fields?.slug}
+            data-pagefind-ignore
           />
         )}
-        {headings.length > 0 && <TableOfContents headings={headings} />}
+        {headings.length > 0 && <TableOfContents headings={headings} data-pagefind-ignore />}
         <HeadingAnchor />
         <ImageLightbox />
         <PostStyles $showHashes={showMarkdownHashes}>
@@ -443,7 +447,7 @@ const BlogPostTemplate = ({ data, location }) => {
             itemProp="articleBody"
           />
         </PostStyles>
-        <PostFooter>
+        <PostFooter data-pagefind-ignore>
           <FooterSection>
             <FooterTitle>About the Author</FooterTitle>
             <FooterContent>
@@ -468,9 +472,9 @@ const BlogPostTemplate = ({ data, location }) => {
             </div>
           </FooterSection>
         </PostFooter>
-        <CommentStyles>
+        <CommentStyles data-pagefind-ignore>
           <Suspense fallback={<div>Loading comments...</div>}>
-            <Comments postTitle={post.frontmatter.title} />
+            <Comments />
           </Suspense>
         </CommentStyles>
       </article>

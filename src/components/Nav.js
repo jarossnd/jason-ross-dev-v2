@@ -203,6 +203,7 @@ const menuItems = [
   { name: 'Home', path: '/' },
   { name: 'Posts', path: '/posts' },
   { name: 'Topics', path: '/topics' },
+  { name: 'Search', path: '/search' },
   { name: 'Images', path: '/images' },
   { name: 'Feed', path: '/feed' },
   { name: 'Uses', path: '/uses' },

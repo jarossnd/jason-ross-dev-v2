@@ -153,12 +153,14 @@ const Hint = styled.div`
 
 const commands = [
   { id: 'home', title: 'Home', description: 'Go to homepage', icon: '🏠', path: '/' },
+  { id: 'search', title: 'Search', description: 'Search all blog posts', icon: '🔍', path: '/search' },
   { id: 'blog', title: 'Blog Posts', description: 'View all blog posts', icon: '📝', path: '/posts' },
   { id: 'about', title: 'About', description: 'Learn more about me', icon: '👤', path: '/about' },
   { id: 'contact', title: 'Contact', description: 'Get in touch', icon: '✉️', path: '/contact' },
   // { id: 'resume', title: 'Resume', description: 'View my resume', icon: '📄', path: '/resume' },
   { id: 'uses', title: 'Uses', description: 'Tools and software I use', icon: '🛠️', path: '/uses' },
   { id: 'topics', title: 'Topics', description: 'Browse by topic', icon: '🏷️', path: '/topics' },
+  { id: 'feed', title: 'Feed', description: 'Mastodon social feed', icon: '🐘', path: '/feed' },
   { id: 'donate', title: 'Donate', description: 'Support my work', icon: '💖', path: '/donate' },
 ];
 

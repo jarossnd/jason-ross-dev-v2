@@ -1,5 +1,5 @@
 ---
-title: Installing Unite to Configure Gnome
+title: Installing Unite to Configure GNOME
 date: "2026-01-17"
 description: "Here are the steps I used to intall Unite on Arch Linux to configure GNOME."
 tags: ['gnome', 'arch-linux']
