@@ -2,7 +2,7 @@
 title: Delete an Office 365 Group Permanently
 date: "2022-08-31"
 description: "How to permanently delete an Office 365 Group using PowerShell"
-tags: ['azure-ad', 'office-365', 'sharepoint-online', 'powershell']
+tags: ['azure-ad', 'office-365', 'microsoft-365', 'sharepoint-online', 'powershell']
 ---
 
 ## Scenario
