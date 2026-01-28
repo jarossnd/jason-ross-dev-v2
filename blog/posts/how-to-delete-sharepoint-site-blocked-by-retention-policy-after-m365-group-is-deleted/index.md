@@ -55,9 +55,9 @@ To remove the site, we'll identify the site's ID, find the retention policy that
 First, retrieve the Site ID. We'll need this value later when adding it to the exception list.
 
 ```powershell
-Connect-SPOService -Url https://MngEnvMCAP469954-admin.sharepoint.com
+Connect-SPOService -Url https://myTenant-admin.sharepoint.com
 
-$site = Get-SPOSite -Identity https://mngenvmcap469954.sharepoint.com/sites/group2
+$site = Get-SPOSite -Identity https://myTenant.sharepoint.com/sites/group2
 
 $site.SiteId
 
@@ -92,16 +92,16 @@ With the policy ID and site details in hand, add the site to the exception list 
 ```powershell
 Import-Module ExchangeOnlineManagement
 
-Connect-IPPSSession -UserPrincipalName admin@MngEnvMCAP469954.onmicrosoft.com
+Connect-IPPSSession -UserPrincipalName admin@myTenant.onmicrosoft.com
 
 $stringJson = @"
 [{
-     'EmailAddress': 'group2@MngEnvMCAP469954.onmicrosoft.com',
+     'EmailAddress': 'group2@myTenant.onmicrosoft.com',
      'SiteId': 'd94dac4e-16ba-43fe-85d1-8083155e7221'
 }]
 "@
 
-Set-RetentionCompliancePolicy -Identity 42c6fff7-a21b-4df6-b378-835095b3e22f -AddModernGroupLocationException "group2@MngEnvMCAP469954.onmicrosoft.com" -DeletedResources $stringJson
+Set-RetentionCompliancePolicy -Identity 42c6fff7-a21b-4df6-b378-835095b3e22f -AddModernGroupLocationException "group2@myTenant.onmicrosoft.com" -DeletedResources $stringJson
 ```
 
 Once the exception is added, you should be able to successfully delete the SharePoint site from the Admin Center or directly via the deleteweb.aspx page.
