@@ -6,7 +6,6 @@ import SEO from '../components/SEO';
 import PostDisclaimer from '../components/PostDisclaimer';
 import Changelog from '../components/Changelog';
 import TableOfContents from '../components/TableOfContents';
-import HeadingAnchor from '../components/HeadingAnchor';
 import ImageLightbox from '../components/ImageLightbox';
 import UpdatedArticleBadge from '../components/UpdatedArticleBadge';
 
@@ -333,6 +332,12 @@ const BlogPostTemplate = ({ data, location }) => {
       const article = document.querySelector('article');
       if (article) {
         const headingElements = article.querySelectorAll('h2, h3');
+        const getCleanHeadingText = (heading) => {
+          const clone = heading.cloneNode(true);
+          clone.querySelectorAll('.heading-anchor').forEach((anchor) => anchor.remove());
+          return clone.textContent.replace(/\s*#+\s*$/, '').trim();
+        };
+
         const tocHeadings = Array.from(headingElements).map((heading) => {
           // Add ID to heading if it doesn't have one
           if (!heading.id) {
@@ -345,7 +350,7 @@ const BlogPostTemplate = ({ data, location }) => {
           
           return {
             id: heading.id,
-            text: heading.textContent,
+            text: getCleanHeadingText(heading),
             level: parseInt(heading.tagName.substring(1))
           };
         });
@@ -439,7 +444,6 @@ const BlogPostTemplate = ({ data, location }) => {
           />
         )}
         {headings.length > 0 && <TableOfContents headings={headings} data-pagefind-ignore />}
-        <HeadingAnchor />
         <ImageLightbox />
         <PostStyles $showHashes={showMarkdownHashes}>
           <section
