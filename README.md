@@ -43,10 +43,10 @@ cd jason-ross-dev-v2
 ### 2. Install dependencies
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
 
-> **Note**: The `--legacy-peer-deps` flag is needed for some Gatsby plugin compatibility.
+> **Note**: The Wes Bos ESLint configuration requires Prettier 2 and TypeScript 4. Gatsby's ESLint dependencies are overridden to use ESLint 8, React ESLint config 7, and Flow plugin 8, matching the project's lint tooling. Keep these versions compatible when updating dependencies; `--force` and `--legacy-peer-deps` are not needed. Gatsby may still emit a peer warning for its experimental React server dependency; do not replace the project's stable React version with an experimental one to suppress it.
 
 ### 3. Set up environment variables
 
@@ -181,9 +181,27 @@ nvm use 20
 ### Missing dependencies
 
 ```bash
-rm -rf node_modules package-lock.json
-npm install --legacy-peer-deps
+npm ci
 ```
+
+This reinstalls dependencies from the committed lockfile. Keep `package-lock.json`
+and use `npm install` after intentional dependency changes.
+
+### Sharp native module is missing
+
+If Gatsby reports that `sharp-linux-x64.node` is missing, Sharp's native
+installation may have been skipped. On npm versions with install-script approval:
+
+```bash
+npm install-scripts approve sharp
+npm rebuild sharp --foreground-scripts
+```
+
+Approved Sharp versions are recorded in `package.json` under `allowScripts`.
+Review and approve the new versions when updating Sharp. On older npm versions
+without `install-scripts`, use `npm rebuild sharp --ignore-scripts=false --foreground-scripts`.
+Use Node.js 20 as specified by the project's version files. Do not install the
+latest Sharp directly to repair Gatsby's transitive dependency.
 
 ## 📝 Writing Blog Posts
 

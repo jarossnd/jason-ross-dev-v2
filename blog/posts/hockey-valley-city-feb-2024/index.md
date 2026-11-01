@@ -1,14 +1,14 @@
 ---
-title: Hockey Tournament Valley City, ND February 2024
+title: A Weekend of Youth Hockey
 date: "2024-02-16"
-description: "Fargo Angels Hockey travels to Valley City, ND to play in a hockey tournament on Feb 10-11, 2024."
+description: "A quick recap of a fun weekend of youth hockey, teamwork, and tournament games."
 tags: ['hockey', 'competition', 'sports']
 ---
 
 ## Overview
 
-Last weekend we traveled to Valley City, ND for my son's hockey tournament. He plays for Angel's Hockey and is a termite. He had games on both Saturday and Sunday. On Saturday they played Jamestown, Mandan 3 and Mandan 1. The Angels won all 3 games. On Sunday the Angels played Mayport and Mandan 2. The Angels also won both of those games.
+We recently attended a youth hockey tournament with games on both Saturday and Sunday. The team had a great weekend and won all of its games. It was fun to cheer everyone on and see their hard work pay off.
 
-![Fargo Angels in Valley City 2024 group picture](assets/fargo-angels-valley-city-nd-2024.jpg)
+![Youth hockey tournament group photo with all faces blurred for privacy](assets/fargo-angels-valley-city-nd-2024.jpg)
 
-Tomorrow we travel to Detroit Lakes, MN to play Fergus Falls, MN and Detroit Lakes, MN. Wish us luck! Go Angels!
+Looking forward to more hockey and cheering the team on!
